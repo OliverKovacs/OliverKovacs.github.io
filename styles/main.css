@@ -1,0 +1,121 @@
+canvas {
+    background-color: #000000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    position: relative;
+}
+
+#overlay {
+    position: absolute;
+}
+
+#overlay {
+    padding-left: 30px;
+}
+
+.primary {
+    color: var(--primary);
+}
+
+.text {
+    color: #d4d4d4;
+    font-family: Roboto Mono, monospace;
+}
+
+.list {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}
+
+.list2 {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}
+
+#contact-list {
+    height: 20px;
+}
+
+#language-list {
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 210px;
+}
+
+#technology-list {
+    flex-wrap: wrap;
+    width: 300px;
+    height: 210px;
+}
+
+#project-list {
+    flex-wrap: wrap;
+    width: 600px
+}
+
+#demo-list {
+    flex-wrap: wrap;
+    width: 600px
+}
+
+#music-list {
+    flex-wrap: wrap;
+    width: 300px
+}
+
+.page {
+    min-height: 100vh;
+}
+
+h1 {
+    margin: 0px;
+    padding-top: 40px;
+    padding-bottom: 15px;
+}
+
+h2 {
+    margin: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#pfp {
+    height: 24px;
+    margin-right: 12px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    float: left;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.list ui-icon {
+    margin-left: 10px;
+}
+
+.list ui-icon {
+    margin-right: 10px;
+}
+
+ui-key {
+    width: 19px;
+}
