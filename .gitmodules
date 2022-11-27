@@ -13,3 +13,6 @@
 [submodule "demos/lorenz"]
 	path = demos/lorenz
 	url = https://github.com/OliverKovacs/lorenz-webgl
+[submodule "demos/polymerization"]
+	path = demos/polymerization
+	url = https://github.com/OliverKovacs/polymerization
