@@ -1,3 +1,9 @@
-# OliverKovacs.github.io
+# My personal Website
 
-Github Pages repo.
+## Build
+
+```
+git submodule update --init --recursive
+npx tsx
+bundle exec jekyll build
+```
