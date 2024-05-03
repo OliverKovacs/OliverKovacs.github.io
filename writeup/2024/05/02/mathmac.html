@@ -1,38 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2024-05-03T18:46:52+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Anti-rev</title><link href="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html" rel="alternate" type="text/html" title="Anti-rev" /><published>2024-05-02T00:00:00+02:00</published><updated>2024-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/05/02/anti-rev</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"><![CDATA[<p><strong>openECSC 2024 - Round 2</strong></p>
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MathMAC | Oliver Kovacs</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="MathMAC" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="openECSC 2024 - Round 2" />
+<meta property="og:description" content="openECSC 2024 - Round 2" />
+<link rel="canonical" href="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html" />
+<meta property="og:url" content="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html" />
+<meta property="og:site_name" content="Oliver Kovacs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-05-02T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MathMAC" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-05-02T00:00:00+02:00","datePublished":"2024-05-02T00:00:00+02:00","description":"openECSC 2024 - Round 2","headline":"MathMAC","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"},"url":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><!-- is a post -->
+    
+        <link rel="stylesheet" href="/assets/css/post.css">
 
-<p>by <a href="https://oliverkovacs.dev">Oliver Kovacs</a></p>
+        <!-- KaTeX -->
+        <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+        <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+        <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    
+</head>
+<body><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">MathMAC</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-05-02T00:00:00+02:00" itemprop="datePublished">May 2, 2024
+      </time></p>
+  </header>
 
-<p>Category: <code class="language-plaintext highlighter-rouge">rev</code></p>
-
-<h3 id="description">Description</h3>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Good luck finding the secret word for my super secure program!
-</code></pre></div></div>
-
-<p>Attachments: <code class="language-plaintext highlighter-rouge">anti-rev</code></p>
-
-<h3 id="solution">Solution</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">angr</span>
-
-<span class="n">project</span> <span class="o">=</span> <span class="n">angr</span><span class="p">.</span><span class="nc">Project</span><span class="p">(</span><span class="sh">"</span><span class="s">anti-rev</span><span class="sh">"</span><span class="p">,</span> <span class="n">auto_load_libs</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">simgr</span> <span class="o">=</span> <span class="n">project</span><span class="p">.</span><span class="n">factory</span><span class="p">.</span><span class="nf">simulation_manager</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">factory</span><span class="p">.</span><span class="nf">full_init_state</span><span class="p">())</span>
-<span class="n">simgr</span><span class="p">.</span><span class="nf">explore</span><span class="p">(</span><span class="n">find</span><span class="o">=</span><span class="mh">0x401def</span><span class="p">,</span> <span class="n">avoid</span><span class="o">=</span><span class="mh">0x401df8</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">simgr</span><span class="p">.</span><span class="n">found</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">posix</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-</code></pre></div></div>
-
-<h3 id="bonus">Bonus</h3>
-
-<p>Use <code class="language-plaintext highlighter-rouge">angr</code> to disassemble and find address to search for.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">angr</span>
-
-<span class="n">project</span> <span class="o">=</span> <span class="n">angr</span><span class="p">.</span><span class="nc">Project</span><span class="p">(</span><span class="sh">"</span><span class="s">anti-rev</span><span class="sh">"</span><span class="p">,</span> <span class="n">auto_load_libs</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">cfg</span> <span class="o">=</span> <span class="n">project</span><span class="p">.</span><span class="n">analyses</span><span class="p">.</span><span class="nc">CFG</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">cfg</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="nf">nodes</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">.</span><span class="n">addr</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">.</span><span class="n">is_simprocedure</span><span class="p">:</span>
-        <span class="n">node</span><span class="p">.</span><span class="n">block</span><span class="p">.</span><span class="nf">pp</span><span class="p">()</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 2]]></summary></entry><entry><title type="html">MathMAC</title><link href="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html" rel="alternate" type="text/html" title="MathMAC" /><published>2024-05-02T00:00:00+02:00</published><updated>2024-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/05/02/mathmac</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"><![CDATA[<p><strong>openECSC 2024 - Round 2</strong></p>
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><strong>openECSC 2024 - Round 2</strong></p>
 
 <p>by <a href="https://oliverkovacs.dev">Oliver Kovacs</a></p>
 
@@ -343,309 +351,12 @@ Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as fol
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
     <span class="nf">main</span><span class="p">()</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 2]]></summary></entry><entry><title type="html">Stealing Seeds</title><link href="https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html" rel="alternate" type="text/html" title="Stealing Seeds" /><published>2024-04-06T00:00:00+02:00</published><updated>2024-04-06T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html"><![CDATA[<p><strong>openECSC 2024 - Round 1</strong></p>
-
-<p>by <a href="https://oliverkovacs.dev">Oliver Kovacs</a></p>
-
-<p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
-
-<h3 id="description">Description</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I found an interesting way to generate numbers with someone. Wanna try?
-</code></pre></div></div>
-<p>Attachments: <code class="language-plaintext highlighter-rouge">stealing-seeds.py</code> (see <a href="#appendix">Appendix</a>)</p>
-
-<h3 id="probem">Probem</h3>
-
-<p>Let \(s \in \mathbb{P}\) and \(k \in \mathbb{Z}\) with \(0 \le s, k \lt 2^{256}\) be two secret numbers chosen at random.</p>
-
-<p>Let \(f_1, f_2 \colon \{0, 1\}^{256} \to \{0, 1\}^{256}\) be</p>
-
-\[f_1(u) = \text{sha256}(((s \oplus u) + s) \oplus k) \\
-f_2(u) = \text{sha256}(((s + u) \oplus s) \oplus k)\]
-
-<p>where \(\oplus\) denotes bit-wise XOR.</p>
-
-<p>Given that you can compute \(f_1(u)\) and \(f_2(u)\) for any \(u \in \{0, 1\}^{256}\), find \(s\).</p>
-
-<h3 id="solution">Solution</h3>
-
-<p>This may not be the most elegant solution, however I will explain how to systematically find it without any advanced knowledge of cryptography and semi-formally argue why it is correct.</p>
-
-<p>We first observe that \(\text{sha256} \colon \{0, 1\}^n \to \{0, 1\}^{256}\) is a <em>hash function</em>. It maps every sequence of bits to a sequence of 256 bits. Its outputs are distributed uniformly random, but the same input will always yield the same output. Furthermore we cannot find the pre-image of an output. That is, given  \(\text{sha256}(x)\) there is no way of finding \(x\) other than trying every possible value. This is obviously only feasible if the search space is severly limited.</p>
-
-<p>Let us define \(g_1, g_2\) as</p>
-
-\[\begin{align*}
-&amp;g_1(u) = (s \oplus u) + s \\
-&amp;g_2(u) = (s + u) \oplus s \ .
-\end{align*}\]
-
-<p>Now we observe that the \(f_i\) has the following structure:</p>
-
-\[f_i(u) = \text{sha256}(g_i(u) \oplus k) \  .\]
-
-<p>XOR can be interpreted as conditionally flipping a bit. More precisely, given two bits \(b, k \in \{0, 1\}\)</p>
-
-\[b \oplus k = \begin{cases}
-   b &amp;\text{if } k = 0 \\
-   \neg\ b &amp;\text{if } k = 1
-\end{cases}.\]
-
-<p>This is problematic because it means that even knowing \(g_i(u)\) the term \(g_i(u) \oplus k\) could still be <em>any</em> number.
-This implies that doing a brute-force search to find pre-images of \(\text{sha256}\) would require checking \(2^{256}\) (the amount of possible values of \(k\)) elements which is practically impossible.</p>
-
-<p>To closer illustrate this consider that</p>
-
-\[f_2(0) = \text{sha256}(((s + 0) \oplus s) \oplus k) = \text{sha256}((s \oplus s) \oplus k) = \text{sha256}(0 \oplus k) = \text{sha256}(k)\]
-
-<p>could have any possible value depending on \(k\). This rules out a pre-image attack and thus extracting information from a single image is impossible.</p>
-
-<p>But we observe that \(\text{sha256}\) behaves <em>as if</em> it were injective. A function \(f\) with the domain \(X\) is called injective if</p>
-
-\[\forall a, b \in X \colon f(a) = f(b) \implies a = b \ .\]
-
-<p>Technically this is not true for \(\text{sha256}\) as there are infinitely many hash collisions (this is evident by the fact that the output is limited to a finite number of bits) but in practice it is extremely unlikely to observe a hash collision.</p>
-
-<p>If we now define the function</p>
-
-\[x_k(u) = u \oplus k\]
-
-<p>for some constant \(k\) we can see that</p>
-
-\[x_k(x_k(u)) = (u \oplus k) \oplus k = u \oplus (k \oplus k) = u \oplus 0 = u\]
-
-<p>therefore \(x_k = x_k^{-1}\) which implies that \(x_k\) is injective aswell.</p>
-
-<p>It is easy to show that if two function \(f \colon B \to C, g \colon A \to B\) are injective then \(f \circ g \colon A \to C\) must also be injective.</p>
-
-<p>We can now write</p>
-
-\[f_i(u) = \text{sha256}(x_k(g_i(u)) \\\]
-
-<p>and use the definition of injectivity to show that</p>
-
-\[\begin{align*}
-\forall u, v \colon &amp;f_1(u) = f_2(v) \\
-\iff &amp;\text{sha256}(x_k(g_1(u))) = \text{sha256}(x_k(g_2(v))) \\
-\implies &amp;g_1(u) = g_2(v) \ .
-\end{align*}\]
-
-<p>It is also worth to note that we can use the same arguments to show that</p>
-
-\[\forall u, v \colon f_i(u) = f_i(v) \implies u = v \ .\\\]
-
-<p>This gives us the crucial hint that we have to create an exploit by comparing the values of two different functions while trying out specific inputs.
-To craft this exploit we fix \(s\) to some number and consider \(g_i(0), g_i(1), \ldots\)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = 1
-u       0   1   2   3   4   5   6   7
-
-g1      2   1   4   3   6   5   8   7
-g2      0   3   2   5   4   7   6   9
 </code></pre></div></div>
 
-<p>Let \(p_s(u)\) be the number such that \(g_2(u) = g_1(p_s(u))\) or \(-1\) if no such number exists with \(s\) fixed to some value.
-This is well defined as from the above result it follows that \(\forall u, v \colon u \neq v \implies g_i(u) \neq g_i(v)\).</p>
+  </div><a class="u-url" href="/writeup/2024/05/02/mathmac.html" hidden></a>
+</article>
 
-<p>We now look at a table of \(p_s(u)\) with the axes \(u\) and odd \(s\). A <code class="language-plaintext highlighter-rouge">.</code> denotes \(-1\).</p>
+      </div>
+    </main></body>
 
-<blockquote>
-  <p>Only odd \(s\) are considered as \(s\) is prime and very unlikely to be \(2\).</p>
-</blockquote>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>u     0   1   2   3   4   5   6   7
-
-p1    .   3   0   5   2   7   4   .
-p3    .   7   0   1   2   .   4   5
-p5    .   .   .   .   2   .   .   1
-p7    .   .   0   1   2   3   4   5
-</code></pre></div></div>
-
-<p>We notice that</p>
-
-\[\begin{align*}
-&amp;p_3(7) = p_7(7) = 5 \neq p_{1,5}(7) \\
-\implies &amp;g_2(7) = g_1(5) \iff f_2(7) = f_1(5) \iff s \in \{3, 7\} \iff s \equiv 3 \quad (\text{mod } 4) \ .
-\end{align*}\]
-
-<p>This means that by a single comparison we can halve the search space! A quick look at a larger table suggests that the method can be generalised.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>u     0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
-
-p1    .   3   0   5   2   7   4   9   6  11   8  13  10  15  12   .
-p3    .   7   0   1   2  11   4   5   6  15   8   9  10   .  12  13
-p5    .   .   .  13   2  15  12   1   6   3   0   .  10   .   .   9
-p7    .  15   0   1   2   3   4   5   6   .   8   9  10  11  12  13
-p9    .   .   .   .   .   .   .   .   6   .   .   .   .   .   .   1
-p11   .   .   .   .   .   .   4   5   6   .   .   .   .   3  12  13
-p13   .   .   .   .   2   .   .   1   6   3   0   5  10   7   4   9
-p15   .   .   0   1   2   3   4   5   6   7   8   9  10  11  12  13
-</code></pre></div></div>
-
-\[s \equiv \begin{cases}
-    3 \equiv \begin{cases}
-        7 &amp;\text{if } f_2(13) = f_1(11) \\
-        3 &amp;\text{if } f_2(13) \neq f_1(11)
-    \end{cases} (\text{mod } 8) &amp;\text{if } f_2(15) = f_1(13) \\
-    1 \equiv \begin{cases}
-        5 &amp;\text{if } f_2(15) = f_1(9) \\
-        1 &amp;\text{if } f_2(15) \neq f_1(9)
-    \end{cases} (\text{mod } 8) &amp;\text{if } f_2(15) \neq f_1(13)
-\end{cases} (\text{mod } 4)\]
-
-<p>To put this more concretely let us look at a slice of the above table:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>u     ...   12  13        14  15
-                         
-p1    ...   10  15        12   .
-p3    ...   10   .        12  13 (1)
-p5    ...   10   .         .   9 (3)
-p7    ...   10  11 (2)    12  13 (1)
-p9    ...    .   .         .   1
-p11   ...    .   3        12  13 (1)
-p13   ...   10   7         4   9 (3)
-p15   ...   10  11 (2)    12  13 (1)
-</code></pre></div></div>
-
-<p>The first comparison concerns the entries marked with <code class="language-plaintext highlighter-rouge">(1)</code>.</p>
-
-<p>1) If it returns true we get this subtable of possible values and use the comparison marked with <code class="language-plaintext highlighter-rouge">(2)</code>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>u     ...   12  13        14  15
-                          
-p3    ...   10   .        12  13 (1)
-p7    ...   10  11 (2)    12  13 (1)
-p11   ...    .   3        12  13 (1)
-p15   ...   10  11 (2)    12  13 (1)
-</code></pre></div></div>
-
-<p>2) If it returns false we get the opposite subtable and use the comparison marked with <code class="language-plaintext highlighter-rouge">(3)</code>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>u     ...   12  13        14  15
-                          
-p1    ...   10  15        12   .
-p5    ...   10   .         .   9 (3)
-p9    ...    .   .         .   1
-p13   ...   10   7         4   9 (3)
-</code></pre></div></div>
-
-<p>Thus with every comparison one bit is recovered, meaning that \(s\) can be computed with 255 comparisons.
-What remains is to reverse engineer the equation for the indices to compare at each step.
-One possible solution can be found in the <a href="#appendix">Appendix</a>.
-Then some automated way of submitting requests needs to be created to obtain the seed from the remote server.</p>
-
-<h3 id="appendix">Appendix</h3>
-
-<p>Visualisation of the \(p_s(u)\) table obtained by coloring \(-1\) white.
-<img src="/assets/img/posts/vis.png" alt="test" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">solve.py</code></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-    <span class="n">last</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">delta_x</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">delta_y</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="nf">while </span><span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">):</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">index</span>
-        <span class="n">delta_y</span> <span class="o">|=</span> <span class="n">mask</span>
-        
-        <span class="c1"># x y
-</span>        <span class="nf">print</span><span class="p">(</span><span class="n">last</span> <span class="o">-</span> <span class="n">delta_y</span><span class="p">,</span> <span class="n">last</span> <span class="o">-</span> <span class="n">delta_x</span><span class="p">)</span>
-    
-        <span class="c1"># compute f1(x) == f2(y)
-</span>        <span class="c1"># write result to stdin
-</span>        <span class="n">equal</span> <span class="o">=</span> <span class="nf">bool</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">()))</span>
-        <span class="nf">if </span><span class="p">(</span><span class="n">equal</span><span class="p">):</span>
-            <span class="n">out</span> <span class="o">|=</span> <span class="n">mask</span>
-            <span class="n">delta_x</span> <span class="o">|=</span> <span class="n">mask</span>
-            <span class="n">delta_y</span> <span class="o">^=</span> <span class="n">mask</span>
-
-        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">out</span> <span class="o">=</span> <span class="si">}</span><span class="sh">"</span><span class="p">)</span>
-
-<span class="nf">solve</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">stealing-seeds.py</code></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
-</span>
-<span class="kn">import</span> <span class="n">os</span>
-<span class="kn">import</span> <span class="n">signal</span>
-<span class="kn">import</span> <span class="n">random</span>
-<span class="kn">from</span> <span class="n">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">getPrime</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">,</span> <span class="n">bytes_to_long</span>
-<span class="kn">from</span> <span class="n">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
-
-<span class="nf">assert</span><span class="p">(</span><span class="sh">"</span><span class="s">FLAG</span><span class="sh">"</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">)</span>
-<span class="n">FLAG</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">FLAG</span><span class="sh">"</span><span class="p">]</span>
-<span class="nf">assert</span><span class="p">(</span><span class="n">FLAG</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">"</span><span class="s">openECSC{</span><span class="sh">"</span><span class="p">))</span>
-<span class="nf">assert</span><span class="p">(</span><span class="n">FLAG</span><span class="p">.</span><span class="nf">endswith</span><span class="p">(</span><span class="sh">"</span><span class="s">}</span><span class="sh">"</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-    <span class="n">seed_size</span> <span class="o">=</span> <span class="mi">256</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="nf">getPrime</span><span class="p">(</span><span class="n">seed_size</span><span class="p">)</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="mi">11</span>
-
-    <span class="c1"># Just to protect my seed
-</span>    <span class="n">k</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">seed_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">seed_size</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">seed</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">k</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"""</span><span class="s">I have my seed, if you give me yours we can generate some random numbers together!
-Just don</span><span class="sh">'</span><span class="s">t try to steal mine...
-</span><span class="sh">"""</span><span class="p">)</span>
-
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">choice</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">"""</span><span class="s">Which random do you want to use?
-1) Secure
-2) Even more secure
-3) That</span><span class="sh">'</span><span class="s">s enough
-&gt; </span><span class="sh">"""</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">choice</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
-            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">We don</span><span class="sh">'</span><span class="s">t have that :(</span><span class="sh">"</span><span class="p">)</span>
-            <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="k">break</span>
-        <span class="n">user_seed</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span>
-            <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">Give me your seed: </span><span class="sh">"</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">user_seed</span><span class="p">.</span><span class="nf">bit_length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">seed_size</span><span class="p">:</span>
-            <span class="nf">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="sh">"</span><span class="s">Your seed can be at most </span><span class="si">{</span><span class="n">seed_size</span><span class="si">}</span><span class="s"> bits!</span><span class="sh">"</span><span class="p">)</span>
-            <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">final_seed</span> <span class="o">=</span> <span class="p">((</span><span class="n">seed</span> <span class="o">^</span> <span class="n">user_seed</span><span class="p">)</span> <span class="o">+</span>
-                           <span class="n">seed</span><span class="p">)</span> <span class="o">^</span> <span class="n">k</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">final_seed</span> <span class="o">=</span> <span class="p">((</span><span class="n">seed</span> <span class="o">+</span> <span class="n">user_seed</span><span class="p">)</span> <span class="o">^</span>
-                           <span class="n">seed</span><span class="p">)</span> <span class="o">^</span> <span class="n">k</span>
-
-        <span class="n">random_number</span> <span class="o">=</span> <span class="nf">bytes_to_long</span><span class="p">(</span><span class="nf">sha256</span><span class="p">(</span><span class="nf">long_to_bytes</span><span class="p">(</span><span class="n">final_seed</span><span class="p">)).</span><span class="nf">digest</span><span class="p">())</span>
-
-        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Random number:</span><span class="sh">"</span><span class="p">,</span> <span class="n">random_number</span><span class="p">)</span>
-    
-    <span class="n">guess</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">Hey, did you steal my seed? </span><span class="sh">"</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">seed</span><span class="p">:</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Ok, I trust you</span><span class="sh">"</span><span class="p">)</span>
-    <span class="k">return</span>
-
-
-<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Time over!</span><span class="sh">"</span><span class="p">)</span>
-    <span class="nf">exit</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
-    <span class="n">signal</span><span class="p">.</span><span class="nf">signal</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
-    <span class="n">signal</span><span class="p">.</span><span class="nf">alarm</span><span class="p">(</span><span class="mi">30000</span><span class="p">)</span>
-    <span class="nf">main</span><span class="p">()</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 1]]></summary></entry></feed>
+</html>
