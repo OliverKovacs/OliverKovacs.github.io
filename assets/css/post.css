@@ -17,6 +17,10 @@ h3 {
     color: #2472c8;
 }
 
+h4 {
+    color: #2472c8;
+}
+
 a {
     color: #2196F3;
 }
@@ -46,6 +50,10 @@ pre {
     padding: 10px;
     background: #1e1e1e;
     border-radius: 5px
+}
+
+code {
+    background-color: #1e1e1e;
 }
 
 .highlight {
@@ -91,7 +99,7 @@ pre {
   .ne    { color: #DCDCAA } /* Name.Exception           */
   .nf    { color: #DCDCAA } /* Name.Function            */
   .nn    { color: #555 } /* Name.Namespace                              */
-  .nt    { color: #000080 } /* Name.Tag                                 */
+  .nt    { color: #569CD6 } /* Name.Tag                                 */
   .nv    { color: #008080 } /* Name.Variable                            */
   .ow    {  } /* Operator.Word                         */
   .w     { color: #bbb } /* Text.Whitespace                             */
