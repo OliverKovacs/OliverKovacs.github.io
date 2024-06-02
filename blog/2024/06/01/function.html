@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Function connecting points with straight lines | Oliver Kovacs</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Function connecting points with straight lines" />
+<meta name="author" content="Oliver Kovacs" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://oliverkovacs.dev/blog/2024/06/01/function.html" />
+<meta property="og:url" content="https://oliverkovacs.dev/blog/2024/06/01/function.html" />
+<meta property="og:site_name" content="Oliver Kovacs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-06-01T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Function connecting points with straight lines" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-06-01T00:00:00+02:00","datePublished":"2024-06-01T00:00:00+02:00","headline":"Function connecting points with straight lines","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/blog/2024/06/01/function.html"},"url":"https://oliverkovacs.dev/blog/2024/06/01/function.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><!-- is a post -->
+    
+        <link rel="stylesheet" href="/assets/css/post.css">
+
+        <!-- KaTeX -->
+        <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+        <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+        <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    
+</head>
+<body><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
+  <header class="post-header">
+
+    <h1 class="post-title p-name" itemprop="name headline">Function connecting points with straight lines</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-06-01T00:00:00+02:00" itemprop="datePublished">2024 Jun 1
+      </time><a href="/">
+        <span itemprop="author" itemscope itemtype="http:/*schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Oliver Kovacs</span>
+        </span>
+      </a></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--How to find a function that connects a list of points with straight line segments.-->
+
+<h2 id="problem">Problem</h2>
+
+<p>Given a list of \(n\) Points \(\bold P = (P_1, P_2, …, P_n)\) where \(P_i = (P_{i,x}, P_{i,y})\) ordered along the \(x\)-axis, what function \(f(x)\), when graphed, connects the points in the domain \([P_{1,x}; P_{n,x}]\) with straight lines?</p>
+
+<figure>
+    <img src="/assets/img/posts/graph.svg" alt="Graph" />
+    <figcaption>
+    Example: \(f(x)\) connects the points \((1, 1)\), \((2, 3)\) and \((4, 2)\) in \([1; 4]\).
+    </figcaption>
+</figure>
+
+<h2 id="solution">Solution</h2>
+
+\[f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert\]
+
+<p>where</p>
+
+\[\begin{bmatrix}
+    a_1    \\
+    \vdots \\
+    a_n    \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    P_{1,y} \\
+    \vdots  \\
+    P_{n,y} \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    \lvert P_{1,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{1,x} - P_{n,x} \rvert \\
+    \vdots                          &amp; \ddots &amp; \vdots                          \\
+    \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} - P_{n,x} \rvert \\
+\end{bmatrix}^{-1} \ .\]
+
+<blockquote>
+  <p>Note: I came up with this on my own so there are probably better ways to do this.</p>
+</blockquote>
+
+<h2 id="explanation">Explanation</h2>
+
+<p>Consider the function \(g(x) = a \lvert x - b \rvert\): it is like a linear function, \(a\) determines the steepness, but it’s mirrored at \(b\) along the \(y\) axis.</p>
+
+<p>If you sum multiple of these functions with different \(a\) and \(b\) values together, you get a zigzagged line, something that could work as the function we are searching for.</p>
+
+<p>Let’s assume we can use the \(x\)-values of the given points as values for \(b\). Then we get:</p>
+
+\[f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert\]
+
+<p>which is the same as</p>
+
+\[f(x) = a_1 \lvert x - P_{1,x} \rvert + \cdots + a_n \lvert x - P_{n,x} \rvert \ .\]
+
+<p>Now we need to find the values for \(a = (a_1, a_2, \ldots, a_n)\).</p>
+
+<p>We know the values of \(f(x)\) at the given points:</p>
+
+\[\forall p \in P \colon f(p_x) = p_y\]
+
+<p>which in simpler terms just means</p>
+
+\[\begin{cases}
+    f(P_{1,x}) = P_{1,y}     \\
+    \quad \quad \quad \vdots \\
+    f(P_{n,x}) = P_{n,y}     \\
+\end{cases} \ .\]
+
+<p>From this we can construct a linear system of equations:</p>
+
+\[\begin{cases}
+    a_1 \lvert P_{1,x} - P_{1,x} \rvert + \cdots + a_n \lvert P_{1,x} - P_{n,x} \rvert = P_{1,y}                              \\
+    \quad \quad \quad \vdots \quad \quad \quad \ \ \ \ddots \quad \quad \quad \quad \ \vdots \quad \quad \quad \quad \ \vdots \\
+    a_1 \lvert P_{n,x} - P_{1,x} \rvert + \cdots + a_n \lvert P_{n,x} - P_{n,x} \rvert = P_{n,y}                              \\
+\end{cases} \ .\]
+
+<p>All values for \(P\) are known, so at this point, we could simply use an equation solver to get \(a\).
+However, it can also be rewritten as a matrix multiplication:</p>
+
+\[\begin{bmatrix}
+    \lvert P_{1,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{1,x} - P_{n,x} \rvert \\
+    \vdots                          &amp; \ddots &amp; \vdots                          \\
+    \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} - P_{n,x} \rvert \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    a_1    \\
+    \vdots \\
+    a_n    \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    P_{1,y} \\
+    \vdots  \\
+    P_{n,y} \\
+\end{bmatrix} \ .\]
+
+<p>Solve for \(a\):</p>
+
+\[\begin{bmatrix}
+    a_1    \\
+    \vdots \\
+    a_n    \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    P_{1,y} \\
+    \vdots  \\
+    P_{n,y} \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    \lvert P_{1,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{1,x} - P_{n,x} \rvert \\
+    \vdots                          &amp; \ddots &amp; \vdots                          \\
+    \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} - P_{n,x} \rvert \\
+\end{bmatrix}^{-1} \ .\]
+
+<p>And that’s it.</p>
+
+<h2 id="example">Example</h2>
+
+<p>Let’s find \(f(x)\) for the points \((1, 1)\), \((2, 3)\) and \((4, 2)\).
+First, we need to find the values for \(a\).</p>
+
+<p>Using the above formula, we get:</p>
+
+\[\begin{bmatrix}
+    a_1 \\
+    a_2 \\
+    a_3 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 \\
+    3 \\
+    2 \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    \lvert 1 - 1 \rvert &amp; \lvert 1 - 2 \rvert &amp; \lvert 1 - 4 \rvert \\
+    \lvert 2 - 1 \rvert &amp; \lvert 2 - 2 \rvert &amp; \lvert 2 - 4 \rvert \\
+    \lvert 4 - 1 \rvert &amp; \lvert 4 - 2 \rvert &amp; \lvert 4 - 4 \rvert \\
+\end{bmatrix}^{-1} \ .\]
+
+<p>Simplify:</p>
+
+\[\begin{bmatrix}
+    a_1 \\
+    a_2 \\
+    a_3 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 \\
+    3 \\
+    2 \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    0 &amp; 1 &amp; 3 \\
+    1 &amp; 0 &amp; 2 \\
+    3 &amp; 2 &amp; 0 \\
+\end{bmatrix}^{-1} \ .\]
+
+<p>Solve using SageMath:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">V</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">QQ</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">M</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">QQ</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">V</span> <span class="o">*</span> <span class="nf">pow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="c1"># [ 3/2 -5/4  3/4]
+</span></code></pre></div></div>
+
+\[a = \left(\frac 3 2, - \frac 5 4, \frac 3 4\right)\]
+
+<p>Now we can use the very first formula to get \(f(x)\):</p>
+
+\[f(x) = \frac 3 2 \lvert x - 1 \rvert - \frac 5 4 \lvert x - 2 \rvert + \frac 3 4 \lvert x - 4 \rvert \ .\]
+
+<figure>
+    <img src="/assets/img/posts/graph.svg" alt="Graph" height="450" />
+    <figcaption>
+    This is the graph of \(f(x)\).
+    </figcaption>
+</figure>
+
+  </div><a class="u-url" href="/blog/2024/06/01/function.html" hidden></a>
+</article>
+
+      </div>
+    </main></body>
+
+</html>

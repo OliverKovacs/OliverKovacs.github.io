@@ -6,6 +6,7 @@
 <title>MathMAC | Oliver Kovacs</title>
 <meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="MathMAC" />
+<meta name="author" content="Oliver Kovacs" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="openECSC 2024 - Round 2" />
 <meta property="og:description" content="openECSC 2024 - Round 2" />
@@ -17,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="MathMAC" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-05-02T00:00:00+02:00","datePublished":"2024-05-02T00:00:00+02:00","description":"openECSC 2024 - Round 2","headline":"MathMAC","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"},"url":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-05-02T00:00:00+02:00","datePublished":"2024-05-02T00:00:00+02:00","description":"openECSC 2024 - Round 2","headline":"MathMAC","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"},"url":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><!-- is a post -->
     
@@ -33,27 +34,30 @@
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
   <header class="post-header">
+
     <h1 class="post-title p-name" itemprop="name headline">MathMAC</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2024-05-02T00:00:00+02:00" itemprop="datePublished">May 2, 2024
-      </time></p>
+      <time class="dt-published" datetime="2024-05-02T00:00:00+02:00" itemprop="datePublished">2024 May 2
+      </time><a href="/">
+        <span itemprop="author" itemscope itemtype="http:/*schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Oliver Kovacs</span>
+        </span>
+      </a></p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     <p><strong>openECSC 2024 - Round 2</strong></p>
 
-<p>by <a href="https://oliverkovacs.dev">Oliver Kovacs</a></p>
-
 <p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
 
-<h3 id="description">Description</h3>
+<h2 id="description">Description</h2>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Why using boring symmetric crypto for MACs when we can use fancy math?
 </code></pre></div></div>
 
 <p>Attachments: <code class="language-plaintext highlighter-rouge">mathmac.py</code> (see <a href="#appendix">Appendix</a>)</p>
 
-<h3 id="probem">Probem</h3>
+<h2 id="probem">Probem</h2>
 
 <p>Let \(p = 8636821143825786083\) and \(M = 64\).<br />
 Let \(\bold k = k_0, \ldots,k_M\) where \(k_i \in \mathbb Z_{\lt p}\) be a private key chosen at random.<br />
@@ -74,11 +78,11 @@ Let \(h \colon \{0, 1\}^M \to \mathbb Z_p\) be a hash function defined as</p>
   </li>
 </ul>
 
-<h3 id="solution">Solution</h3>
+<h2 id="solution">Solution</h2>
 
 <p>The first step involves solving the <a href="https://en.wikipedia.org/wiki/Discrete_logarithm">discrete logarithm problem (DLP)</a>.</p>
 
-<h4 id="dlp">DLP</h4>
+<h3 id="dlp">DLP</h3>
 
 <p>Let \(h(\bold x)\) be an element of the cyclic subgroup \(\langle 4 \rangle\) of \(\mathbb Z_p^*\).<br />
 If \(4^n \equiv h(\bold x) \mod p\) then \(n\) is the discrete logarithm of \(h(\bold x)\) to the base \(4\) denoted as \(n = \log_4(h(\bold x))\).<br />
@@ -101,12 +105,12 @@ Solving this is useful because \(n\) is directly related to \(k_0 + x_1 k_1 + \c
   <li>The base 4 doesn’t matter. Computing a logarithm to any base \(x\) is sufficient, because</li>
 </ul>
 
-\[\log_ba = log_x a \cdot (\log_xb)^{-1} \ .\]
+\[\log_ba = \log_x a \cdot (\log_xb)^{-1} \ .\]
 
 <p>The fastest known algorithm to compute the DLP in this case is a number field sieve.<br />
 One implementation is <a href="https://cado-nfs.gitlabpages.inria.fr/">CADO-NFS</a>.</p>
 
-<h4 id="cado-nfs">CADO-NFS</h4>
+<h3 id="cado-nfs">CADO-NFS</h3>
 <p>Setup:</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://gitlab.inria.fr/cado-nfs/cado-nfs
 <span class="nb">cd </span>cado-nfs
@@ -142,7 +146,7 @@ make
 </span><span class="nf">pow</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>   <span class="c1"># 4802397593893189429 → correct
 </span></code></pre></div></div>
 
-<h4 id="attack">Attack</h4>
+<h3 id="attack">Attack</h3>
 
 <p>Now we need the hashes of three words \(\bold a, \bold b, \bold c\) such that \(\bold a + \bold b - \bold c\) doesn’t under- or overflow any of the individual bits.<br />
 Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as follows:</p>
@@ -151,7 +155,7 @@ Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as fol
 
 <p>Note that we need two positive and one negative term so that the secret \(k_0\) contained in every hash occurs exactly once.</p>
 
-<h4 id="conclusion">Conclusion</h4>
+<h3 id="conclusion">Conclusion</h3>
 
 <p>A high level overview of the exploit is:</p>
 <ul>
@@ -165,7 +169,7 @@ Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as fol
 
 <p>A reference implementation can be found in the <a href="#appendix">Appendix</a>.</p>
 
-<h3 id="appendix">Appendix</h3>
+<h2 id="appendix">Appendix</h2>
 
 <p><code class="language-plaintext highlighter-rouge">solve.py</code></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># this program expects an input file data.txt

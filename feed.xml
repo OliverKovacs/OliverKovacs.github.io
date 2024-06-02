@@ -1,17 +1,200 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2024-05-03T18:46:52+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Anti-rev</title><link href="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html" rel="alternate" type="text/html" title="Anti-rev" /><published>2024-05-02T00:00:00+02:00</published><updated>2024-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/05/02/anti-rev</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"><![CDATA[<p><strong>openECSC 2024 - Round 2</strong></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2024-06-02T23:15:25+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Function connecting points with straight lines</title><link href="https://oliverkovacs.dev/blog/2024/06/01/function.html" rel="alternate" type="text/html" title="Function connecting points with straight lines" /><published>2024-06-01T00:00:00+02:00</published><updated>2024-06-01T00:00:00+02:00</updated><id>https://oliverkovacs.dev/blog/2024/06/01/function</id><content type="html" xml:base="https://oliverkovacs.dev/blog/2024/06/01/function.html"><![CDATA[<!--How to find a function that connects a list of points with straight line segments.-->
 
-<p>by <a href="https://oliverkovacs.dev">Oliver Kovacs</a></p>
+<h2 id="problem">Problem</h2>
+
+<p>Given a list of \(n\) Points \(\bold P = (P_1, P_2, …, P_n)\) where \(P_i = (P_{i,x}, P_{i,y})\) ordered along the \(x\)-axis, what function \(f(x)\), when graphed, connects the points in the domain \([P_{1,x}; P_{n,x}]\) with straight lines?</p>
+
+<figure>
+    <img src="/assets/img/posts/graph.svg" alt="Graph" />
+    <figcaption>
+    Example: \(f(x)\) connects the points \((1, 1)\), \((2, 3)\) and \((4, 2)\) in \([1; 4]\).
+    </figcaption>
+</figure>
+
+<h2 id="solution">Solution</h2>
+
+\[f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert\]
+
+<p>where</p>
+
+\[\begin{bmatrix}
+    a_1    \\
+    \vdots \\
+    a_n    \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    P_{1,y} \\
+    \vdots  \\
+    P_{n,y} \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    \lvert P_{1,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{1,x} - P_{n,x} \rvert \\
+    \vdots                          &amp; \ddots &amp; \vdots                          \\
+    \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} - P_{n,x} \rvert \\
+\end{bmatrix}^{-1} \ .\]
+
+<blockquote>
+  <p>Note: I came up with this on my own so there are probably better ways to do this.</p>
+</blockquote>
+
+<h2 id="explanation">Explanation</h2>
+
+<p>Consider the function \(g(x) = a \lvert x - b \rvert\): it is like a linear function, \(a\) determines the steepness, but it’s mirrored at \(b\) along the \(y\) axis.</p>
+
+<p>If you sum multiple of these functions with different \(a\) and \(b\) values together, you get a zigzagged line, something that could work as the function we are searching for.</p>
+
+<p>Let’s assume we can use the \(x\)-values of the given points as values for \(b\). Then we get:</p>
+
+\[f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert\]
+
+<p>which is the same as</p>
+
+\[f(x) = a_1 \lvert x - P_{1,x} \rvert + \cdots + a_n \lvert x - P_{n,x} \rvert \ .\]
+
+<p>Now we need to find the values for \(a = (a_1, a_2, \ldots, a_n)\).</p>
+
+<p>We know the values of \(f(x)\) at the given points:</p>
+
+\[\forall p \in P \colon f(p_x) = p_y\]
+
+<p>which in simpler terms just means</p>
+
+\[\begin{cases}
+    f(P_{1,x}) = P_{1,y}     \\
+    \quad \quad \quad \vdots \\
+    f(P_{n,x}) = P_{n,y}     \\
+\end{cases} \ .\]
+
+<p>From this we can construct a linear system of equations:</p>
+
+\[\begin{cases}
+    a_1 \lvert P_{1,x} - P_{1,x} \rvert + \cdots + a_n \lvert P_{1,x} - P_{n,x} \rvert = P_{1,y}                              \\
+    \quad \quad \quad \vdots \quad \quad \quad \ \ \ \ddots \quad \quad \quad \quad \ \vdots \quad \quad \quad \quad \ \vdots \\
+    a_1 \lvert P_{n,x} - P_{1,x} \rvert + \cdots + a_n \lvert P_{n,x} - P_{n,x} \rvert = P_{n,y}                              \\
+\end{cases} \ .\]
+
+<p>All values for \(P\) are known, so at this point, we could simply use an equation solver to get \(a\).
+However, it can also be rewritten as a matrix multiplication:</p>
+
+\[\begin{bmatrix}
+    \lvert P_{1,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{1,x} - P_{n,x} \rvert \\
+    \vdots                          &amp; \ddots &amp; \vdots                          \\
+    \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} - P_{n,x} \rvert \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    a_1    \\
+    \vdots \\
+    a_n    \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    P_{1,y} \\
+    \vdots  \\
+    P_{n,y} \\
+\end{bmatrix} \ .\]
+
+<p>Solve for \(a\):</p>
+
+\[\begin{bmatrix}
+    a_1    \\
+    \vdots \\
+    a_n    \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    P_{1,y} \\
+    \vdots  \\
+    P_{n,y} \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    \lvert P_{1,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{1,x} - P_{n,x} \rvert \\
+    \vdots                          &amp; \ddots &amp; \vdots                          \\
+    \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} - P_{n,x} \rvert \\
+\end{bmatrix}^{-1} \ .\]
+
+<p>And that’s it.</p>
+
+<h2 id="example">Example</h2>
+
+<p>Let’s find \(f(x)\) for the points \((1, 1)\), \((2, 3)\) and \((4, 2)\).
+First, we need to find the values for \(a\).</p>
+
+<p>Using the above formula, we get:</p>
+
+\[\begin{bmatrix}
+    a_1 \\
+    a_2 \\
+    a_3 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 \\
+    3 \\
+    2 \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    \lvert 1 - 1 \rvert &amp; \lvert 1 - 2 \rvert &amp; \lvert 1 - 4 \rvert \\
+    \lvert 2 - 1 \rvert &amp; \lvert 2 - 2 \rvert &amp; \lvert 2 - 4 \rvert \\
+    \lvert 4 - 1 \rvert &amp; \lvert 4 - 2 \rvert &amp; \lvert 4 - 4 \rvert \\
+\end{bmatrix}^{-1} \ .\]
+
+<p>Simplify:</p>
+
+\[\begin{bmatrix}
+    a_1 \\
+    a_2 \\
+    a_3 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 \\
+    3 \\
+    2 \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+    0 &amp; 1 &amp; 3 \\
+    1 &amp; 0 &amp; 2 \\
+    3 &amp; 2 &amp; 0 \\
+\end{bmatrix}^{-1} \ .\]
+
+<p>Solve using SageMath:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">V</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">QQ</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">M</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">QQ</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">V</span> <span class="o">*</span> <span class="nf">pow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="c1"># [ 3/2 -5/4  3/4]
+</span></code></pre></div></div>
+
+\[a = \left(\frac 3 2, - \frac 5 4, \frac 3 4\right)\]
+
+<p>Now we can use the very first formula to get \(f(x)\):</p>
+
+\[f(x) = \frac 3 2 \lvert x - 1 \rvert - \frac 5 4 \lvert x - 2 \rvert + \frac 3 4 \lvert x - 4 \rvert \ .\]
+
+<figure>
+    <img src="/assets/img/posts/graph.svg" alt="Graph" height="450" />
+    <figcaption>
+    This is the graph of \(f(x)\).
+    </figcaption>
+</figure>]]></content><author><name>Oliver Kovacs</name></author><category term="blog" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Anti-rev</title><link href="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html" rel="alternate" type="text/html" title="Anti-rev" /><published>2024-05-02T00:00:00+02:00</published><updated>2024-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/05/02/anti-rev</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"><![CDATA[<p><strong>openECSC 2024 - Round 2</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">rev</code></p>
 
-<h3 id="description">Description</h3>
+<h2 id="description">Description</h2>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Good luck finding the secret word for my super secure program!
 </code></pre></div></div>
 
 <p>Attachments: <code class="language-plaintext highlighter-rouge">anti-rev</code></p>
 
-<h3 id="solution">Solution</h3>
+<h2 id="solution">Solution</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">angr</span>
 
@@ -21,7 +204,7 @@
 <span class="nf">print</span><span class="p">(</span><span class="n">simgr</span><span class="p">.</span><span class="n">found</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">posix</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </code></pre></div></div>
 
-<h3 id="bonus">Bonus</h3>
+<h2 id="bonus">Bonus</h2>
 
 <p>Use <code class="language-plaintext highlighter-rouge">angr</code> to disassemble and find address to search for.</p>
 
@@ -32,20 +215,18 @@
 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">cfg</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="nf">nodes</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">.</span><span class="n">addr</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">.</span><span class="n">is_simprocedure</span><span class="p">:</span>
         <span class="n">node</span><span class="p">.</span><span class="n">block</span><span class="p">.</span><span class="nf">pp</span><span class="p">()</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 2]]></summary></entry><entry><title type="html">MathMAC</title><link href="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html" rel="alternate" type="text/html" title="MathMAC" /><published>2024-05-02T00:00:00+02:00</published><updated>2024-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/05/02/mathmac</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"><![CDATA[<p><strong>openECSC 2024 - Round 2</strong></p>
-
-<p>by <a href="https://oliverkovacs.dev">Oliver Kovacs</a></p>
+</code></pre></div></div>]]></content><author><name>Oliver Kovacs</name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 2]]></summary></entry><entry><title type="html">MathMAC</title><link href="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html" rel="alternate" type="text/html" title="MathMAC" /><published>2024-05-02T00:00:00+02:00</published><updated>2024-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/05/02/mathmac</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"><![CDATA[<p><strong>openECSC 2024 - Round 2</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
 
-<h3 id="description">Description</h3>
+<h2 id="description">Description</h2>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Why using boring symmetric crypto for MACs when we can use fancy math?
 </code></pre></div></div>
 
 <p>Attachments: <code class="language-plaintext highlighter-rouge">mathmac.py</code> (see <a href="#appendix">Appendix</a>)</p>
 
-<h3 id="probem">Probem</h3>
+<h2 id="probem">Probem</h2>
 
 <p>Let \(p = 8636821143825786083\) and \(M = 64\).<br />
 Let \(\bold k = k_0, \ldots,k_M\) where \(k_i \in \mathbb Z_{\lt p}\) be a private key chosen at random.<br />
@@ -66,11 +247,11 @@ Let \(h \colon \{0, 1\}^M \to \mathbb Z_p\) be a hash function defined as</p>
   </li>
 </ul>
 
-<h3 id="solution">Solution</h3>
+<h2 id="solution">Solution</h2>
 
 <p>The first step involves solving the <a href="https://en.wikipedia.org/wiki/Discrete_logarithm">discrete logarithm problem (DLP)</a>.</p>
 
-<h4 id="dlp">DLP</h4>
+<h3 id="dlp">DLP</h3>
 
 <p>Let \(h(\bold x)\) be an element of the cyclic subgroup \(\langle 4 \rangle\) of \(\mathbb Z_p^*\).<br />
 If \(4^n \equiv h(\bold x) \mod p\) then \(n\) is the discrete logarithm of \(h(\bold x)\) to the base \(4\) denoted as \(n = \log_4(h(\bold x))\).<br />
@@ -93,12 +274,12 @@ Solving this is useful because \(n\) is directly related to \(k_0 + x_1 k_1 + \c
   <li>The base 4 doesn’t matter. Computing a logarithm to any base \(x\) is sufficient, because</li>
 </ul>
 
-\[\log_ba = log_x a \cdot (\log_xb)^{-1} \ .\]
+\[\log_ba = \log_x a \cdot (\log_xb)^{-1} \ .\]
 
 <p>The fastest known algorithm to compute the DLP in this case is a number field sieve.<br />
 One implementation is <a href="https://cado-nfs.gitlabpages.inria.fr/">CADO-NFS</a>.</p>
 
-<h4 id="cado-nfs">CADO-NFS</h4>
+<h3 id="cado-nfs">CADO-NFS</h3>
 <p>Setup:</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://gitlab.inria.fr/cado-nfs/cado-nfs
 <span class="nb">cd </span>cado-nfs
@@ -134,7 +315,7 @@ make
 </span><span class="nf">pow</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>   <span class="c1"># 4802397593893189429 → correct
 </span></code></pre></div></div>
 
-<h4 id="attack">Attack</h4>
+<h3 id="attack">Attack</h3>
 
 <p>Now we need the hashes of three words \(\bold a, \bold b, \bold c\) such that \(\bold a + \bold b - \bold c\) doesn’t under- or overflow any of the individual bits.<br />
 Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as follows:</p>
@@ -143,7 +324,7 @@ Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as fol
 
 <p>Note that we need two positive and one negative term so that the secret \(k_0\) contained in every hash occurs exactly once.</p>
 
-<h4 id="conclusion">Conclusion</h4>
+<h3 id="conclusion">Conclusion</h3>
 
 <p>A high level overview of the exploit is:</p>
 <ul>
@@ -157,7 +338,7 @@ Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as fol
 
 <p>A reference implementation can be found in the <a href="#appendix">Appendix</a>.</p>
 
-<h3 id="appendix">Appendix</h3>
+<h2 id="appendix">Appendix</h2>
 
 <p><code class="language-plaintext highlighter-rouge">solve.py</code></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># this program expects an input file data.txt
@@ -343,18 +524,16 @@ Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as fol
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
     <span class="nf">main</span><span class="p">()</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 2]]></summary></entry><entry><title type="html">Stealing Seeds</title><link href="https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html" rel="alternate" type="text/html" title="Stealing Seeds" /><published>2024-04-06T00:00:00+02:00</published><updated>2024-04-06T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html"><![CDATA[<p><strong>openECSC 2024 - Round 1</strong></p>
-
-<p>by <a href="https://oliverkovacs.dev">Oliver Kovacs</a></p>
+</code></pre></div></div>]]></content><author><name>Oliver Kovacs</name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 2]]></summary></entry><entry><title type="html">Stealing Seeds</title><link href="https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html" rel="alternate" type="text/html" title="Stealing Seeds" /><published>2024-04-06T00:00:00+02:00</published><updated>2024-04-06T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html"><![CDATA[<p><strong>openECSC 2024 - Round 1</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
 
-<h3 id="description">Description</h3>
+<h2 id="description">Description</h2>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I found an interesting way to generate numbers with someone. Wanna try?
 </code></pre></div></div>
 <p>Attachments: <code class="language-plaintext highlighter-rouge">stealing-seeds.py</code> (see <a href="#appendix">Appendix</a>)</p>
 
-<h3 id="probem">Probem</h3>
+<h2 id="probem">Probem</h2>
 
 <p>Let \(s \in \mathbb{P}\) and \(k \in \mathbb{Z}\) with \(0 \le s, k \lt 2^{256}\) be two secret numbers chosen at random.</p>
 
@@ -367,7 +546,7 @@ f_2(u) = \text{sha256}(((s + u) \oplus s) \oplus k)\]
 
 <p>Given that you can compute \(f_1(u)\) and \(f_2(u)\) for any \(u \in \{0, 1\}^{256}\), find \(s\).</p>
 
-<h3 id="solution">Solution</h3>
+<h2 id="solution">Solution</h2>
 
 <p>This may not be the most elegant solution, however I will explain how to systematically find it without any advanced knowledge of cryptography and semi-formally argue why it is correct.</p>
 
@@ -534,10 +713,14 @@ What remains is to reverse engineer the equation for the indices to compare at e
 One possible solution can be found in the <a href="#appendix">Appendix</a>.
 Then some automated way of submitting requests needs to be created to obtain the seed from the remote server.</p>
 
-<h3 id="appendix">Appendix</h3>
+<p>Visualisation of the \(p_s(u)\) table obtained by coloring \(-1\) white.</p>
 
-<p>Visualisation of the \(p_s(u)\) table obtained by coloring \(-1\) white.
-<img src="/assets/img/posts/vis.png" alt="test" /></p>
+<h2 id="appendix">Appendix</h2>
+
+<figure>
+    <img src="/assets/img/posts/vis.png" alt="Graph" />
+    <figcaption>Visualisation of the \(p_s(u)\) table obtained by coloring \(-1\) white.</figcaption>
+</figure>
 
 <p><code class="language-plaintext highlighter-rouge">solve.py</code></p>
 
@@ -648,4 +831,4 @@ Just don</span><span class="sh">'</span><span class="s">t try to steal mine...
     <span class="n">signal</span><span class="p">.</span><span class="nf">signal</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
     <span class="n">signal</span><span class="p">.</span><span class="nf">alarm</span><span class="p">(</span><span class="mi">30000</span><span class="p">)</span>
     <span class="nf">main</span><span class="p">()</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 1]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>Oliver Kovacs</name></author><category term="writeup" /><summary type="html"><![CDATA[openECSC 2024 - Round 1]]></summary></entry></feed>
