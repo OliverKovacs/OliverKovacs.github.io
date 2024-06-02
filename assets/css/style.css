@@ -1,6 +1,4 @@
-:root {
-    --primary: #2472c8;
-}
+@import "/assets/css/vars.css";
 
 canvas {
     background-color: #000000;
@@ -15,20 +13,22 @@ body {
     padding: 0;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 #container {
     position: relative;
 }
 
 #overlay {
-    position: absolute;
-}
-
-#overlay {
-    padding-left: 30px;
-}
-
-.primary {
-    color: var(--primary);
+    margin: auto;
+    width: 730px;
 }
 
 .text {
@@ -36,35 +36,12 @@ body {
     font-family: Roboto Mono, monospace;
 }
 
-#contact-list {
-    height: 20px;
-}
-
-#language-list {
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 210px;
-}
-
 #technology-list {
-    flex-wrap: wrap;
     width: 340px;
-    height: 210px;
 }
 
-#project-list {
-    flex-wrap: wrap;
-    width: 600px
-}
-
-#demo-list {
-    flex-wrap: wrap;
-    width: 600px
-}
-
-#music-list {
-    flex-wrap: wrap;
-    width: 310px
+.vert-list {
+    flex-direction: column;
 }
 
 .page {
@@ -72,15 +49,20 @@ body {
 }
 
 h1 {
-    margin: 0px;
-    padding-top: 40px;
-    padding-bottom: 15px;
+    color: var(--color-primary);
 }
 
 h2 {
-    margin: 0px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-size: 1.5em;
+    color: var(--color-primary);
+
+    margin-top: 42px;
+    margin-bottom: 16px;
+
+    /*
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #444;
+    */
 }
 
 #pfp {
@@ -91,20 +73,8 @@ h2 {
     float: left;
 }
 
-body::-webkit-scrollbar {
-  display: none;
-}
-
-body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 ul .ui-icon {
     margin-left: 10px;
-}
-
-ul .ui-icon {
     margin-right: 10px;
 }
 
@@ -116,10 +86,6 @@ ul .ui-icon {
 
 .ui-contact a:hover img {
     filter: brightness(1000%);
-}
-
-.ui-contact a {
-    text-decoration: none;
 }
 
 .ui-icon img {
@@ -182,7 +148,8 @@ ul .ui-icon {
     float: right;
 }
 
-.ui-key {
+.key {
+    font-weight: bold;
     background-color: #303030;
     display: inline-block;
     border-radius: 2px;
@@ -191,12 +158,10 @@ ul .ui-icon {
     margin: 0px;
     padding-left: 3px;
     padding-right: 3px;
-    /* width: 19px; */
 }
 
-/**/
-
 ul {
+    flex-wrap: wrap;
     display: flex;
     justify-content: left;
     align-items: left;
@@ -208,4 +173,4 @@ ul {
 
 li {
     list-style-type: none;
-
+}
