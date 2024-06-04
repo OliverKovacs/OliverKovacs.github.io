@@ -20,7 +20,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-05-02T00:00:00+02:00","datePublished":"2024-05-02T00:00:00+02:00","description":"openECSC 2024 - Round 2","headline":"Anti-rev","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"},"url":"https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><!-- is a post -->
+<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+
+    <!-- is a post -->
     
         <link rel="stylesheet" href="/assets/css/post.css">
 
@@ -30,11 +32,11 @@
         <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
     
 </head>
-<body><main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
-  <header class="post-header">
+<body>
+    <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
+    <div id="overlay"><header>
+    
     <h1 class="post-title p-name" itemprop="name headline">Anti-rev</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2024-05-02T00:00:00+02:00" itemprop="datePublished">2024 May 2
@@ -43,21 +45,36 @@
             <span class="p-author h-card" itemprop="name">Oliver Kovacs</span>
         </span>
       </a></p>
-  </header>
-
+    
+</header>
+<main id="main" class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
   <div class="post-content e-content" itemprop="articleBody">
     <p><strong>openECSC 2024 - Round 2</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">rev</code></p>
-
-<h2 id="description">Description</h2>
+<h2 id="description">
+  
+  
+    Description <a href="#description">#</a>
+  
+  
+</h2>
+    
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Good luck finding the secret word for my super secure program!
 </code></pre></div></div>
 
 <p>Attachments: <code class="language-plaintext highlighter-rouge">anti-rev</code></p>
-
-<h2 id="solution">Solution</h2>
+<h2 id="solution">
+  
+  
+    Solution <a href="#solution">#</a>
+  
+  
+</h2>
+    
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">angr</span>
 
@@ -66,8 +83,14 @@
 <span class="n">simgr</span><span class="p">.</span><span class="nf">explore</span><span class="p">(</span><span class="n">find</span><span class="o">=</span><span class="mh">0x401def</span><span class="p">,</span> <span class="n">avoid</span><span class="o">=</span><span class="mh">0x401df8</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">simgr</span><span class="p">.</span><span class="n">found</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">posix</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </code></pre></div></div>
-
-<h2 id="bonus">Bonus</h2>
+<h2 id="bonus">
+  
+  
+    Bonus <a href="#bonus">#</a>
+  
+  
+</h2>
+    
 
 <p>Use <code class="language-plaintext highlighter-rouge">angr</code> to disassemble and find address to search for.</p>
 
@@ -84,6 +107,8 @@
 </article>
 
       </div>
-    </main></body>
+    </main></div>
+
+  </body>
 
 </html>

@@ -20,7 +20,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-04-06T00:00:00+02:00","datePublished":"2024-04-06T00:00:00+02:00","description":"openECSC 2024 - Round 1","headline":"Stealing Seeds","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html"},"url":"https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><!-- is a post -->
+<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+
+    <!-- is a post -->
     
         <link rel="stylesheet" href="/assets/css/post.css">
 
@@ -30,11 +32,11 @@
         <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
     
 </head>
-<body><main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
-  <header class="post-header">
+<body>
+    <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
+    <div id="overlay"><header>
+    
     <h1 class="post-title p-name" itemprop="name headline">Stealing Seeds</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2024-04-06T00:00:00+02:00" itemprop="datePublished">2024 Apr 6
@@ -43,19 +45,34 @@
             <span class="p-author h-card" itemprop="name">Oliver Kovacs</span>
         </span>
       </a></p>
-  </header>
-
+    
+</header>
+<main id="main" class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
   <div class="post-content e-content" itemprop="articleBody">
     <p><strong>openECSC 2024 - Round 1</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
-
-<h2 id="description">Description</h2>
+<h2 id="description">
+  
+  
+    Description <a href="#description">#</a>
+  
+  
+</h2>
+    
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I found an interesting way to generate numbers with someone. Wanna try?
 </code></pre></div></div>
 <p>Attachments: <code class="language-plaintext highlighter-rouge">stealing-seeds.py</code> (see <a href="#appendix">Appendix</a>)</p>
-
-<h2 id="probem">Probem</h2>
+<h2 id="probem">
+  
+  
+    Probem <a href="#probem">#</a>
+  
+  
+</h2>
+    
 
 <p>Let \(s \in \mathbb{P}\) and \(k \in \mathbb{Z}\) with \(0 \le s, k \lt 2^{256}\) be two secret numbers chosen at random.</p>
 
@@ -67,8 +84,14 @@ f_2(u) = \text{sha256}(((s + u) \oplus s) \oplus k)\]
 <p>where \(\oplus\) denotes bit-wise XOR.</p>
 
 <p>Given that you can compute \(f_1(u)\) and \(f_2(u)\) for any \(u \in \{0, 1\}^{256}\), find \(s\).</p>
-
-<h2 id="solution">Solution</h2>
+<h2 id="solution">
+  
+  
+    Solution <a href="#solution">#</a>
+  
+  
+</h2>
+    
 
 <p>This may not be the most elegant solution, however I will explain how to systematically find it without any advanced knowledge of cryptography and semi-formally argue why it is correct.</p>
 
@@ -236,8 +259,14 @@ One possible solution can be found in the <a href="#appendix">Appendix</a>.
 Then some automated way of submitting requests needs to be created to obtain the seed from the remote server.</p>
 
 <p>Visualisation of the \(p_s(u)\) table obtained by coloring \(-1\) white.</p>
-
-<h2 id="appendix">Appendix</h2>
+<h2 id="appendix">
+  
+  
+    Appendix <a href="#appendix">#</a>
+  
+  
+</h2>
+    
 
 <figure>
     <img src="/assets/img/posts/vis.png" alt="Graph" />
@@ -359,6 +388,8 @@ Just don</span><span class="sh">'</span><span class="s">t try to steal mine...
 </article>
 
       </div>
-    </main></body>
+    </main></div>
+
+  </body>
 
 </html>
