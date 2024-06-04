@@ -17,3 +17,7 @@ bundle exec jekyll build
 - Improve hover effect
 - Merge stylesheets
 - Add now
+- Adjust blockquote
+- Improve image loading
+- Add code copy
+- Improve non-link focus

@@ -8,6 +8,8 @@ canvas {
 }
 
 body {
+    color: #d4d4d4;
+    font-family: Roboto Mono, monospace;
     background-color: #000000;
     margin: 0;
     padding: 0;
@@ -31,11 +33,6 @@ body {
     width: 730px;
 }
 
-.text {
-    color: #d4d4d4;
-    font-family: Roboto Mono, monospace;
-}
-
 #technology-list {
     width: 340px;
 }
@@ -44,12 +41,9 @@ body {
     flex-direction: column;
 }
 
-.page {
-    min-height: 100vh;
-}
-
 h1 {
     color: var(--color-primary);
+    text-decoration-color: var(--color-primary);
 }
 
 h2 {
@@ -63,6 +57,11 @@ h2 {
     padding-bottom: 0.3em;
     border-bottom: 1px solid #444;
     */
+}
+
+h2 a {
+    color: var(--color-primary);
+    text-decoration-color: var(--color-primary);
 }
 
 #pfp {
@@ -152,6 +151,7 @@ ul .ui-icon {
     font-weight: bold;
     background-color: #303030;
     display: inline-block;
+
     border-radius: 2px;
     min-width: 19px;
     text-align: center;
@@ -173,4 +173,23 @@ ul {
 
 li {
     list-style-type: none;
+}
+
+#skip {
+    position: absolute;
+    left: -1000%;
+    top: -1000%;
+}
+
+#skip:focus {
+    left: 10px;
+    top: 10px;
+    z-index: 100;
+}
+
+#skip h2 {
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
 }

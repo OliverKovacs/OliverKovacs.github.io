@@ -18,7 +18,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-06-01T00:00:00+02:00","datePublished":"2024-06-01T00:00:00+02:00","headline":"Function connecting points with straight lines","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/blog/2024/06/01/function.html"},"url":"https://oliverkovacs.dev/blog/2024/06/01/function.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><!-- is a post -->
+<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+
+    <!-- is a post -->
     
         <link rel="stylesheet" href="/assets/css/post.css">
 
@@ -28,11 +30,11 @@
         <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
     
 </head>
-<body><main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
-  <header class="post-header">
+<body>
+    <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
+    <div id="overlay"><header>
+    
     <h1 class="post-title p-name" itemprop="name headline">Function connecting points with straight lines</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2024-06-01T00:00:00+02:00" itemprop="datePublished">2024 Jun 1
@@ -41,12 +43,21 @@
             <span class="p-author h-card" itemprop="name">Oliver Kovacs</span>
         </span>
       </a></p>
-  </header>
-
+    
+</header>
+<main id="main" class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
   <div class="post-content e-content" itemprop="articleBody">
     <!--How to find a function that connects a list of points with straight line segments.-->
-
-<h2 id="problem">Problem</h2>
+<h2 id="problem">
+  
+  
+    Problem <a href="#problem">#</a>
+  
+  
+</h2>
+    
 
 <p>Given a list of \(n\) Points \(\bold P = (P_1, P_2, …, P_n)\) where \(P_i = (P_{i,x}, P_{i,y})\) ordered along the \(x\)-axis, what function \(f(x)\), when graphed, connects the points in the domain \([P_{1,x}; P_{n,x}]\) with straight lines?</p>
 
@@ -56,8 +67,14 @@
     Example: \(f(x)\) connects the points \((1, 1)\), \((2, 3)\) and \((4, 2)\) in \([1; 4]\).
     </figcaption>
 </figure>
-
-<h2 id="solution">Solution</h2>
+<h2 id="solution">
+  
+  
+    Solution <a href="#solution">#</a>
+  
+  
+</h2>
+    
 
 \[f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert\]
 
@@ -84,8 +101,14 @@
 <blockquote>
   <p>Note: I came up with this on my own so there are probably better ways to do this.</p>
 </blockquote>
-
-<h2 id="explanation">Explanation</h2>
+<h2 id="explanation">
+  
+  
+    Explanation <a href="#explanation">#</a>
+  
+  
+</h2>
+    
 
 <p>Consider the function \(g(x) = a \lvert x - b \rvert\): it is like a linear function, \(a\) determines the steepness, but it’s mirrored at \(b\) along the \(y\) axis.</p>
 
@@ -163,8 +186,14 @@ However, it can also be rewritten as a matrix multiplication:</p>
 \end{bmatrix}^{-1} \ .\]
 
 <p>And that’s it.</p>
-
-<h2 id="example">Example</h2>
+<h2 id="example">
+  
+  
+    Example <a href="#example">#</a>
+  
+  
+</h2>
+    
 
 <p>Let’s find \(f(x)\) for the points \((1, 1)\), \((2, 3)\) and \((4, 2)\).
 First, we need to find the values for \(a\).</p>
@@ -235,6 +264,8 @@ First, we need to find the values for \(a\).</p>
 </article>
 
       </div>
-    </main></body>
+    </main></div>
+
+  </body>
 
 </html>
