@@ -47,3 +47,9 @@ h3 {
     margin-top: 0.3em;
     margin-bottom: 0.3em;
 }
+
+.content {
+    position: relative;
+    margin: auto;
+    max-width: 730px;
+}

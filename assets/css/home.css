@@ -16,17 +16,14 @@ canvas {
     position: fixed;
     width: 100%;
     height: 100%;
-    z-index: 0;
 }
 
-#container {
-    position: relative;
+nav {
+    margin-bottom: 16px;
 }
 
-#overlay {
-    position: relative;
-    margin: auto;
-    width: 730px;
+footer {
+    margin-bottom: 72px;
 }
 
 #pfp {
@@ -37,47 +34,44 @@ canvas {
     float: left;
 }
 
-.ui-contact img {
-    height: 20px;
-    display: block;
+nav a {
     margin-right: 10px;
 }
 
-.ui-contact:hover img {
+nav a img {
+    height: 20px;
+}
+
+nav a img:hover {
     filter: brightness(1000%);
 }
 
+p {
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
+
 .ui-icon {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    margin-left: 0px;
-    margin-bottom: 15px;
-
-    height: 20px;
-
-    text-decoration: none;
-    color: #d4d4d4;
-}
-
-ul .ui-icon {
     padding-left: 10px;
-    padding-right: 10px;
-}
-
-.ui-icon img {
-    width: 20px;
-    display: block;
-    margin-right: 10px;
-    float: left;
-    border-radius: 2px;
+    text-decoration: none;
+    color: var(--color-fg);
 }
 
 a.ui-icon:hover {
     color: #ffffff;
+}
+
+.ui-icon img {
+    width: 20px;
+    margin-right: 10px;
+    vertical-align:top;
+}
+
+ul .ui-icon {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 15px;
 }
 
 .ui-card img {
@@ -137,14 +131,6 @@ ul {
 }
 
 main ul {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    list-style-type: none;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    padding-inline-start: 0px;
     flex-direction: column;
 }
 
@@ -157,6 +143,6 @@ main ul {
     flex-direction: row;
 }
 
-li {
-    list-style-type: none;
+a {
+    color: var(--color-primary)
 }
