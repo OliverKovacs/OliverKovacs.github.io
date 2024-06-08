@@ -30,27 +30,6 @@ a {
     /* text-decoration: none; */
 }
 
-/*
-article {
-    margin: 20px;
-    padding: 0px;
-    width: 100%;
-}
-
-@media (min-width: 730px){
-    article {
-        margin: auto;
-        width: 730px;
-    }
-}
-*/
-
-#overlay {
-    background-color: black;    /* avoid blink */
-    margin: auto;
-    width: 730px;
-}
-
 figure img {
     border-radius: 5px;
     width: 100%;
