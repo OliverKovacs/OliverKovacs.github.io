@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>GPU-accelerated real-time rendering of n-dimensional objects | Oliver Kovacs</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="GPU-accelerated real-time rendering of n-dimensional objects" />
+<meta name="author" content="Oliver Kovacs" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="[ pdf, errata ]" />
+<meta property="og:description" content="[ pdf, errata ]" />
+<link rel="canonical" href="http://localhost:4000/publication/2024/06/25/vwa.html" />
+<meta property="og:url" content="http://localhost:4000/publication/2024/06/25/vwa.html" />
+<meta property="og:site_name" content="Oliver Kovacs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-06-25T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="GPU-accelerated real-time rendering of n-dimensional objects" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-06-25T00:00:00+02:00","datePublished":"2024-06-25T00:00:00+02:00","description":"[ pdf, errata ]","headline":"GPU-accelerated real-time rendering of n-dimensional objects","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/publication/2024/06/25/vwa.html"},"url":"http://localhost:4000/publication/2024/06/25/vwa.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/css/vars.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <!-- is a post -->
+    
+        <link rel="stylesheet" href="/assets/css/post.css">
+        <link rel="stylesheet" href="/assets/css/code.css">
+
+        <!-- KaTeX -->
+        <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+        <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+        <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    
+</head>
+<body>
+    <a id="skip" href="#main"><h2>Skip to main content</h2></a>
+
+    <div class="content">
+        <header>
+            <h1>GPU-accelerated real-time rendering of n-dimensional objects</h1>
+            <p>
+                <time class="dt-published" datetime="2024-06-25T00:00:00+02:00" itemprop="datePublished">2024 Jun 25
+                </time>
+                <a href="/">
+                  <span itemprop="author" itemscope itemtype="http:/*schema.org/Person">
+                      <span class="p-author h-card" itemprop="name">Oliver Kovacs</span>
+                  </span>
+                </a>
+            </p>
+        <header>
+
+        <main id="main">
+            <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
+                <p>[
+<a href="/assets/pdf/Oliver_Kovacs-VWA.pdf" target="_blank">pdf</a>,
+<a href="/assets/pdf/Oliver_Kovacs-VWA-Errata.pdf" target="_blank">errata</a>
+]</p>
+
+<p>My pre-scientific thesis (VWA), submitted in 2023.</p>
+<h2 id="abstract">
+  
+  
+    Abstract <a href="#abstract">#</a>
+  
+  
+</h2>
+    
+
+<p>N-dimensional rendering is a fascinating but computationally expensive process. This makes it ill-suited for real-time applications. GPUs have been conventionally used to accelerate rendering workloads, however they are heavily optimized for 3D rendering. This thesis explains the mathematics underpinning n-dimensional rendering and takes a look at how it can be optimally realized on modern graphics hardware. It will give some workarounds to overcome the inherent limitations of components designed not with this use case in mind.</p>
+
+<p>A reference implementation written in C++ and utilizing Vulkan is provided in the form of vulkan-xd, exemplifying some of the techniques discussed. Some basic performance analysis was conducted on the project giving a benchmark for the achievable efficiency.</p>
+
+<p>Further research is required to come up with additional optimizations and to
+accurately assess the exact performance to be expected.</p>
+
+            </article>
+        </main>
+    </div>
+
+  </body>
+
+</html>

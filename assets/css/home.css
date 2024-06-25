@@ -52,7 +52,7 @@ p {
 }
 
 .ui-icon {
-    padding-left: 10px;
+    margin-left: 10px;
     text-decoration: none;
     color: var(--color-fg);
 }
@@ -69,7 +69,6 @@ a.ui-icon:hover {
 
 ul .ui-icon {
     display: block;
-    padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 15px;
 }
@@ -80,7 +79,7 @@ ul .ui-icon {
     margin-right: 10px;
     border-radius: 2px;
     display: inline-block;
-    vertical-align:top;
+    vertical-align: top;
     float: left;
 }
 
