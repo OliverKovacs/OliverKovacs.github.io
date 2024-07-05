@@ -1,4 +1,239 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2024-06-30T11:34:05+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">GPU-accelerated real-time rendering of n-dimensional objects</title><link href="https://oliverkovacs.dev/publication/2024/06/25/vwa.html" rel="alternate" type="text/html" title="GPU-accelerated real-time rendering of n-dimensional objects" /><published>2024-06-25T00:00:00+02:00</published><updated>2024-06-25T00:00:00+02:00</updated><id>https://oliverkovacs.dev/publication/2024/06/25/vwa</id><content type="html" xml:base="https://oliverkovacs.dev/publication/2024/06/25/vwa.html"><![CDATA[<p>[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2024-07-05T19:10:44+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Clandestine VPN split tunneling</title><link href="https://oliverkovacs.dev/blog/2024/07/05/clandestine-vpn-split-tunneling.html" rel="alternate" type="text/html" title="Clandestine VPN split tunneling" /><published>2024-07-05T00:00:00+02:00</published><updated>2024-07-05T00:00:00+02:00</updated><id>https://oliverkovacs.dev/blog/2024/07/05/clandestine-vpn-split-tunneling</id><content type="html" xml:base="https://oliverkovacs.dev/blog/2024/07/05/clandestine-vpn-split-tunneling.html"><![CDATA[<h2 id="overview">Overview</h2>
+
+<p>This post details how to use a virtual private network (VPN) running on a separate (virtual) machine.
+This allows you to “pre-filter” the network traffic, effectively split tunneling using a full-tunnel VPN connection.</p>
+
+<p>Some possible use cases include:</p>
+<ul>
+  <li>You are required to use a full tunnel VPN connection but you don’t want to send all of your traffic through the VPN for privacy or performance reasons.</li>
+  <li>You want to connect a machine to multiple VPNs simultaneously.</li>
+  <li>You want to connect multiple machines to a VPN simultaneously.</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+
+<p>The simplest setup is to use a virtual machine (VM) to connect to the VPN.
+However two different physical computers could also be used.</p>
+
+<p>This post will assume you are running a KVM VM on a Linux host but it should be trivial to adapt it to other situations.</p>
+
+<h3 id="create-the-vm">Create the VM</h3>
+
+<ol>
+  <li>Choose a Linux distribution. You can use a distro optimized for networking like <a href="https://openwrt.org/">OpenWRT</a> or a general purpose one like <a href="https://www.debian.org/">Debian</a> or <a href="https://archlinux.org/">Arch</a>.</li>
+  <li>Create a VM with for example <code class="language-plaintext highlighter-rouge">virt-manager</code>. If you are paranoid you can enable full disk encryption.</li>
+  <li>Install the VPN client you want to use inside the VM.</li>
+</ol>
+
+<h3 id="network-interfaces">Network interfaces</h3>
+
+<p>Inspect the network interfaces of the machines using <code class="language-plaintext highlighter-rouge">ip addr</code> or <code class="language-plaintext highlighter-rouge">ifconfig</code>.
+There are 3 interfaces of interest:</p>
+<ul>
+  <li>On the host:
+    <ul>
+      <li>interface to the LAN:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">wlp1s0</code> or similar if connected to wifi</li>
+          <li><code class="language-plaintext highlighter-rouge">enp1s0</code>, <code class="language-plaintext highlighter-rouge">eth0</code> or similar if connected to ethernet</li>
+        </ul>
+      </li>
+      <li>interface like <code class="language-plaintext highlighter-rouge">virbr0</code> to the VM</li>
+    </ul>
+  </li>
+  <li>On the VM:
+    <ul>
+      <li>interface like <code class="language-plaintext highlighter-rouge">enp1s0</code> to the host</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Furthermore if you start the VPN in the VM a new interface like <code class="language-plaintext highlighter-rouge">tun0</code> should be created.</p>
+
+<p>This is a diagramm of the setup:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       +------------------------------------------------------+
+       |                                                      |
+       |    Host                                              |
+       |                                                      |
+       |    +--------+    +------------------------------+    |
+LAN &lt;-----&gt; | wlp1s0 |    |                              |    |
+       |    +--------+    |    VM                        |    |
+       |                  |                              |    |
+       |    +--------+    |    +--------+  +--------+    |    |
+       |    | virbr0 | &lt;-----&gt; | enp1s0 |  |  tun0  |    |    |
+       |    +--------+    |    +--------+  +--------+    |    |
+       |       ...        +------------------------------+    |
+       +------------------------------------------------------+
+</code></pre></div></div>
+
+<p>The interfaces might be named a bit differently on your machines, you will have to adapt the following commands accordingly.</p>
+
+<h3 id="routing">Routing</h3>
+
+<p>Linux uses a routing table to determine where to send packets.
+The routing table can be consulted using the <code class="language-plaintext highlighter-rouge">route</code> command.</p>
+
+<p>Therefore:</p>
+<ol>
+  <li>The routing table of the host has to be modified so that it sends packets meant for the VPN to the VM.</li>
+  <li>The VM has to be adjusted so that it forwards these packets received from the host to the VPN.</li>
+</ol>
+
+<h2 id="vm">VM</h2>
+
+<p>Enable IP forwarding:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'1'</span> <span class="o">&gt;&gt;</span> /proc/sys/net/ipv4/ip_forward
+</code></pre></div></div>
+
+<p>Adjust the firewall to forward <code class="language-plaintext highlighter-rouge">enp1s0</code> to <code class="language-plaintext highlighter-rouge">tun0</code>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables <span class="nt">-t</span> nat <span class="nt">-A</span> POSTROUTING <span class="nt">-o</span> tun0 <span class="nt">-j</span> MASQUERADE
+
+iptables <span class="nt">-A</span> FORWARD <span class="nt">-i</span> enp1s0 <span class="nt">-o</span> tun0 <span class="nt">-j</span> ACCEPT
+iptables <span class="nt">-A</span> FORWARD <span class="nt">-o</span> tun0 <span class="nt">-j</span> ACCEPT
+iptables <span class="nt">-A</span> FORWARD <span class="nt">-i</span> tun0 <span class="nt">-m</span> conntrack <span class="nt">--ctstate</span> ESTABLISHED,RELATED <span class="nt">-j</span> ACCEPT
+
+iptables <span class="nt">-A</span> INPUT <span class="nt">-i</span> tun0 <span class="nt">-j</span> ACCEPT
+</code></pre></div></div>
+
+<h2 id="host">Host</h2>
+
+<p>There are two ways to set up the host:</p>
+
+<h3 id="static">Static</h3>
+
+<p>This is simpler if you only need to access a few resources.
+If there is a website called <code class="language-plaintext highlighter-rouge">site.example</code> that you need to access:</p>
+<ol>
+  <li>Look up the IP address of <code class="language-plaintext highlighter-rouge">site.example</code> using <code class="language-plaintext highlighter-rouge">dig</code> or <code class="language-plaintext highlighter-rouge">nslookup</code>. Let’s assume it is <code class="language-plaintext highlighter-rouge">10.10.10.10</code>.</li>
+  <li>Add an entry to your <code class="language-plaintext highlighter-rouge">/etc/hosts</code> file:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># /etc/hosts</span>
+10.10.10.10     site.example
+</code></pre></div>    </div>
+  </li>
+  <li>Find the IP address of the <code class="language-plaintext highlighter-rouge">enp1s0</code> network interface of the VM.
+It must be on the same subnet as the <code class="language-plaintext highlighter-rouge">virbr0</code> interface of the host.
+Let’s assume it is <code class="language-plaintext highlighter-rouge">192.168.100.100</code>.</li>
+  <li>Add an entry to the routing table of the host specifying that packets bound for the IP of the website should use the VM as the gateway.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>route add 10.10.10.10/32 gw 192.168.100.100 metric 200 dev virbr0
+</code></pre></div>    </div>
+  </li>
+  <li>You should be able to access the website.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl site.example
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="dns">DNS</h3>
+
+<p>This is more complicated but might be necessary if a static setup would be too tedious.</p>
+
+<ol>
+  <li>Find the VPN name server using <code class="language-plaintext highlighter-rouge">dig</code> or <code class="language-plaintext highlighter-rouge">nslookup</code>.</li>
+  <li>Configure the host to use it for DNS resolution. The concrete steps to do this depend on your setup, but this is tricky:
+    <ul>
+      <li>You should restrict usage of the VPN name server to domains that it is actually needed for.</li>
+      <li>You might not know all of the domains this applies to.</li>
+      <li>You cannot use the name server on your router because it doesn’t have access to the VPN.</li>
+      <li>Therefore you might have to run a seperate name server on the host and configure the fallback logic between router and VPN name server there.</li>
+      <li>Failing to set this up correctly could leak your DNS queries to the VPN name server and break a DNS sinkholing setup.</li>
+    </ul>
+  </li>
+  <li>Expose the VPN name server as well as the VPN subnets using the host routing table as explained in the <a href="./clandestine-vpn-split-tunneling.html#static">static</a> section.</li>
+</ol>
+
+<h4 id="example">Example</h4>
+
+<p>DNS using <code class="language-plaintext highlighter-rouge">systemd-resolved</code> with <code class="language-plaintext highlighter-rouge">systemd-networkd</code></p>
+
+<p>Run on the VM:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dig site1.example
+<span class="c"># ...</span>
+<span class="c"># site1.example.	300	IN	A	10.10.10.10</span>
+<span class="c"># ...</span>
+<span class="c"># ;; SERVER: 10.10.10.53#53(10.10.10.53) (UDP)</span>
+<span class="c"># ...</span>
+</code></pre></div></div>
+<p>Thus the VPN name server is <code class="language-plaintext highlighter-rouge">10.10.10.53</code>.</p>
+
+<p>Make sure you are actually using resolved for host resolution.
+The <code class="language-plaintext highlighter-rouge">/etc/nsswitch.conf</code> file should contain the following line:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hosts:  files resolve dns
+</code></pre></div></div>
+<p>See also <code class="language-plaintext highlighter-rouge">man nss-resolve</code> and <code class="language-plaintext highlighter-rouge">man nsswitch.conf</code>.</p>
+
+<p>Set the VPN name server as the network DNS server in <code class="language-plaintext highlighter-rouge">/etc/systemd/network/wlp1s0.network</code>.</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Match]</span>
+<span class="py">Name</span><span class="p">=</span><span class="s">wlp1s0</span>
+
+<span class="nn">[Network]</span>
+<span class="py">DNS</span><span class="p">=</span><span class="s">10.10.10.53</span>
+<span class="py">Domains</span><span class="p">=</span><span class="s">site1.example site2.example ~example</span>
+</code></pre></div></div>
+<p>See also <code class="language-plaintext highlighter-rouge">man systemd.network</code>.</p>
+
+<p>Set your prefered non-VPN name server as your global DNS server in <code class="language-plaintext highlighter-rouge">/etc/systemd/resolved.conf</code>:</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Resolve]</span>
+<span class="py">DNS</span><span class="p">=</span><span class="s">8.8.8.8</span>
+</code></pre></div></div>
+<p>See also <code class="language-plaintext highlighter-rouge">man systemd-resolved.service</code>.</p>
+
+<p>Reload:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl daemon-reload
+systemctl restart systemd-networkd
+systemctl restart systemd-resolved
+</code></pre></div></div>
+
+<p>This has the effect that <code class="language-plaintext highlighter-rouge">host1.site1.example</code> will be resolved using <code class="language-plaintext highlighter-rouge">10.10.10.53</code> but <code class="language-plaintext highlighter-rouge">on.the.internet</code> using <code class="language-plaintext highlighter-rouge">8.8.8.8</code>.</p>
+
+<p>Add routing information for the VPN name server and other resources you need to access:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>route add 10.10.10.53/32 gw 192.168.100.100 metric 200 dev virbr0
+route add 10.10.10.10/32 gw 192.168.100.100 metric 200 dev virbr0
+</code></pre></div></div>
+
+<p>You can troubleshoot using:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resolvectl status
+</code></pre></div></div>
+
+<p>The output should look something like this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Global
+         Protocols: <span class="nt">-LLMNR</span> <span class="nt">-mDNS</span> <span class="nt">-DNSOverTLS</span> <span class="nv">DNSSEC</span><span class="o">=</span>no/unsupported
+  resolv.conf mode: foreign
+Current DNS Server: 8.8.8.8
+       DNS Servers: 8.8.8.8
+
+Link 2 <span class="o">(</span>wlp1s0<span class="o">)</span>
+    Current Scopes: DNS
+         Protocols: <span class="nt">-DefaultRoute</span> +LLMNR <span class="nt">-mDNS</span> <span class="nt">-DNSOverTLS</span> <span class="nv">DNSSEC</span><span class="o">=</span>no/unsupported
+Current DNS Server: 10.10.10.53
+       DNS Servers: 10.10.10.53
+        DNS Domain: site1.example site2.example ~example
+
+<span class="c"># ...</span>
+</code></pre></div></div>
+
+<h2 id="persistence">Persistence</h2>
+
+<p>All of the commands are non-persistent.
+If you want them to survive a reboot you have to create a startup script running them on boot.</p>
+
+<p>Ideally you want</p>
+<ul>
+  <li>a startup script on the host setting up the routing table and starting the VM, and</li>
+  <li>a startup script on the VM starting the VPN and adjusting the firewall.</li>
+</ul>
+
+<p>The specifics will highly depend on your setup and use case.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Notice how you can use these techniques to</p>
+<ul>
+  <li>split tunnel before a full tunnel VPN,</li>
+  <li>share a VPN connection with multiple computers or</li>
+  <li>use multiple VPNs simultaneously</li>
+</ul>
+
+<p>without the arbiters of the VPN being able to do much about it.</p>]]></content><author><name>Oliver Kovacs</name></author><category term="blog" /><summary type="html"><![CDATA[Overview]]></summary></entry><entry><title type="html">GPU-accelerated real-time rendering of n-dimensional objects</title><link href="https://oliverkovacs.dev/publication/2024/06/25/vwa.html" rel="alternate" type="text/html" title="GPU-accelerated real-time rendering of n-dimensional objects" /><published>2024-06-25T00:00:00+02:00</published><updated>2024-06-25T00:00:00+02:00</updated><id>https://oliverkovacs.dev/publication/2024/06/25/vwa</id><content type="html" xml:base="https://oliverkovacs.dev/publication/2024/06/25/vwa.html"><![CDATA[<p>[
 <a href="/assets/pdf/Oliver_Kovacs-VWA.pdf" target="_blank">pdf</a>,
 <a href="/assets/pdf/Oliver_Kovacs-VWA-Errata.pdf" target="_blank">errata</a>
 ]</p>
