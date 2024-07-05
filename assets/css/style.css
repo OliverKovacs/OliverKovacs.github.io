@@ -5,30 +5,38 @@ body {
     padding: 0;
 }
 
+/* headings */
+
+h1, h2, h3, h4 {
+    color: var(--color-primary);
+}
+
 h1 {
     font-size: 2em;
-    color: var(--color-primary);
-    text-decoration-color: var(--color-primary);
 }
 
 h2 {
     font-size: 1.5em;
-    color: var(--color-primary);
     margin-top: 42px;
     margin-bottom: 16px;
 }
 
-h2 a {
-    color: var(--color-primary);
-    text-decoration: none;
-    text-decoration-color: var(--color-primary);
-}
-
 h3 {
-    color: var(--color-primary);
     margin-top: 24px;
     margin-bottom: 16px;
 }
+
+h2>a, h3>a, h4>a
+{
+    text-decoration: none;
+    display: none;
+}
+
+h2:hover>a, h3:hover>a, h4:hover>a {
+    display: unset;
+}
+
+/* skip to main content */
 
 #skip {
     position: absolute;
@@ -42,7 +50,7 @@ h3 {
     z-index: 100;
 }
 
-#skip h2 {
+#skip>h2 {
     text-decoration: underline;
     text-decoration-color: var(--color-primary);
     margin-top: 0.3em;
