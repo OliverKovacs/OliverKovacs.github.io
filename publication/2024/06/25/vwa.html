@@ -40,17 +40,33 @@
 
     <div class="content">
         <header>
+            <div id="color-row">
+                <div>
+                <img class="light-mode-hide" src="/assets/img/icons/dark/light_mode.svg" alt="Light mode" />
+                <img class="dark-mode-hide" src="/assets/img/icons/light/light_mode.svg" alt="Light mode" />
+                <label class="switch">
+                    <input type="checkbox" id="color-mode">
+                    <span class="slider round"></span>
+                </label>
+                <img class="light-mode-hide" src="/assets/img/icons/dark/dark_mode.svg" alt="Dark mode" />
+                <img class="dark-mode-hide" src="/assets/img/icons/light/dark_mode.svg" alt="Dark mode" />
+                </div>
+            </div>
+
             <h1>GPU-accelerated real-time rendering of n-dimensional objects</h1>
-            <p>
+            <div id="home-row">
                 <time class="dt-published" datetime="2024-06-25T00:00:00+02:00" itemprop="datePublished">2024 Jun 25
                 </time>
-                <a href="/">
-                  <span itemprop="author" itemscope itemtype="http:/*schema.org/Person">
-                      <span class="p-author h-card" itemprop="name">Oliver Kovacs</span>
-                  </span>
+                <div>
+                <a id="home" href="/">
+                    <div>Oliver Kovacs</div>
+                    <!--<span itemprop="author" itemscope itemtype="http:/*schema.org/Person">
+                      <span class="p-author h-card" itemprop="name"></span>
+                  </span>-->
                 </a>
-            </p>
-        <header>
+                </div>
+            </div>
+        </header>
 
         <main id="main">
             <article class="post h-entry" itemscope itemtype="http:/*schema.org/BlogPosting">
