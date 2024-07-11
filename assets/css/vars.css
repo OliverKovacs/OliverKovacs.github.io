@@ -1,6 +1,141 @@
 :root {
-    --color-bg: #000000;
-    --color-fg: #d4d4d4;
-    --color-fg2: #999;
     --color-primary: #2472c8;
+
+    --light-color-bg: #ffffff;
+    --light-color-bg2: #e0e0e0;
+    --light-color-fg: #000000;
+    --light-color-fg2: #999999;
+
+    --dark-color-bg: #000000;
+    --dark-color-bg2: #333333;
+    --dark-color-fg: #d4d4d4;
+    --dark-color-fg2: #999999;
+
+    --color-bg: var(--light-color-bg);
+    --color-bg2: var(--light-color-bg2);
+    --color-fg: var(--light-color-fg);
+    --color-fg2: var(--light-color-fg2);
+}
+
+.dark-mode-hide {
+    display:none;
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+    --color-bg: var(--dark-color-bg);
+    --color-bg2: var(--dark-color-bg2);
+    --color-fg: var(--dark-color-fg);
+    --color-fg2: var(--dark-color-fg2);
+}
+
+.dark-mode-hide {
+    display:none;
+}
+}
+
+:root:has(#color-mode:checked) {
+    --color-bg: var(--dark-color-bg);
+    --color-bg2: var(--dark-color-bg2);
+    --color-fg: var(--dark-color-fg);
+    --color-fg2: var(--dark-color-fg2);
+
+    .light-mode-hide {
+        display:none;
+    }
+    .dark-mode-hide {
+        display:initial;
+    }
+}
+
+
+@media (prefers-color-scheme: dark) {
+:root:has(#color-mode:checked) {
+    --color-bg: var(--light-color-bg);
+    --color-bg2: var(--light-color-bg2);
+    --color-fg: var(--light-color-fg);
+    --color-fg2: var(--light-color-fg2);
+
+    .light-mode-hide {
+        display:none;
+    }
+    .dark-mode-hide {
+        display:initial;
+    }
+}
+}
+
+/* The switch - the box around the slider */
+.switch {
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 21px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-fg2);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--color-fg);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+@media (prefers-color-scheme: dark) {
+    input:not(:checked) + .slider {
+        background-color: var(--color-primary);
+    }
+
+    input:not(:checked) + .slider:before {
+        -webkit-transform: translateX(21px);
+        -ms-transform: translateX(21px);
+        transform: translateX(21px);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    input:checked + .slider {
+        background-color: var(--color-primary);
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(21px);
+        -ms-transform: translateX(21px);
+        transform: translateX(21px);
+    }
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

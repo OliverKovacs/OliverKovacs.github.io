@@ -1,11 +1,12 @@
 code {
+    color: #d4d4d4;
     background-color: #1e1e1e;
 }
 
 p>code,
 li>code {
-    background-color: #333333;
-    /* color: #ffffff; */
+    color: var(--color-fg);
+    background-color: var(--color-bg2);
     padding-right: 2px;
     padding-left: 2px;
     border-radius: 2px;

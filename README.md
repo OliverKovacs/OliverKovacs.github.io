@@ -21,3 +21,5 @@ bundle exec jekyll build
 - Improve image loading
 - Add code copy
 - Improve non-link focus
+- Improve multiple lines in cards
+- Improve CSS
