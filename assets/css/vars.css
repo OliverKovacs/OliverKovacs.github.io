@@ -22,16 +22,16 @@
 }
 
 @media (prefers-color-scheme: dark) {
-:root {
-    --color-bg: var(--dark-color-bg);
-    --color-bg2: var(--dark-color-bg2);
-    --color-fg: var(--dark-color-fg);
-    --color-fg2: var(--dark-color-fg2);
-}
+    :root {
+        --color-bg: var(--dark-color-bg);
+        --color-bg2: var(--dark-color-bg2);
+        --color-fg: var(--dark-color-fg);
+        --color-fg2: var(--dark-color-fg2);
+    }
 
-.dark-mode-hide {
-    display:none;
-}
+    .dark-mode-hide {
+        display:none;
+    }
 }
 
 :root:has(#color-mode:checked) {
@@ -50,19 +50,19 @@
 
 
 @media (prefers-color-scheme: dark) {
-:root:has(#color-mode:checked) {
-    --color-bg: var(--light-color-bg);
-    --color-bg2: var(--light-color-bg2);
-    --color-fg: var(--light-color-fg);
-    --color-fg2: var(--light-color-fg2);
+    :root:has(#color-mode:checked) {
+        --color-bg: var(--light-color-bg);
+        --color-bg2: var(--light-color-bg2);
+        --color-fg: var(--light-color-fg);
+        --color-fg2: var(--light-color-fg2);
 
-    .light-mode-hide {
-        display:none;
+        .light-mode-hide {
+            display:none;
+        }
+        .dark-mode-hide {
+            display:initial;
+        }
     }
-    .dark-mode-hide {
-        display:initial;
-    }
-}
 }
 
 /* The switch - the box around the slider */

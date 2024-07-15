@@ -1,14 +1,11 @@
 body {
     font-family: Roboto Mono, monospace;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
   display: none;
-}
-
-body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 canvas {
@@ -20,18 +17,6 @@ canvas {
 
 nav {
     margin-bottom: 16px;
-}
-
-footer {
-    margin-bottom: 72px;
-}
-
-#pfp {
-    height: 24px;
-    margin-right: 12px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    float: left;
 }
 
 nav a {
@@ -46,25 +31,20 @@ nav a img:hover {
     filter: brightness(1000%);
 }
 
-p {
-    margin-top: 0px;
-    margin-bottom: 16px;
-}
-
 .ui-icon {
-    margin-left: 10px;
-    text-decoration: none;
     color: var(--color-fg);
+    margin-left: 10px;
 }
 
-a.ui-icon:hover {
+.ui-icon:hover {
     color: #ffffff;
 }
 
 .ui-icon img {
-    width: 20px;
+    color: var(--dark-color-fg);
+    width: 19px;
     margin-right: 10px;
-    vertical-align:top;
+    vertical-align: top;
 }
 
 ul .ui-icon {
@@ -73,56 +53,38 @@ ul .ui-icon {
     margin-bottom: 15px;
 }
 
+.ui-card {
+    color: var(--dark-color-fg);
+    display: flex;
+    justify-content: left;
+    margin: 10px;
+}
+
+.ui-card:hover {
+    color: #ffffff;
+}
+
 .ui-card img {
-    width: 60px;
-    display: block;
+    width: 57px;
     margin-right: 10px;
     border-radius: 2px;
-    display: inline-block;
     vertical-align: top;
     float: left;
 }
 
-.ui-card {
-    text-decoration: none;
-    color: #d4d4d4;
-
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    margin: 10px;
-}
-
-
-a.ui-card:hover {
-    color: #ffffff;
-}
-
-.ui-card .container {
-    float: right;
-}
-
 .key {
+    background-color: var(--dark-color-bg2);
     font-weight: bold;
-    background-color: #303030;
     display: inline-block;
-
     border-radius: 2px;
-    min-width: 19px;
     text-align: center;
-    margin: 0px;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding: 0px 6px;
 }
 
 ul {
     flex-wrap: wrap;
     display: flex;
     justify-content: left;
-    align-items: left;
     list-style-type: none;
     margin-block-start: 0em;
     margin-block-end: 0em;
@@ -133,15 +95,20 @@ main ul {
     flex-direction: column;
 }
 
-#technology-list {
-    flex-direction: row;
-    width: 340px;
-}
-
 .row-list {
     flex-direction: row;
 }
 
+#technology-list {
+    width: 340px;
+}
+
+#pfp {
+    height: 24px;
+    margin: 6px 12px 6px 0px;
+    float: left;
+}
+
 a {
-    color: var(--color-primary)
+    text-decoration: none;
 }
