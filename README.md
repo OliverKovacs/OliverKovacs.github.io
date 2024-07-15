@@ -24,4 +24,4 @@ bundle exec jekyll build
 - Improve multiple lines in cards
 - Improve CSS
 - Add light theme on home
-- About anchor link
+- Improve theme switch focus
