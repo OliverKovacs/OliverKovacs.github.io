@@ -46,6 +46,15 @@ h2>a:focus, h3>a:focus, h4>a:focus {
     opacity: 1;
 }
 
+a {
+    color: var(--color-primary);
+}
+
+p {
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
+
 /* skip to main content */
 #skip {
     position: absolute;
@@ -66,12 +75,23 @@ h2>a:focus, h3>a:focus, h4>a:focus {
     margin-bottom: 0.3em;
 }
 
-
-a {
-    color: var(--color-primary);
+/* change theme */
+#color-row {
+    height: 21px;
 }
 
-p {
-    margin-top: 0px;
-    margin-bottom: 16px;
+#color-row div {
+    float: right;
+}
+
+#color-row label {
+    height: 21px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+#color-row img {
+    height: 21px;
+    margin-left: 4px;
+    margin-right: 4px;
 }

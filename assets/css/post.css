@@ -8,26 +8,6 @@ h1 {
     margin-bottom: 7px;
 }
 
-#color-row {
-    height: 21px;
-}
-
-#color-row div {
-    float: right;
-}
-
-#color-row label {
-    height: 21px;
-    margin-left: auto; 
-    margin-right: 0;
-}
-
-#color-row img {
-    height: 21px;
-    margin-left: 4px; 
-    margin-right: 4px;
-}
-
 #home-row {
     margin-bottom: 16px;
 }
@@ -67,7 +47,7 @@ time {
 figure img {
     border-radius: 5px;
     width: 100%;
-    background-color: #000;
+    background-color: #000000;
 }
 
 figure {

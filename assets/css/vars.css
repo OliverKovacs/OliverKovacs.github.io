@@ -5,19 +5,22 @@
     --light-color-bg2: #e0e0e0;
     --light-color-fg: #000000;
     --light-color-fg2: #999999;
+    --light-color-hl: #555555;
 
     --dark-color-bg: #000000;
     --dark-color-bg2: #333333;
     --dark-color-fg: #d4d4d4;
     --dark-color-fg2: #999999;
+    --dark-color-hl: #ffffff;
 
     --color-bg: var(--light-color-bg);
     --color-bg2: var(--light-color-bg2);
     --color-fg: var(--light-color-fg);
     --color-fg2: var(--light-color-fg2);
+    --color-hl: var(--light-color-hl);
 }
 
-.dark-mode-hide {
+.light-mode-hide {
     display:none;
 }
 
@@ -27,8 +30,12 @@
         --color-bg2: var(--dark-color-bg2);
         --color-fg: var(--dark-color-fg);
         --color-fg2: var(--dark-color-fg2);
+        --color-hl: var(--dark-color-hl);
     }
 
+    .light-mode-hide {
+        display:initial;
+    }
     .dark-mode-hide {
         display:none;
     }
@@ -39,12 +46,13 @@
     --color-bg2: var(--dark-color-bg2);
     --color-fg: var(--dark-color-fg);
     --color-fg2: var(--dark-color-fg2);
+    --color-hl: var(--dark-color-hl);
 
     .light-mode-hide {
-        display:none;
+        display:initial;
     }
     .dark-mode-hide {
-        display:initial;
+        display:none;
     }
 }
 
@@ -55,6 +63,7 @@
         --color-bg2: var(--light-color-bg2);
         --color-fg: var(--light-color-fg);
         --color-fg2: var(--light-color-fg2);
+        --color-hl: var(--light-color-hl);
 
         .light-mode-hide {
             display:none;
@@ -132,10 +141,10 @@
 }
 
 /* Rounded sliders */
-.slider.round {
+.slider {
     border-radius: 34px;
 }
 
-.slider.round:before {
+.slider:before {
     border-radius: 50%;
 }
