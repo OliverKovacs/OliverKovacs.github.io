@@ -1,4 +1,6 @@
 body {
+    background-color: var(--dark-color-bg);
+    color: var(--dark-color-fg);
     font-family: Roboto Mono, monospace;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -9,7 +11,7 @@ body::-webkit-scrollbar {
 }
 
 canvas {
-    background-color: var(--color-bg);
+    background-color: var(--dark-color-bg);
     position: fixed;
     width: 100%;
     height: 100%;
@@ -32,12 +34,15 @@ nav a img:hover {
 }
 
 .ui-icon {
-    color: var(--color-fg);
+    color: var(--dark-color-fg);
+}
+
+p .ui-icon {
     margin-left: 10px;
 }
 
 .ui-icon:hover {
-    color: #ffffff;
+    color: var(--dark-color-hl);
 }
 
 .ui-icon img {
@@ -50,26 +55,28 @@ nav a img:hover {
 ul .ui-icon {
     display: block;
     padding-right: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .ui-card {
     color: var(--dark-color-fg);
     display: flex;
     justify-content: left;
-    margin: 10px;
+    margin-bottom: 16px;
+    margin-right: 16px;
 }
 
 .ui-card:hover {
-    color: #ffffff;
+    color: var(--dark-color-hl);
 }
 
 .ui-card img {
     width: 57px;
-    margin-right: 10px;
+    margin-right: 16px;
     border-radius: 2px;
     vertical-align: top;
     float: left;
+    /* background-color: #000000; */
 }
 
 .key {
@@ -100,7 +107,7 @@ main ul {
 }
 
 #technology-list {
-    width: 340px;
+    width: 300px;
 }
 
 #pfp {

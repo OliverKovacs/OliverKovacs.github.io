@@ -1,4 +1,13 @@
 {
+  "name": "website",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "scripts": {
+    "build": "bundle exec jekyll build",
+    "dev": "tsc --watch & bundle exec jekyll serve"
+  },
+  "keywords": [],
+  "author": "Oliver Kovacs",
   "devDependencies": {
     "typescript": "^5.4.4"
   }
