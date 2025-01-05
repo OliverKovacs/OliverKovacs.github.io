@@ -2,12 +2,6 @@ body {
     background-color: var(--dark-color-bg);
     color: var(--dark-color-fg);
     font-family: Roboto Mono, monospace;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-body::-webkit-scrollbar {
-  display: none;
 }
 
 canvas {
@@ -17,105 +11,44 @@ canvas {
     height: 100%;
 }
 
-nav {
-    margin-bottom: 16px;
-}
-
-nav a {
-    margin-right: 10px;
-}
-
-nav a img {
-    height: 20px;
-}
-
-nav a img:hover {
-    filter: brightness(1000%);
-}
-
-.ui-icon {
+ul a, p a {
     color: var(--dark-color-fg);
+    text-decoration: none;
 }
 
-p .ui-icon {
+main li {
+    display: block;
+    padding-right: 10px;
+}
+
+p img {
     margin-left: 10px;
 }
 
-.ui-icon:hover {
+.key {
+    background-color: var(--dark-color-bg2);
+    border-radius: 2px;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0px 6px;
+    text-align: center;
+}
+
+.home .row-list {
+    display: flex;
+    flex-direction: row;
+}
+
+a.ui-icon:hover {
     color: var(--dark-color-hl);
 }
 
 .ui-icon img {
-    color: var(--dark-color-fg);
     width: 19px;
     margin-right: 10px;
     vertical-align: top;
 }
 
-ul .ui-icon {
-    display: block;
-    padding-right: 10px;
-    margin-bottom: 16px;
-}
-
-.ui-card {
-    color: var(--dark-color-fg);
-    display: flex;
-    justify-content: left;
-    margin-bottom: 16px;
-    margin-right: 16px;
-}
-
-.ui-card:hover {
-    color: var(--dark-color-hl);
-}
-
-.ui-card img {
-    width: 57px;
-    margin-right: 16px;
-    border-radius: 2px;
-    vertical-align: top;
-    float: left;
-    /* background-color: #000000; */
-}
-
-.key {
-    background-color: var(--dark-color-bg2);
-    font-weight: bold;
-    display: inline-block;
-    border-radius: 2px;
-    text-align: center;
-    padding: 0px 6px;
-}
-
-ul {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: left;
-    list-style-type: none;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    padding-inline-start: 0px;
-}
-
-main ul {
-    flex-direction: column;
-}
-
-.row-list {
-    flex-direction: row;
-}
-
 #technology-list {
     width: 300px;
-}
-
-#pfp {
-    height: 24px;
-    margin: 6px 12px 6px 0px;
-    float: left;
-}
-
-a {
-    text-decoration: none;
 }

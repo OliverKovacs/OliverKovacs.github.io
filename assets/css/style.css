@@ -2,13 +2,7 @@ body {
     background-color: var(--color-bg);
     color: var(--color-fg);
     margin: 0;
-}
-
-.content {
-    position: relative;
-    margin: auto;
-    max-width: 730px;
-    padding: 40px 15px 80px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
 
 /* headings */
@@ -17,6 +11,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
+    font-family: Roboto Mono, monospace;
     font-size: 2em;
 }
 
@@ -31,23 +26,18 @@ h3 {
     margin-bottom: 16px;
 }
 
-h2>a, h3>a, h4>a
-{
+h2>a, h3>a, h4>a {
     color: var(--color-primary);
     text-decoration: none;
-    opacity: 0;
-}
-
-h2:hover>a, h3:hover>a, h4:hover>a {
-    opacity: 1;
-}
-
-h2>a:focus, h3>a:focus, h4>a:focus {
-    opacity: 1;
 }
 
 a {
     color: var(--color-primary);
+}
+
+#show {
+    text-decoration: underline;
+    opacity: 1;
 }
 
 p {
@@ -94,4 +84,108 @@ p {
     height: 21px;
     margin-left: 4px;
     margin-right: 4px;
+}
+
+#pfp {
+    height: 24px;
+    margin: 6px 12px 6px 0px;
+    float: left;
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+td {
+    padding: 0px;
+}
+
+.home ul {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: left;
+    list-style-type: none;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding-inline-start: 0px;
+    flex-direction: column;
+}
+
+.home li {
+    margin-bottom: 16px;
+}
+
+.content {
+    position: relative;
+    margin: auto;
+    max-width: 730px;
+    padding: 40px 15px 80px;
+}
+
+nav.contacts {
+    margin-bottom: 16px;
+}
+
+nav.contacts li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav.contacts a img {
+    height: 20px;
+}
+
+nav.contacts a:hover img {
+    filter: brightness(1000%);
+}
+
+nav.contacts ul {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: left;
+    list-style-type: none;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding-inline-start: 0px;
+}
+
+.photo {
+    margin: 0px;
+    margin-bottom: 100px;
+}
+
+.photo img {
+    max-width: 100%;
+    max-height: 70vh;
+    margin: auto;
+    display: block;
+}
+
+figcaption {
+    text-align: center;
+    color: var(--color-fg2)
+}
+
+.photo figcaption {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+}
+
+a.ui-card:hover {
+    color: var(--dark-color-hl);
+}
+
+.ui-card {
+    color: var(--dark-color-fg);
+    display: flex;
+    justify-content: left;
+}
+
+.ui-card img {
+    width: 57px;
+    margin-right: 16px;
+    border-radius: 2px;
+}
+
+#music .ui-card img {
+    width: 69px;
 }
