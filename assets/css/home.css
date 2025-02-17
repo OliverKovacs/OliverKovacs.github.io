@@ -52,3 +52,12 @@ a.ui-icon:hover {
 #technology-list {
     width: 300px;
 }
+
+webring-banner {
+    margin: auto;
+    width: 446px;
+}
+
+footer {
+    padding-bottom: 160px;
+}

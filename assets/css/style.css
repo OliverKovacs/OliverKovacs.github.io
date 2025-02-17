@@ -35,9 +35,8 @@ a {
     color: var(--color-primary);
 }
 
-#show {
+h2>a:hover, h3>a:hover, h4>a:hover {
     text-decoration: underline;
-    opacity: 1;
 }
 
 p {
