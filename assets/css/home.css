@@ -11,11 +11,6 @@ canvas {
     height: 100%;
 }
 
-ul a, p a {
-    color: var(--dark-color-fg);
-    text-decoration: none;
-}
-
 main li {
     display: block;
     padding-right: 10px;
@@ -23,6 +18,10 @@ main li {
 
 p img {
     margin-left: 10px;
+}
+
+.colo-fg2 {
+    color: var(--dark-color-fg2);
 }
 
 .key {
@@ -37,6 +36,11 @@ p img {
 .home .row-list {
     display: flex;
     flex-direction: row;
+}
+
+a.ui-card, a.ui-icon {
+    color: var(--dark-color-fg);
+    text-decoration: none;
 }
 
 a.ui-icon:hover {

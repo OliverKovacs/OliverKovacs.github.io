@@ -28,6 +28,12 @@ h3 {
 
 h2>a, h3>a, h4>a {
     color: var(--color-primary);
+    /* text-decoration: none; */
+    text-decoration: underline;
+}
+
+/* # */
+h2>a:last-child, h3>a:last-child, h4>a:last-child {
     text-decoration: none;
 }
 
