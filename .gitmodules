@@ -1,0 +1,18 @@
+[submodule "demos/jsfps"]
+	path = demos/jsfps
+	url = https://github.com/OliverKovacsArchived/jsfps
+[submodule "demos/xdgl"]
+	path = demos/xdgl
+	url = https://github.com/OliverKovacs/xdgl
+[submodule "demos/engine-xd"]
+	path = demos/engine-xd
+	url = https://github.com/dx81/engine-xd-demos
+[submodule "demos/mandelbrot"]
+	path = demos/mandelbrot
+	url = https://github.com/OliverKovacs/mandelbrot-webgl
+[submodule "demos/lorenz"]
+	path = demos/lorenz
+	url = https://github.com/OliverKovacs/lorenz-webgl
+[submodule "demos/polymerization"]
+	path = demos/polymerization
+	url = https://github.com/OliverKovacs/polymerization
