@@ -2,7 +2,9 @@
 
 ## Dev
 ```
-bundle exec jekyll serve
+./setup.sh
+nix-shell
+jekyll serve
 ```
 
 ## Build
@@ -10,7 +12,9 @@ bundle exec jekyll serve
 ```
 git submodule update --init --recursive
 npx tsc
-bundle exec jekyll build
+./setup.sh
+nix-shell
+jekyll build
 ```
 
 ## Todo
