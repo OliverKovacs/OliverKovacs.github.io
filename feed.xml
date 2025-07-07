@@ -1,4 +1,197 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2025-07-06T10:11:10+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Installing Vivado on NixOS</title><link href="https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html" rel="alternate" type="text/html" title="Installing Vivado on NixOS" /><published>2025-05-02T00:00:00+02:00</published><updated>2025-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos</id><content type="html" xml:base="https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html"><![CDATA[<h2 id="introduction">Introduction</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2025-07-07T15:45:18+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Fast RSA</title><link href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" rel="alternate" type="text/html" title="Fast RSA" /><published>2025-07-07T00:00:00+02:00</published><updated>2025-07-07T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"><![CDATA[<p><strong>ACSC 2025 - Final</strong></p>
+
+<p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
+
+<h2 id="description">Description</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hey choom! I got my hands on some fresh new hardware, a chip that can do military-grade encryption at lightning speed.
+
+I'm testing out it's signature features, and since you're a god-tier netrunner, maybe you can learn how to sign stuff yourself if you watch my bot do it enough?
+</code></pre></div></div>
+<p>Attachments: [
+<a href="/assets/zip/fast-rsa.zip">fast-rsa.zip</a>
+]</p>
+
+<h2 id="problem">Problem</h2>
+
+<p>The program generates an RSA keypair and outputs the modulus \(n\)
+and the uppermost 32 bits of \(d\).</p>
+
+<p>It then repeatedly reads \(m, b \in \mathbb Z\) and calculates the signature \(s = m^d \mod n\).
+This is done in <a href="https://en.wikipedia.org/wiki/Montgomery_modular_multiplication">Montgomery</a> form.
+Then \(s\) and whether any of the two multiplications in the \(b\)th step of exponentiation
+required the conditional subtraction is revealed.</p>
+
+<p>The goal is to determine \(d\).</p>
+
+<h2 id="solution">Solution</h2>
+
+<blockquote>
+  <p>Disclosure: I was not able to solve this challenge at the competition.</p>
+</blockquote>
+
+<p>We can <em>almost</em> use an attack by Walter &amp; Thompson<sup>1</sup>.
+You can find my implementation <a href="https://github.com/OliverKovacs/montgomery-sidechannel/">here</a>.</p>
+
+<p>The only difference is that in each step it is not known which of the two
+subtractions were needed, i. e. the observation vector is “squashed”.
+The solution is simple: the algorithm has to be run on multiple
+squashed observation vectors simultaneously.
+In practice 2 are enough.
+The algorithm calculates \(d\) in ~1 s,
+however getting the observation vectors from the remote takes considerably more time.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="kn">import</span> <span class="n">sys</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">pwn</span>
+
+<span class="n">sys</span><span class="p">.</span><span class="nf">setrecursionlimit</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span>
+
+<span class="c1"># https://en.wikipedia.org/wiki/Montgomery_modular_multiplication
+</span><span class="k">class</span> <span class="nc">Montgomery</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="nf">assert</span><span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">nbits</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">.</span><span class="nf">bit_length</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">R</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">nbits</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">R_inv</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">R</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">N_prime</span> <span class="o">=</span> <span class="o">-</span><span class="nf">pow</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">R</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_montgomery</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="nf">return </span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">nbits</span><span class="p">)</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span>
+
+    <span class="k">def</span> <span class="nf">from_montgomery</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="nf">return </span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">R_inv</span><span class="p">)</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span>
+
+    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">((</span><span class="n">T</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">N_prime</span><span class="p">)</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">R</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">self</span><span class="p">.</span><span class="n">nbits</span>
+        <span class="nf">return </span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span> <span class="nf">else </span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">:],</span> <span class="mi">16</span><span class="p">)</span>
+
+<span class="n">CUTOFF</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="k">def</span> <span class="nf">Z_prime_next</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">bit</span><span class="p">):</span>
+    <span class="n">Y</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="n">bit</span><span class="p">:</span>
+        <span class="n">Y</span><span class="p">,</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Y</span><span class="p">,</span> <span class="n">z1</span> <span class="ow">or</span> <span class="n">z2</span>
+
+<span class="k">def</span> <span class="nf">attack_bruteforce</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">S_bar</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">CUTOFF</span><span class="p">):</span>
+        <span class="n">Y</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">CUTOFF</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Y</span> <span class="o">==</span> <span class="n">S_bar</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">i</span>
+        <span class="n">Y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">None</span>
+
+<span class="c1"># inv: first t bits of dt are assumed to be correct
+</span><span class="k">def</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">guess</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">attack_impl</span><span class="sh">'</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+    <span class="n">nbits</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">Zs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">guess</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">|</span> <span class="p">(</span><span class="n">guess</span> <span class="o">&lt;&lt;</span> <span class="n">nbits</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">[</span><span class="nc">Z_prime_next</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">guess</span><span class="p">)</span> <span class="k">for</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">As_bar</span><span class="p">,</span> <span class="n">Ys</span><span class="p">)]</span>
+        <span class="n">Ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span> <span class="k">for</span> <span class="n">Y</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">]</span>
+        <span class="n">Zs_prime</span> <span class="o">=</span> <span class="p">[</span><span class="n">Z_prime</span> <span class="o">+</span> <span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="k">for</span> <span class="n">Z_prime</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">Zs_prime</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="n">nbits</span> <span class="o">-</span> <span class="n">CUTOFF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">attack_bruteforce</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Ys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Ss_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nf">any</span><span class="p">([</span><span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Z_prime</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Z_prime</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">)]):</span>
+        <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">None</span>
+
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">:</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="ow">not</span> <span class="ow">not</span> <span class="p">(</span><span class="n">H</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">31</span> <span class="o">-</span> <span class="n">t</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">guess</span><span class="p">)</span>
+
+    <span class="n">guess</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">any</span><span class="p">([</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">Z_prime</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Z_prime</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">)]))</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">guess</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="ow">not</span> <span class="n">guess</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span>
+
+<span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">d_upper</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="nc">Montgomery</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">As_bar</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="nf">to_montgomery</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
+    <span class="n">Ss_bar</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="nf">to_montgomery</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">Ss</span><span class="p">]</span>
+    <span class="n">Ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="nf">to_montgomery</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
+    <span class="n">Zs_prime</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
+    <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d_upper</span><span class="p">)</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+
+<span class="k">def</span> <span class="nf">get_sig</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="nf">hex</span><span class="p">(</span><span class="n">A</span><span class="p">).</span><span class="nf">encode</span><span class="p">()</span> <span class="o">+</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="s">0</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readuntil</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">challenge: </span><span class="sh">'</span><span class="p">),</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Signature: </span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">is_expensive</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+    <span class="n">GOOD</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">b</span><span class="sh">'</span><span class="s"> is a cool number</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sa">b</span><span class="sh">'</span><span class="s"> is really quite something</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sa">b</span><span class="sh">'</span><span class="s"> likes to save me money</span><span class="sh">'</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="nf">any</span><span class="p">([</span><span class="n">e</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">GOOD</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">get_vec</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">bits</span><span class="p">):</span>
+    <span class="n">BATCH</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">bits</span><span class="p">,</span> <span class="n">BATCH</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="nf">hex</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="se">\n</span><span class="sh">'</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">BATCH</span><span class="p">)]</span>
+        <span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">lines</span><span class="p">).</span><span class="nf">encode</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">BATCH</span><span class="p">):</span>
+            <span class="n">Z</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">is_expensive</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readuntil</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">challenge: </span><span class="sh">'</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">Z</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pwn</span><span class="p">.</span><span class="nf">remote</span><span class="p">(</span><span class="sh">'</span><span class="s">127.0.0.1</span><span class="sh">'</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nf">readuntil</span><span class="p">(</span><span class="sh">'</span><span class="s">challenge: </span><span class="sh">'</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="s">n=</span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">d_upper</span> <span class="o">=</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="s">d: </span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>         <span class="c1"># crib
+</span><span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>                                     <span class="c1"># messages
+</span><span class="n">Ss</span> <span class="o">=</span> <span class="p">[</span><span class="nf">get_sig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>                   <span class="c1"># signatures
+</span><span class="n">Zs</span> <span class="o">=</span> <span class="p">[</span><span class="nf">get_vec</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">.</span><span class="nf">bit_length</span><span class="p">())</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>   <span class="c1"># observation vectors
+</span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nf">attack</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">d_upper</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+
+<span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="sa">b</span><span class="sh">''</span><span class="p">)</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readline</span><span class="p">(),</span> <span class="sa">b</span><span class="sh">'</span><span class="s">message: </span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="nf">hex</span><span class="p">(</span><span class="n">sig</span><span class="p">).</span><span class="nf">encode</span><span class="p">())</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">{d_upper = }</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">As</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">Ss</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">n</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">d</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">msg</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">sig</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">CUTOFF</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s"># calculated in </span><span class="sh">'</span><span class="p">,</span> <span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">,</span> <span class="sh">'</span><span class="s">s</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readline</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><em>C. D. Walter and S. Thompson, “<a href="https://link.springer.com/chapter/10.1007/3-540-45353-9_15">Distinguishing exponent digits by observing modular subtractions</a>,” in Topics in Cryptology — CT-RSA 2001, ser. Lecture Notes in Computer Science, vol. 2020. Springer Verlag, 2001, pp. 192–207. subsection 3.3</em></li>
+</ol>]]></content><author><name>Oliver Kovacs</name></author><category term="writeup" /><summary type="html"><![CDATA[ACSC 2025 - Final]]></summary></entry><entry><title type="html">Installing Vivado on NixOS</title><link href="https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html" rel="alternate" type="text/html" title="Installing Vivado on NixOS" /><published>2025-05-02T00:00:00+02:00</published><updated>2025-05-02T00:00:00+02:00</updated><id>https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos</id><content type="html" xml:base="https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html"><![CDATA[<h2 id="introduction">Introduction</h2>
 
 <p>I hate <a href="https://en.wikipedia.org/wiki/Vivado">Vivado</a> but I am forced to use
 it at university. It is notoriously complicated to set up on Linux and using
