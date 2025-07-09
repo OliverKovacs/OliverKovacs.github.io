@@ -18,6 +18,7 @@ jekyll build
 ```
 
 ## Todo
+- Improve writeup layout/design
 - Improve hover effect
 - Merge stylesheets
 - Add now
