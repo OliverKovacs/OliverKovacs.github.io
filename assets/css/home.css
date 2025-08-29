@@ -59,7 +59,7 @@ a.ui-icon:hover {
 
 webring-banner {
     margin: auto;
-    width: 446px;
+    width: min(446px, 100%);
 }
 
 footer {

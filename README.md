@@ -28,5 +28,4 @@ jekyll build
 - Improve non-link focus
 - Improve multiple lines in cards
 - Improve CSS
-- Add light theme on home
 - Improve theme switch focus
