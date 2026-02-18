@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2026-02-09T17:11:47+01:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Fast RSA</title><link href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" rel="alternate" type="text/html" title="Fast RSA" /><published>2025-07-07T00:00:00+02:00</published><updated>2025-07-07T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"><![CDATA[<p><strong>ACSC 2025 - Final</strong></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2026-02-18T11:48:09+01:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Fast RSA</title><link href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" rel="alternate" type="text/html" title="Fast RSA" /><published>2025-07-07T00:00:00+02:00</published><updated>2025-07-07T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"><![CDATA[<p><strong>ACSC 2025 - Final</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
 
@@ -651,6 +651,14 @@ If you want them to survive a reboot you have to create a startup script running
 
 <p>Further research is required to come up with additional optimizations and to
 accurately assess the exact performance to be expected.</p>]]></content><author><name>Oliver Kovacs</name></author><category term="publication" /><summary type="html"><![CDATA[[ pdf, errata ]]]></summary></entry><entry><title type="html">Function connecting points with straight lines</title><link href="https://oliverkovacs.dev/blog/2024/06/01/function.html" rel="alternate" type="text/html" title="Function connecting points with straight lines" /><published>2024-06-01T00:00:00+02:00</published><updated>2024-06-01T00:00:00+02:00</updated><id>https://oliverkovacs.dev/blog/2024/06/01/function</id><content type="html" xml:base="https://oliverkovacs.dev/blog/2024/06/01/function.html"><![CDATA[<!--How to find a function that connects a list of points with straight line segments.-->
+
+<blockquote>
+  <p>Note: This was originally published on Medium on Mar 31, 2021.
+I have since since taken a numerics lecture and come to know that this is called
+“piecewise linear interpolation”.
+I have also learned that solving such a linear system of equations might give awful
+precision unless you represent your numbers as rationals.</p>
+</blockquote>
 
 <h2 id="problem">Problem</h2>
 
