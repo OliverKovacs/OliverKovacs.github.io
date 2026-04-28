@@ -295,18 +295,18 @@ The <code class="language-plaintext highlighter-rouge">/etc/nsswitch.conf</code>
 <p>See also <code class="language-plaintext highlighter-rouge">man nss-resolve</code> and <code class="language-plaintext highlighter-rouge">man nsswitch.conf</code>.</p>
 
 <p>Set the VPN name server as the network DNS server in <code class="language-plaintext highlighter-rouge">/etc/systemd/network/wlp1s0.network</code>.</p>
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Match]</span>
-<span class="py">Name</span><span class="p">=</span><span class="s">wlp1s0</span>
-
-<span class="nn">[Network]</span>
-<span class="py">DNS</span><span class="p">=</span><span class="s">10.10.10.53</span>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Match]</span><span class="w">
+</span><span class="py">Name</span><span class="p">=</span><span class="s">wlp1s0</span>
+<span class="w">
+</span><span class="nn">[Network]</span><span class="w">
+</span><span class="py">DNS</span><span class="p">=</span><span class="s">10.10.10.53</span>
 <span class="py">Domains</span><span class="p">=</span><span class="s">site1.example site2.example ~example</span>
 </code></pre></div></div>
 <p>See also <code class="language-plaintext highlighter-rouge">man systemd.network</code>.</p>
 
 <p>Set your prefered non-VPN name server as your global DNS server in <code class="language-plaintext highlighter-rouge">/etc/systemd/resolved.conf</code>:</p>
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Resolve]</span>
-<span class="py">DNS</span><span class="p">=</span><span class="s">8.8.8.8</span>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Resolve]</span><span class="w">
+</span><span class="py">DNS</span><span class="p">=</span><span class="s">8.8.8.8</span>
 </code></pre></div></div>
 <p>See also <code class="language-plaintext highlighter-rouge">man systemd-resolved.service</code>.</p>
 

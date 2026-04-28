@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scramble</title>
+        <style>
+            main {
+                width: 100%;
+                max-width: 560px;
+            }
+
+            #input {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        </style>
+        <script>
+            // u.a.r. integer from [min, max)
+            const random = (min, max) => Math
+                .floor(Math.random() * (max - min)) + min;
+
+            const drop = (arr, idx) => [
+                ...arr.slice(0, idx),
+                ...arr.slice(idx + 1),
+            ];
+
+            const shuffle = arr => arr.length <= 1
+                ? arr
+                : (idx => [arr[idx], ...shuffle(drop(arr, idx))])
+                    (random(0, arr.length));
+
+            const shuffleString = str => shuffle(str.split('')).join('');
+
+            const scramble = word => word.length <= 2
+                ? word
+                : word[0] + shuffleString(word.slice(1, -1)) + word.at(-1);
+
+            window.onload = () => {
+                const input = document.getElementById('input');
+                const output = document.getElementById('output');
+                const update = () => {
+                    output.textContent = input.value
+                        .split(/(?=[\s',‘“])|(?<=[\s',‘“])/g)
+                        .map(scramble)
+                        .join('');
+                };
+
+                input.oninput = update;
+                update();
+            };
+        </script>
+    </head>
+    <body>
+        <main>
+            <textarea id='input' rows='5'></textarea>
+            <pre id='output'></pre>
+        <main>
+    </body>
+</html>

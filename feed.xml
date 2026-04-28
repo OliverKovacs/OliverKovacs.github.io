@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2026-03-11T19:38:06+01:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Fast RSA</title><link href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" rel="alternate" type="text/html" title="Fast RSA" /><published>2025-07-07T00:00:00+02:00</published><updated>2025-07-07T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"><![CDATA[<p><strong>ACSC 2025 - Final</strong></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2026-04-28T11:15:25+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Fast RSA</title><link href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" rel="alternate" type="text/html" title="Fast RSA" /><published>2025-07-07T00:00:00+02:00</published><updated>2025-07-07T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"><![CDATA[<p><strong>ACSC 2025 - Final</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
 
@@ -565,18 +565,18 @@ The <code class="language-plaintext highlighter-rouge">/etc/nsswitch.conf</code>
 <p>See also <code class="language-plaintext highlighter-rouge">man nss-resolve</code> and <code class="language-plaintext highlighter-rouge">man nsswitch.conf</code>.</p>
 
 <p>Set the VPN name server as the network DNS server in <code class="language-plaintext highlighter-rouge">/etc/systemd/network/wlp1s0.network</code>.</p>
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Match]</span>
-<span class="py">Name</span><span class="p">=</span><span class="s">wlp1s0</span>
-
-<span class="nn">[Network]</span>
-<span class="py">DNS</span><span class="p">=</span><span class="s">10.10.10.53</span>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Match]</span><span class="w">
+</span><span class="py">Name</span><span class="p">=</span><span class="s">wlp1s0</span>
+<span class="w">
+</span><span class="nn">[Network]</span><span class="w">
+</span><span class="py">DNS</span><span class="p">=</span><span class="s">10.10.10.53</span>
 <span class="py">Domains</span><span class="p">=</span><span class="s">site1.example site2.example ~example</span>
 </code></pre></div></div>
 <p>See also <code class="language-plaintext highlighter-rouge">man systemd.network</code>.</p>
 
 <p>Set your prefered non-VPN name server as your global DNS server in <code class="language-plaintext highlighter-rouge">/etc/systemd/resolved.conf</code>:</p>
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Resolve]</span>
-<span class="py">DNS</span><span class="p">=</span><span class="s">8.8.8.8</span>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Resolve]</span><span class="w">
+</span><span class="py">DNS</span><span class="p">=</span><span class="s">8.8.8.8</span>
 </code></pre></div></div>
 <p>See also <code class="language-plaintext highlighter-rouge">man systemd-resolved.service</code>.</p>
 
