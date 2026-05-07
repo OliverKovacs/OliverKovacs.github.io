@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2026-04-28T11:15:25+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Fast RSA</title><link href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" rel="alternate" type="text/html" title="Fast RSA" /><published>2025-07-07T00:00:00+02:00</published><updated>2025-07-07T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"><![CDATA[<p><strong>ACSC 2025 - Final</strong></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" /><updated>2026-05-07T10:23:59+02:00</updated><id>https://oliverkovacs.dev/feed.xml</id><title type="html">Oliver Kovacs</title><subtitle></subtitle><entry><title type="html">Fast RSA</title><link href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" rel="alternate" type="text/html" title="Fast RSA" /><published>2025-07-07T00:00:00+02:00</published><updated>2025-07-07T00:00:00+02:00</updated><id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id><content type="html" xml:base="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"><![CDATA[<p><strong>ACSC 2025 - Final</strong></p>
 
 <p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
 
@@ -654,7 +654,7 @@ accurately assess the exact performance to be expected.</p>]]></content><author>
 
 <blockquote>
   <p>Note: This was originally published on Medium on Mar 31, 2021.
-I have since since taken a numerics lecture and come to know that this is called
+I have since taken a numerics lecture and come to know that this is called
 “piecewise linear interpolation”.
 I have also learned that solving such a linear system of equations might give awful
 precision unless you represent your numbers as rationals.</p>
