@@ -1,41 +1,30 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Installing Vivado on NixOS | Oliver Kovacs</title>
-<meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="Installing Vivado on NixOS" />
-<meta name="author" content="Oliver Kovacs" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Introduction" />
-<meta property="og:description" content="Introduction" />
-<link rel="canonical" href="https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html" />
-<meta property="og:url" content="https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html" />
-<meta property="og:site_name" content="Oliver Kovacs" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-05-02T00:00:00+02:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Installing Vivado on NixOS" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2025-05-02T00:00:00+02:00","datePublished":"2025-05-02T00:00:00+02:00","description":"Introduction","headline":"Installing Vivado on NixOS","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html"},"url":"https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html"}</script>
-<!-- End Jekyll SEO tag -->
-<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--{%- seo -%}
+    {%- feed_meta -%}-->
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    
-        <!-- is a post -->
-        <link rel="stylesheet" href="/assets/css/post.css">
-        <link rel="stylesheet" href="/assets/css/code.css">
+    <!-- is a post -->
+<link rel="stylesheet" href="/assets/css/post.css">
+<link rel="stylesheet" href="/assets/css/code.css">
 
-        <!-- KaTeX -->
-        <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-        <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-        <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
-    
+<!-- KaTeX -->
+<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+
 </head>
-<body>
+
+
+  <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
     
@@ -59,7 +48,8 @@
         <h1>Installing Vivado on NixOS</h1>
         <nav>
         <table style="width: 100%;"><tr>
-            <td><time datetime="2025-05-02T00:00:00+02:00">2025 May 2
+            <td><time datetime="2025-05-02T00:00:00+02:00">
+                2025 May 2
             </time></td>
             <td><a id="author" href="/">
                 Oliver Kovacs
@@ -70,248 +60,193 @@
 
     <main id="main">
         <article>
-            <h2 id="introduction">
-  
-  
-    Introduction <a href="#introduction">#</a>
-  
-  
-</h2>
-    
-
-<p>I hate <a href="https://en.wikipedia.org/wiki/Vivado">Vivado</a> but I am forced to use
-it at university. It is notoriously complicated to set up on Linux and using
-NixOS has caused me extra difficulties.</p>
-
-<p>In this post I will detail how to install Vivado 2019.2 on <code class="language-plaintext highlighter-rouge">nixos-unstable</code>.
-Other combinations of versions may or may not work.</p>
-<h2 id="installing">
-  
-  
-    Installing <a href="#installing">#</a>
-  
-  
-</h2>
-    
-
-<ol>
-  <li>
-    <p>Download <code class="language-plaintext highlighter-rouge">Vivado HLx 2019.2: All OS installer Single-File Download</code> from the
-<a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html">Xilinx website</a>.</p>
-  </li>
-  <li>Extract it using
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Downloads <span class="o">&amp;&amp;</span> <span class="nb">tar </span>xzvf Xilinx_Vivado_2019.2_1106_2127.tar.gz
-</code></pre></div>    </div>
-  </li>
-  <li>In the extracted directory create a <code class="language-plaintext highlighter-rouge">shell.nix</code> file with the following content:
-    <div class="language-nix highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># shell.nix</span>
-<span class="p">{</span> <span class="nv">pkgs</span> <span class="o">?</span> <span class="kr">import</span> <span class="o">&lt;</span><span class="nv">nixpkgs</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">}</span> <span class="p">}:</span>
-<span class="p">(</span><span class="nv">pkgs</span><span class="o">.</span><span class="nv">buildFHSEnv</span> <span class="p">{</span>
-  <span class="nv">name</span> <span class="o">=</span> <span class="s2">"vivado-env"</span><span class="p">;</span>
-  <span class="nv">targetPkgs</span> <span class="o">=</span> <span class="nv">pkgs</span><span class="p">:</span> <span class="p">(</span>
- <span class="kn">with</span> <span class="nv">pkgs</span><span class="p">;</span> <span class="p">[</span>
-   <span class="nv">ncurses5</span>
-   <span class="nv">zlib</span> <span class="nv">libuuid</span>
-   <span class="nv">bash</span> <span class="nv">coreutils</span> <span class="nv">zlib</span> <span class="nv">stdenv</span><span class="o">.</span><span class="nv">cc</span><span class="o">.</span><span class="nv">cc</span>
-   <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXext</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libX11</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXrender</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXtst</span>
-   <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXi</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXft</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libxcb</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libxcb</span>
-   <span class="nv">freetype</span> <span class="nv">fontconfig</span> <span class="nv">glib</span> <span class="nv">gtk2</span> <span class="nv">gtk3</span>
-   <span class="nv">graphviz</span> <span class="nv">gcc</span> <span class="nv">unzip</span> <span class="nv">nettools</span>
- <span class="p">]</span>
-  <span class="p">);</span>
-  <span class="nv">runScript</span> <span class="o">=</span> <span class="s2">''</span><span class="err">
-</span><span class="s2"> env LIBRARY_PATH=/usr/lib \</span><span class="err">
-</span><span class="s2">   C_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">   CPLUS_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">   CMAKE_LIBRARY_PATH=/usr/lib \</span><span class="err">
-</span><span class="s2">   CMAKE_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">   bash</span><span class="err">
-</span><span class="s2">  ''</span><span class="p">;</span>
-<span class="p">})</span><span class="o">.</span><span class="nv">env</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Run <code class="language-plaintext highlighter-rouge">nix-shell</code>.</p>
-  </li>
-  <li>
-    <p>Run <code class="language-plaintext highlighter-rouge">./xsetup -b ConfigGen</code>. Select <code class="language-plaintext highlighter-rouge">Vivado HL WebPACK</code>.</p>
-  </li>
-  <li>Edit the install config:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvim ~/.Xilinx/install_config.txt
-</code></pre></div>    </div>
-    <p>It seems advisable to change <code class="language-plaintext highlighter-rouge">Destination</code> to a path that we have read/write permissions for. <br />
-I used <code class="language-plaintext highlighter-rouge">&lt;home directory&gt;/opt/Xilinx</code>.</p>
-  </li>
-  <li>Install Vivado with
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./xsetup <span class="se">\</span>
-<span class="nt">-a</span> XilinxEULA,3rdPartyEULA,WebTalkTerms <span class="se">\</span>
-<span class="nt">-b</span> Install <span class="se">\</span>
-<span class="nt">-c</span> <span class="nv">$HOME</span>/.Xilinx/install_config.txt
-</code></pre></div>    </div>
-  </li>
-  <li>See <a href="/blog/2025/05/02/installing-vivado-on-nixos.html#notes-on-libtinfoso5">Notes on <tt>libtinfo.so.5</tt></a>.
-Run
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="nt">-s</span> /usr/lib/libtinfo.so.5 ~/opt/Xilinx/Vivado/2019.2/lib/lnx64.o/libtinfo.so.5
-</code></pre></div>    </div>
-  </li>
-  <li>You can now launch Vivado with
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/opt/Xilinx/Vivado/2019.2/bin/vivado
-</code></pre></div>    </div>
-  </li>
+            <h2 id="introduction">Introduction</h2>
+<p>I hate <a href="https://en.wikipedia.org/wiki/Vivado">Vivado</a> but
+I am forced to use it at university. It is notoriously complicated to
+set up on Linux and using NixOS has caused me extra difficulties.</p>
+<p>In this post I will detail how to install Vivado 2019.2 on
+<code>nixos-unstable</code>. Other combinations of versions may or may
+not work.</p>
+<h2 id="installing">Installing</h2>
+<ol type="1">
+<li><p>Download
+<code>Vivado HLx 2019.2: All OS installer Single-File Download</code>
+from the <a
+href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html">Xilinx
+website</a>.</p></li>
+<li><p>Extract it using</p></li>
 </ol>
-<h2 id="desktop-entry">
-  
-  
-    Desktop Entry <a href="#desktop-entry">#</a>
-  
-  
-</h2>
-    
-
-<ol>
-  <li>Create a <code class="language-plaintext highlighter-rouge">shell.nix</code> in <code class="language-plaintext highlighter-rouge">~/opt/Xilinx/Vivado/2019.2/bin/</code> with the following content
-    <div class="language-nix highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># shell.nix</span>
-<span class="p">{</span> <span class="nv">pkgs</span> <span class="o">?</span> <span class="kr">import</span> <span class="o">&lt;</span><span class="nv">nixpkgs</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">}</span> <span class="p">}:</span>
-<span class="p">(</span><span class="nv">pkgs</span><span class="o">.</span><span class="nv">buildFHSEnv</span> <span class="p">{</span>
-  <span class="nv">name</span> <span class="o">=</span> <span class="s2">"vivado-env"</span><span class="p">;</span>
-  <span class="nv">targetPkgs</span> <span class="o">=</span> <span class="nv">pkgs</span><span class="p">:</span> <span class="p">(</span>
- <span class="kn">with</span> <span class="nv">pkgs</span><span class="p">;</span> <span class="p">[</span>
-   <span class="nv">ncurses5</span>
-   <span class="nv">zlib</span> <span class="nv">libuuid</span>
-   <span class="nv">bash</span> <span class="nv">coreutils</span> <span class="nv">zlib</span> <span class="nv">stdenv</span><span class="o">.</span><span class="nv">cc</span><span class="o">.</span><span class="nv">cc</span>
-   <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXext</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libX11</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXrender</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXtst</span>
-   <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXi</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXft</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libxcb</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libxcb</span>
-   <span class="nv">freetype</span> <span class="nv">fontconfig</span> <span class="nv">glib</span> <span class="nv">gtk2</span> <span class="nv">gtk3</span>
-   <span class="nv">graphviz</span> <span class="nv">gcc</span> <span class="nv">unzip</span> <span class="nv">nettools</span>
- <span class="p">]</span>
-  <span class="p">);</span>
-  <span class="nv">runScript</span> <span class="o">=</span> <span class="s2">''</span><span class="err">
-</span><span class="s2"> env LIBRARY_PATH=/usr/lib \</span><span class="err">
-</span><span class="s2">   C_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">   CPLUS_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">   CMAKE_LIBRARY_PATH=/usr/lib \</span><span class="err">
-</span><span class="s2">   CMAKE_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">   $HOME/opt/Xilinx/Vivado/2019.2/bin/vivado</span><span class="err">
-</span><span class="s2">  ''</span><span class="p">;</span>
-<span class="p">})</span><span class="o">.</span><span class="nv">env</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Open the desktop entry for Vivado:
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvim .local/share/applications/Vivado<span class="se">\ </span>2019.2_<span class="k">*</span>.desktop
-</code></pre></div>    </div>
-    <p>Change the line starting with <code class="language-plaintext highlighter-rouge">Exec</code> to</p>
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Exec</span><span class="o">=</span>nix-shell &lt;home directory&gt;/opt/Xilinx/Vivado/2019.2/bin/shell.nix
-</code></pre></div>    </div>
-  </li>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Downloads <span class="kw">&amp;&amp;</span> <span class="fu">tar</span> xzvf Xilinx_Vivado_2019.2_1106_2127.tar.gz</span></code></pre></div>
+<ol start="3" type="1">
+<li>In the extracted directory create a <code>shell.nix</code> file with
+the following content:</li>
 </ol>
-<h2 id="notes-on-libtinfoso5">
-  
-  
-    Notes on <tt>libtinfo.so.5</tt> <a href="#notes-on-libtinfoso5">#</a>
-  
-  
-</h2>
-    
-
-<p>If step 8. is omitted then running Vivado throws the following error:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>application-specific initialization failed: couldn't load file "librdi_commontasks.so":
-libtinfo.so.5: cannot open shared object file: No such file or directory
-</code></pre></div></div>
-<p>This seems to be a common issue and is usually solved by installing <code class="language-plaintext highlighter-rouge">libtinfo-dev</code>
-or symlinking <code class="language-plaintext highlighter-rouge">/usr/lib/libtinfo.so.6</code> to <code class="language-plaintext highlighter-rouge">/usr/lib/libtinfo.so.5</code>.
-However this is not the solution in this case because <code class="language-plaintext highlighter-rouge">libtinfo.so.5</code> is actually
-present at the reasonable locations (<code class="language-plaintext highlighter-rouge">/usr/lib</code>, <code class="language-plaintext highlighter-rouge">/lib</code>, …) but Vivado
-refuses to find it for some unknown reason.
-The only workaround I found is symlinking/copying <code class="language-plaintext highlighter-rouge">libtinfo.so.5</code>
-to <code class="language-plaintext highlighter-rouge">&lt;install dir&gt;/Xilinx/Vivado/2019.2/lib/lnx64.o</code></p>
-<h3 id="solution">
-  
-  
-    Solution <a href="#solution">#</a>
-  
-  
-</h3>
-    
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="nt">-s</span> /usr/lib/libtinfo.so.5 ~/opt/Xilinx/Vivado/2019.2/lib/lnx64.o/libtinfo.so.5
-</code></pre></div></div>
-<h3 id="non-solution-1">
-  
-  
-    Non-solution 1 <a href="#non-solution-1">#</a>
-  
-  
-</h3>
-    
-
-<p>I cannot even install <code class="language-plaintext highlighter-rouge">libtinfo</code>.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nix-shell <span class="nt">-p</span> libtinfo
-<span class="c"># ...</span>
-ERROR: noBrokenSymlinks: the symlink /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/tic.pc points to a missing target: /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/ncurses.pc
-ERROR: noBrokenSymlinks: the symlink /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/tinfo.pc points to a missing target: /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/ncurses.pc
-ERROR: noBrokenSymlinks: found 2 dangling symlinks, 0 reflexive symlinks and 0 unreadable symlinks
-</code></pre></div></div>
-<h3 id="non-solution-2">
-  
-  
-    Non-solution 2 <a href="#non-solution-2">#</a>
-  
-  
-</h3>
-    
-
-<p>Creating a symlink from <code class="language-plaintext highlighter-rouge">/usr/lib/libtinfo.so.6</code> to <code class="language-plaintext highlighter-rouge">/usr/lib/libtinfo.so.5</code>
-in an <code class="language-plaintext highlighter-rouge">FHSEnv</code> is not trivial at all because <code class="language-plaintext highlighter-rouge">/usr</code> is read-only.
-Therefore we have to use a package override so that the symlink is already created in the package.</p>
-<div class="language-nix highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># shell.nix</span>
-<span class="p">{</span> <span class="nv">pkgs</span> <span class="o">?</span> <span class="kr">import</span> <span class="o">&lt;</span><span class="nv">nixpkgs</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">}</span> <span class="p">}:</span>
-<span class="p">(</span>
-<span class="kd">let</span>
-  <span class="nv">custom-ncurses</span> <span class="o">=</span> <span class="nv">pkgs</span><span class="o">.</span><span class="nv">ncurses</span><span class="o">.</span><span class="nv">overrideAttrs</span> <span class="p">(</span><span class="nv">finalAttrs</span><span class="p">:</span> <span class="nv">previousAttrs</span><span class="p">:</span>  <span class="p">{</span>
-    <span class="nv">postFixup</span> <span class="o">=</span> <span class="nv">previousAttrs</span><span class="o">.</span><span class="nv">postFixup</span> <span class="o">+</span> <span class="s2">''</span><span class="err">
-</span><span class="s2">        ln -svf $out/lib/libtinfo.so.6 $out/lib/libtinfo.so.5</span><span class="err">
-</span><span class="s2">    ''</span><span class="p">;</span>
-  <span class="p">});</span>
-<span class="kn">in</span>
-  <span class="nv">pkgs</span><span class="o">.</span><span class="nv">buildFHSEnv</span> <span class="p">{</span>
-    <span class="nv">name</span> <span class="o">=</span> <span class="s2">"vivado-env"</span><span class="p">;</span>
-    <span class="nv">targetPkgs</span> <span class="o">=</span> <span class="nv">pkgs</span><span class="p">:</span> <span class="p">(</span>
-      <span class="kn">with</span> <span class="nv">pkgs</span><span class="p">;</span> <span class="p">[</span>
-        <span class="nv">custom-ncurses</span>
-        <span class="nv">zlib</span> <span class="nv">libuuid</span>
-        <span class="nv">bash</span> <span class="nv">coreutils</span> <span class="nv">zlib</span> <span class="nv">stdenv</span><span class="o">.</span><span class="nv">cc</span><span class="o">.</span><span class="nv">cc</span>
-        <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXext</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libX11</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXrender</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXtst</span>
-        <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXi</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libXft</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libxcb</span> <span class="nv">xorg</span><span class="o">.</span><span class="nv">libxcb</span>
-        <span class="nv">freetype</span> <span class="nv">fontconfig</span> <span class="nv">glib</span> <span class="nv">gtk2</span> <span class="nv">gtk3</span>
-        <span class="nv">graphviz</span> <span class="nv">gcc</span> <span class="nv">unzip</span> <span class="nv">nettools</span>
-      <span class="p">]</span>
-    <span class="p">);</span>
-    <span class="nv">runScript</span> <span class="o">=</span> <span class="s2">''</span><span class="err">
-</span><span class="s2">      env LIBRARY_PATH=/usr/lib \</span><span class="err">
-</span><span class="s2">        C_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">        CPLUS_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">        CMAKE_LIBRARY_PATH=/usr/lib \</span><span class="err">
-</span><span class="s2">        CMAKE_INCLUDE_PATH=/usr/include \</span><span class="err">
-</span><span class="s2">        $HOME/opt/Xilinx/Vivado/2019.2/bin/vivado</span><span class="err">
-</span><span class="s2">    ''</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">)</span><span class="o">.</span><span class="nv">env</span>
-</code></pre></div></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shell.nix</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{</span> <span class="op">}</span> <span class="op">}</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">(</span>pkgs<span class="op">.</span>buildFHSEnv <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;vivado-env&quot;</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">targetPkgs</span> <span class="op">=</span> <span class="va">pkgs</span><span class="op">:</span> <span class="op">(</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      ncurses5</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      zlib libuuid</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      bash coreutils zlib stdenv<span class="op">.</span>cc<span class="op">.</span>cc</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      xorg<span class="op">.</span>libXext xorg<span class="op">.</span>libX11 xorg<span class="op">.</span>libXrender xorg<span class="op">.</span>libXtst</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      xorg<span class="op">.</span>libXi xorg<span class="op">.</span>libXft xorg<span class="op">.</span>libxcb xorg<span class="op">.</span>libxcb</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      freetype fontconfig glib gtk2 gtk3</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      graphviz gcc unzip nettools</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">runScript</span> <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">    env LIBRARY_PATH=/usr/lib \</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">      C_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">      CPLUS_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">      CMAKE_LIBRARY_PATH=/usr/lib \</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">      CMAKE_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">      bash</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">}).</span>env</span></code></pre></div>
+<ol start="4" type="1">
+<li><p>Run <code>nix-shell</code>.</p></li>
+<li><p>Run <code>./xsetup -b ConfigGen</code>. Select
+<code>Vivado HL WebPACK</code>.</p></li>
+<li><p>Edit the install config:</p></li>
+</ol>
+<pre><code>nvim ~/.Xilinx/install_config.txt</code></pre>
+<p>It seems advisable to change <code>Destination</code> to a path that
+we have read/write permissions for. <br> I used
+<code>&lt;home directory&gt;/opt/Xilinx</code>.</p>
+<ol start="7" type="1">
+<li>Install Vivado with</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./xsetup</span> <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>-a XilinxEULA,3rdPartyEULA,WebTalkTerms <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>-b Install <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>-c <span class="va">$HOME</span>/.Xilinx/install_config.txt</span></code></pre></div>
+<ol start="8" type="1">
+<li>See <a
+href="/blog/2025/05/02/installing-vivado-on-nixos.html#notes-on-libtinfoso5">Notes
+on <tt>libtinfo.so.5</tt></a>. Run</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /usr/lib/libtinfo.so.5 ~/opt/Xilinx/Vivado/2019.2/lib/lnx64.o/libtinfo.so.5</span></code></pre></div>
+<ol start="9" type="1">
+<li>You can now launch Vivado with</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/opt/Xilinx/Vivado/2019.2/bin/vivado</span></span></code></pre></div>
+<h2 id="desktop-entry">Desktop Entry</h2>
+<ol type="1">
+<li>Create a <code>shell.nix</code> in
+<code>~/opt/Xilinx/Vivado/2019.2/bin/</code> with the following
+content</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode nix"><code class="sourceCode nix"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shell.nix</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{</span> <span class="op">}</span> <span class="op">}</span>:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">(</span>pkgs<span class="op">.</span>buildFHSEnv <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;vivado-env&quot;</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">targetPkgs</span> <span class="op">=</span> <span class="va">pkgs</span><span class="op">:</span> <span class="op">(</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      ncurses5</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>      zlib libuuid</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>      bash coreutils zlib stdenv<span class="op">.</span>cc<span class="op">.</span>cc</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      xorg<span class="op">.</span>libXext xorg<span class="op">.</span>libX11 xorg<span class="op">.</span>libXrender xorg<span class="op">.</span>libXtst</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      xorg<span class="op">.</span>libXi xorg<span class="op">.</span>libXft xorg<span class="op">.</span>libxcb xorg<span class="op">.</span>libxcb</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      freetype fontconfig glib gtk2 gtk3</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>      graphviz gcc unzip nettools</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">);</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">runScript</span> <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">    env LIBRARY_PATH=/usr/lib \</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">      C_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">      CPLUS_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">      CMAKE_LIBRARY_PATH=/usr/lib \</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">      CMAKE_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">      $HOME/opt/Xilinx/Vivado/2019.2/bin/vivado</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="op">}).</span>env</span></code></pre></div>
+<ol start="2" type="1">
+<li>Open the desktop entry for Vivado:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvim</span> .local/share/applications/Vivado\ 2019.2_<span class="pp">*</span>.desktop</span></code></pre></div>
+<p>Change the line starting with <code>Exec</code> to</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">Exec</span><span class="op">=</span>nix-shell <span class="op">&lt;</span>home <span class="ex">directory</span><span class="op">&gt;</span>/opt/Xilinx/Vivado/2019.2/bin/shell.nix</span></code></pre></div>
+<h2 id="notes-on-libtinfo.so.5">Notes on <tt>libtinfo.so.5</tt></h2>
+<p>If step 8. is omitted then running Vivado throws the following
+error:</p>
+<pre><code>application-specific initialization failed: couldn&#39;t load file &quot;librdi_commontasks.so&quot;:
+libtinfo.so.5: cannot open shared object file: No such file or directory</code></pre>
+<p>This seems to be a common issue and is usually solved by installing
+<code>libtinfo-dev</code> or symlinking
+<code>/usr/lib/libtinfo.so.6</code> to
+<code>/usr/lib/libtinfo.so.5</code>. However this is not the solution in
+this case because <code>libtinfo.so.5</code> is actually present at the
+reasonable locations (<code>/usr/lib</code>, <code>/lib</code>, …) but
+Vivado refuses to find it for some unknown reason. The only workaround I
+found is symlinking/copying <code>libtinfo.so.5</code> to
+<code>&lt;install dir&gt;/Xilinx/Vivado/2019.2/lib/lnx64.o</code></p>
+<h3 id="solution">Solution</h3>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /usr/lib/libtinfo.so.5 ~/opt/Xilinx/Vivado/2019.2/lib/lnx64.o/libtinfo.so.5</span></code></pre></div>
+<h3 id="non-solution-1">Non-solution 1</h3>
+<p>I cannot even install <code>libtinfo</code>.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-shell</span> <span class="at">-p</span> libtinfo</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ERROR:</span> noBrokenSymlinks: the symlink /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/tic.pc points to a missing target: /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/ncurses.pc</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ERROR:</span> noBrokenSymlinks: the symlink /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/tinfo.pc points to a missing target: /nix/store/l3sa8c1f03l84zkz6afbzgya3ad4jcmi-ncurses-6.5-dev/lib/pkgconfig/ncurses.pc</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ERROR:</span> noBrokenSymlinks: found 2 dangling symlinks, 0 reflexive symlinks and 0 unreadable symlinks</span></code></pre></div>
+<h3 id="non-solution-2">Non-solution 2</h3>
+<p>Creating a symlink from <code>/usr/lib/libtinfo.so.6</code> to
+<code>/usr/lib/libtinfo.so.5</code> in an <code>FHSEnv</code> is not
+trivial at all because <code>/usr</code> is read-only. Therefore we have
+to use a package override so that the symlink is already created in the
+package.</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode nix"><code class="sourceCode nix"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shell.nix</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{</span> <span class="op">}</span> <span class="op">}</span>:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">(</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">custom-ncurses</span> <span class="op">=</span> pkgs<span class="op">.</span>ncurses<span class="op">.</span>overrideAttrs <span class="op">(</span><span class="va">finalAttrs</span><span class="op">:</span> <span class="va">previousAttrs</span><span class="op">:</span>  <span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">postFixup</span> <span class="op">=</span> previousAttrs<span class="op">.</span>postFixup <span class="op">+</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="st">        ln -svf $out/lib/libtinfo.so.6 $out/lib/libtinfo.so.5</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="st">    &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">});</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  pkgs<span class="op">.</span>buildFHSEnv <span class="op">{</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;vivado-env&quot;</span><span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">targetPkgs</span> <span class="op">=</span> <span class="va">pkgs</span><span class="op">:</span> <span class="op">(</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        custom-ncurses</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        zlib libuuid</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        bash coreutils zlib stdenv<span class="op">.</span>cc<span class="op">.</span>cc</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        xorg<span class="op">.</span>libXext xorg<span class="op">.</span>libX11 xorg<span class="op">.</span>libXrender xorg<span class="op">.</span>libXtst</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        xorg<span class="op">.</span>libXi xorg<span class="op">.</span>libXft xorg<span class="op">.</span>libxcb xorg<span class="op">.</span>libxcb</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        freetype fontconfig glib gtk2 gtk3</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        graphviz gcc unzip nettools</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">);</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">runScript</span> <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="st">      env LIBRARY_PATH=/usr/lib \</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="st">        C_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="st">        CPLUS_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="st">        CMAKE_LIBRARY_PATH=/usr/lib \</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="st">        CMAKE_INCLUDE_PATH=/usr/include \</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="st">        $HOME/opt/Xilinx/Vivado/2019.2/bin/vivado</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="st">    &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="op">).</span>env</span></code></pre></div>
 <p>However as mentioned this still does not solve the problem.</p>
-<h2 id="uninstalling">
-  
-  
-    Uninstalling <a href="#uninstalling">#</a>
-  
-  
-</h2>
-    
-
+<h2 id="uninstalling">Uninstalling</h2>
 <blockquote>
-  <p>WARNING: This might be overkill for you. Read it carefully and use common sense!</p>
+<p>WARNING: This might be overkill for you. Read it carefully and use
+common sense!</p>
 </blockquote>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm -rf \
+<pre><code>rm -rf \
 ~/opt/Xilinx \
 ~/.Xilinx \
 ~/.config/menus/applications-merged/Xilinx\ Design\ Tools.menu \
@@ -320,39 +255,28 @@ Therefore we have to use a package override so that the symlink is already creat
 ~/.local/share/applications/Uninstall\ 2019.2* \
 ~/.local/share/applications/Add\ Design\ Tools\ or\ Devices\ 2019.2* \
 ~/.local/share/applications/Documentation\ Navigator* \
-~/.local/share/applications/Uninstall\ DocNav*
-</code></pre></div></div>
-<h2 id="resources">
-  
-  
-    Resources <a href="#resources">#</a>
-  
-  
-</h2>
-    
-
-<p>This post is largely based on <a href="https://blog.kotatsu.dev/posts/2021-09-14-vivado-on-nixos/">kotatsuyaki’s excellent article</a>
-Xilinx Vivado on NixOS.</p>
-
-<p>Also check out <a href="https://bruceroettgers.eu/install-vivado/">Bruce Röttgers’ post</a>
-on installing Vivado on Ubuntu.</p>
+~/.local/share/applications/Uninstall\ DocNav*</code></pre>
+<h2 id="resources">Resources</h2>
+<p>This post is largely based on <a
+href="https://blog.kotatsu.dev/posts/2021-09-14-vivado-on-nixos/">kotatsuyaki’s
+excellent article</a> Xilinx Vivado on NixOS.</p>
+<p>Also check out <a
+href="https://bruceroettgers.eu/install-vivado/">Bruce Röttgers’
+post</a> on installing Vivado on Ubuntu.</p>
 
         </article>
     </main>
 
     <footer>
         <table style="width: 100%;"><tr>
-            
             <td><a class="prev" href="/blog/2024/07/05/clandestine-vpn-split-tunneling.html">
-                Previous: Clandestine VPN split tunneling
-            </a></td>
-            
+    Previous: Clandestine VPN split tunneling
+</a></td>
 
-            
             <td><a class="next" href="/writeup/2025/07/07/fast-rsa.html">
-                Next: Fast RSA
-            </a></td>
-            
+    Next: Fast RSA
+</a></td>
+
         </tr></table>
     </footer>
 </div>
@@ -361,3 +285,4 @@ on installing Vivado on Ubuntu.</p>
   </body>
 
 </html>
+

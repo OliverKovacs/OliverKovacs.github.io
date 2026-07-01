@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--{%- seo -%}
+    {%- feed_meta -%}-->
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/css/vars.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <!-- is a post -->
+<link rel="stylesheet" href="/assets/css/post.css">
+<link rel="stylesheet" href="/assets/css/code.css">
+
+<!-- KaTeX -->
+<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+
+</head>
+
+
+  <body>
+    <a id="skip" href="#main"><h2>Skip to main content</h2></a>
+
+    
+
+    <div class="content">
+    <header>
+        <div id="color-row">
+    <div>
+        <img class="light-mode-hide" src="/assets/img/icons/dark/light_mode.svg" alt="Light mode" />
+        <img class="dark-mode-hide" src="/assets/img/icons/light/light_mode.svg" alt="Light mode" />
+        <label class="switch">
+            <input type="checkbox" id="color-mode">
+            <span class="slider"></span>
+        </label>
+        <img class="light-mode-hide" src="/assets/img/icons/dark/dark_mode.svg" alt="Dark mode" />
+        <img class="dark-mode-hide" src="/assets/img/icons/light/dark_mode.svg" alt="Dark mode" />
+    </div>
+</div>
+
+
+        <h1>Fixing ÖBB WiFi conflict with Docker on NixOS</h1>
+        <nav>
+        <table style="width: 100%;"><tr>
+            <td><time datetime="2026-07-01T00:00:00+02:00">
+                2026 Jul 1
+            </time></td>
+            <td><a id="author" href="/">
+                Oliver Kovacs
+            </a></td>
+            </tr></table>
+        </nav>
+    </header>
+
+    <main id="main">
+        <article>
+            <h2 id="problem">Problem</h2>
+<p>As explained in <a
+href="https://unterwaditzer.net/2024/oebb-docker.html">this</a> great
+blogpost by Markus Unterwaditzer Docker sometimes adds routes to the
+routing table that make it impossible to connect to the WiFi on ÖBB
+trains. As a quick fix they may manually be removed with</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ip route del 172.19.0.0/16 </span></code></pre></div>
+<p>However they will be recreated eventually.</p>
+<h2 id="solution">Solution</h2>
+<p>Delete the <code>br-*</code> devices and associated routes. Put the
+following in your <code>configuration.nix</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>virtualisation<span class="op">.</span>docker = <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">extraOptions</span> <span class="op">=</span> <span class="st">&#39;&#39;\</span><span class="sc">&#39;&#39;&#39;</span><span class="st">\&#39;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">    --default-address-pool base=172.44.0.0/16,size=24</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">&#39;&#39;\&#39;&#39;&#39;\&#39;</span><span class="st">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">};</span></span></code></pre></div>
+<p>This will make Docker give out <code>/24</code> networks from the
+<code>172.44.0.0/16</code> range. You may tweak this according to your
+needs.</p>
+
+        </article>
+    </main>
+
+    <footer>
+        <table style="width: 100%;"><tr>
+            <td><a class="prev" href="/writeup/2025/07/07/fast-rsa.html">
+    Previous: Fast RSA
+</a></td>
+
+            
+        </tr></table>
+    </footer>
+</div>
+
+
+  </body>
+
+</html>
+

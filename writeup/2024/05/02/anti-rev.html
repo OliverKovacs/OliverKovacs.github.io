@@ -1,41 +1,30 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Anti-rev | Oliver Kovacs</title>
-<meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="Anti-rev" />
-<meta name="author" content="Oliver Kovacs" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="openECSC 2024 - Round 2" />
-<meta property="og:description" content="openECSC 2024 - Round 2" />
-<link rel="canonical" href="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html" />
-<meta property="og:url" content="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html" />
-<meta property="og:site_name" content="Oliver Kovacs" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-05-02T00:00:00+02:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Anti-rev" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-05-02T00:00:00+02:00","datePublished":"2024-05-02T00:00:00+02:00","description":"openECSC 2024 - Round 2","headline":"Anti-rev","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"},"url":"https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"}</script>
-<!-- End Jekyll SEO tag -->
-<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--{%- seo -%}
+    {%- feed_meta -%}-->
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    
-        <!-- is a post -->
-        <link rel="stylesheet" href="/assets/css/post.css">
-        <link rel="stylesheet" href="/assets/css/code.css">
+    <!-- is a post -->
+<link rel="stylesheet" href="/assets/css/post.css">
+<link rel="stylesheet" href="/assets/css/code.css">
 
-        <!-- KaTeX -->
-        <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-        <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-        <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
-    
+<!-- KaTeX -->
+<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+
 </head>
-<body>
+
+
+  <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
     
@@ -59,7 +48,8 @@
         <h1>Anti-rev</h1>
         <nav>
         <table style="width: 100%;"><tr>
-            <td><time datetime="2024-05-02T00:00:00+02:00">2024 May 2
+            <td><time datetime="2024-05-02T01:00:00+02:00">
+                2024 May 2
             </time></td>
             <td><a id="author" href="/">
                 Oliver Kovacs
@@ -71,73 +61,43 @@
     <main id="main">
         <article>
             <p><strong>openECSC 2024 - Round 2</strong></p>
-
-<p>Category: <code class="language-plaintext highlighter-rouge">rev</code></p>
-<h2 id="description">
-  
-  
-    Description <a href="#description">#</a>
-  
-  
-</h2>
-    
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Good luck finding the secret word for my super secure program!
-</code></pre></div></div>
-
-<p>Attachments: <code class="language-plaintext highlighter-rouge">anti-rev</code></p>
-<h2 id="solution">
-  
-  
-    Solution <a href="#solution">#</a>
-  
-  
-</h2>
-    
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">angr</span>
-
-<span class="n">project</span> <span class="o">=</span> <span class="n">angr</span><span class="p">.</span><span class="nc">Project</span><span class="p">(</span><span class="sh">"</span><span class="s">anti-rev</span><span class="sh">"</span><span class="p">,</span> <span class="n">auto_load_libs</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">simgr</span> <span class="o">=</span> <span class="n">project</span><span class="p">.</span><span class="n">factory</span><span class="p">.</span><span class="nf">simulation_manager</span><span class="p">(</span><span class="n">project</span><span class="p">.</span><span class="n">factory</span><span class="p">.</span><span class="nf">full_init_state</span><span class="p">())</span>
-<span class="n">simgr</span><span class="p">.</span><span class="nf">explore</span><span class="p">(</span><span class="n">find</span><span class="o">=</span><span class="mh">0x401def</span><span class="p">,</span> <span class="n">avoid</span><span class="o">=</span><span class="mh">0x401df8</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">simgr</span><span class="p">.</span><span class="n">found</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">posix</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-</code></pre></div></div>
-<h2 id="bonus">
-  
-  
-    Bonus <a href="#bonus">#</a>
-  
-  
-</h2>
-    
-
-<p>Use <code class="language-plaintext highlighter-rouge">angr</code> to disassemble and find address to search for.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">angr</span>
-
-<span class="n">project</span> <span class="o">=</span> <span class="n">angr</span><span class="p">.</span><span class="nc">Project</span><span class="p">(</span><span class="sh">"</span><span class="s">anti-rev</span><span class="sh">"</span><span class="p">,</span> <span class="n">auto_load_libs</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">cfg</span> <span class="o">=</span> <span class="n">project</span><span class="p">.</span><span class="n">analyses</span><span class="p">.</span><span class="nc">CFG</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">cfg</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="nf">nodes</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">.</span><span class="n">addr</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">.</span><span class="n">is_simprocedure</span><span class="p">:</span>
-        <span class="n">node</span><span class="p">.</span><span class="n">block</span><span class="p">.</span><span class="nf">pp</span><span class="p">()</span>
-</code></pre></div></div>
+<p>Category: <code>rev</code></p>
+<h2 id="description">Description</h2>
+<pre><code>Good luck finding the secret word for my super secure program!</code></pre>
+<p>Attachments: <code>anti-rev</code></p>
+<h2 id="solution">Solution</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> angr</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>project <span class="op">=</span> angr.Project(<span class="st">&quot;anti-rev&quot;</span>, auto_load_libs<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>simgr <span class="op">=</span> project.factory.simulation_manager(project.factory.full_init_state())</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>simgr.explore(find<span class="op">=</span><span class="bn">0x401def</span>, avoid<span class="op">=</span><span class="bn">0x401df8</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(simgr.found[<span class="dv">0</span>].posix.dumps(<span class="dv">0</span>))</span></code></pre></div>
+<h2 id="bonus">Bonus</h2>
+<p>Use <code>angr</code> to disassemble and find address to search
+for.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> angr</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>project <span class="op">=</span> angr.Project(<span class="st">&quot;anti-rev&quot;</span>, auto_load_libs<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>cfg <span class="op">=</span> project.analyses.CFG(normalize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> <span class="bu">sorted</span>(cfg.model.nodes(), key<span class="op">=</span><span class="kw">lambda</span> n: n.addr):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> node.is_simprocedure:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        node.block.pp()</span></code></pre></div>
 
         </article>
     </main>
 
     <footer>
         <table style="width: 100%;"><tr>
-            
             <td><a class="prev" href="/writeup/2024/04/06/stealing-seeds.html">
-                Previous: Stealing Seeds
-            </a></td>
-            
+    Previous: Stealing Seeds
+</a></td>
 
-            
             <td><a class="next" href="/writeup/2024/05/02/mathmac.html">
-                Next: MathMAC
-            </a></td>
-            
+    Next: MathMAC
+</a></td>
+
         </tr></table>
     </footer>
 </div>
@@ -146,3 +106,4 @@
   </body>
 
 </html>
+

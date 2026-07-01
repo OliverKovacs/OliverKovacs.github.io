@@ -1,41 +1,30 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>MathMAC | Oliver Kovacs</title>
-<meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="MathMAC" />
-<meta name="author" content="Oliver Kovacs" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="openECSC 2024 - Round 2" />
-<meta property="og:description" content="openECSC 2024 - Round 2" />
-<link rel="canonical" href="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html" />
-<meta property="og:url" content="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html" />
-<meta property="og:site_name" content="Oliver Kovacs" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-05-02T00:00:00+02:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="MathMAC" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2024-05-02T00:00:00+02:00","datePublished":"2024-05-02T00:00:00+02:00","description":"openECSC 2024 - Round 2","headline":"MathMAC","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"},"url":"https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"}</script>
-<!-- End Jekyll SEO tag -->
-<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--{%- seo -%}
+    {%- feed_meta -%}-->
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    
-        <!-- is a post -->
-        <link rel="stylesheet" href="/assets/css/post.css">
-        <link rel="stylesheet" href="/assets/css/code.css">
+    <!-- is a post -->
+<link rel="stylesheet" href="/assets/css/post.css">
+<link rel="stylesheet" href="/assets/css/code.css">
 
-        <!-- KaTeX -->
-        <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-        <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-        <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
-    
+<!-- KaTeX -->
+<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+
 </head>
-<body>
+
+
+  <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
     
@@ -59,7 +48,8 @@
         <h1>MathMAC</h1>
         <nav>
         <table style="width: 100%;"><tr>
-            <td><time datetime="2024-05-02T00:00:00+02:00">2024 May 2
+            <td><time datetime="2024-05-02T00:00:00+02:00">
+                2024 May 2
             </time></td>
             <td><a id="author" href="/">
                 Oliver Kovacs
@@ -71,380 +61,338 @@
     <main id="main">
         <article>
             <p><strong>openECSC 2024 - Round 2</strong></p>
-
-<p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
-<h2 id="description">
-  
-  
-    Description <a href="#description">#</a>
-  
-  
-</h2>
-    
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Why using boring symmetric crypto for MACs when we can use fancy math?
-</code></pre></div></div>
-
-<p>Attachments: <code class="language-plaintext highlighter-rouge">mathmac.py</code> (see <a href="#appendix">Appendix</a>)</p>
-<h2 id="probem">
-  
-  
-    Probem <a href="#probem">#</a>
-  
-  
-</h2>
-    
-
-<p>Let \(p = 8636821143825786083\) and \(M = 64\).<br />
-Let \(\bold k = k_0, \ldots,k_M\) where \(k_i \in \mathbb Z_{\lt p}\) be a private key chosen at random.<br />
-Let \(\bold x  \in \{0, 1\}^M\) with \(\bold x = x_1, \ldots, x_M\) be an \(M\)-bit binary word.<br />
-Let \(h \colon \{0, 1\}^M \to \mathbb Z_p\) be a hash function defined as</p>
-
-\[h(\bold x) = 4^{k_0 + x_1 k_1+ \cdots x_M k_M} \mod p \ .\]
-
+<p>Category: <code>crypto</code></p>
+<h2 id="description">Description</h2>
+<pre><code>Why using boring symmetric crypto for MACs when we can use fancy math?</code></pre>
+<p>Attachments: <code>mathmac.py</code> (see <a
+href="#appendix">Appendix</a>)</p>
+<h2 id="probem">Probem</h2>
+<p>Let <span
+class="math display"><em>p</em> = 8636821143825786083</span> and <span
+class="math display"><em>M</em> = 64</span>.<br />
+Let <span class="math display">$$\bold k = k_0, \ldots,k_M$$</span>
+where <span
+class="math display"><em>k</em><sub><em>i</em></sub> ∈ ℤ<sub> &lt; <em>p</em></sub></span>
+be a private key chosen at random.<br />
+Let <span class="math display">$$\bold x  \in \{0, 1\}^M$$</span> with
+<span class="math display">$$\bold x = x_1, \ldots, x_M$$</span> be an
+<span class="math display"><em>M</em></span>-bit binary word.<br />
+Let <span
+class="math display"><em>h</em>: {0, 1}<sup><em>M</em></sup> → ℤ<sub><em>p</em></sub></span>
+be a hash function defined as</p>
+<p><span class="math display">$$
+h(\bold x) = 4^{k_0 + x_1 k_1+ \cdots x_M k_M} \mod p \ .
+$$</span></p>
 <p>The challenge is:</p>
-
 <ul>
-  <li>The attacker can request an unlimited amount of word/hash pairs \((\bold x, h(\bold x))\) chosen at random.</li>
-  <li>Then the attacker has to submit a word/hash pair \((\bold x ^\prime, h(\bold x ^\prime))\) that has not yet been revealed.
-    <ul>
-      <li>If the submission is correct the attacker obtains the flag.</li>
-      <li>Only a single submission can be made.</li>
-    </ul>
-  </li>
-</ul>
-<h2 id="solution">
-  
-  
-    Solution <a href="#solution">#</a>
-  
-  
-</h2>
-    
-
-<p>The first step involves solving the <a href="https://en.wikipedia.org/wiki/Discrete_logarithm">discrete logarithm problem (DLP)</a>.</p>
-<h3 id="dlp">
-  
-  
-    DLP <a href="#dlp">#</a>
-  
-  
-</h3>
-    
-
-<p>Let \(h(\bold x)\) be an element of the cyclic subgroup \(\langle 4 \rangle\) of \(\mathbb Z_p^*\).<br />
-If \(4^n \equiv h(\bold x) \mod p\) then \(n\) is the discrete logarithm of \(h(\bold x)\) to the base \(4\) denoted as \(n = \log_4(h(\bold x))\).<br />
-Solving this is useful because \(n\) is directly related to \(k_0 + x_1 k_1 + \cdots x_M k_M\).</p>
-
-<p>Some notes:</p>
+<li>The attacker can request an unlimited amount of word/hash pairs
+<span class="math display">$$(\bold x, h(\bold x))$$</span> chosen at
+random.</li>
+<li>Then the attacker has to submit a word/hash pair <span
+class="math display">$$(\bold x ^\prime, h(\bold x ^\prime))$$</span>
+that has not yet been revealed.
 <ul>
-  <li>\(\lvert \mathbb Z_p^*\rvert = p - 1\).</li>
-  <li>From <a href="https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)">Lagrange’s theorem</a> it follows that \(\lvert4\rvert\) divides \(\lvert \mathbb Z_p^*\rvert\)
-    <ul>
-      <li>This means that  \(|4|\) is \(1\), \(2\), \(4318410571912893041\) or \(8636821143825786082\).<br />
-  It’s easy to see that in practice only the last two are possible.</li>
-    </ul>
-  </li>
-  <li>The DLP is easy to solve if the order of the group is <a href="https://en.wikipedia.org/wiki/Smooth_number">smooth</a> using the <a href="https://en.wikipedia.org/wiki/Pohlig%E2%80%93Hellman_algorithm">Pohlig-Hellman algorithm</a>.
-    <ul>
-      <li>This is not the case because \(p = 8636821143825786083 = 2 \cdot 4318410571912893041 + 1\) is a safe prime.</li>
-    </ul>
-  </li>
-  <li>The base 4 doesn’t matter. Computing a logarithm to any base \(x\) is sufficient, because</li>
+<li>If the submission is correct the attacker obtains the flag.</li>
+<li>Only a single submission can be made.</li>
+</ul></li>
 </ul>
-
-\[\log_ba = \log_x a \cdot (\log_xb)^{-1} \ .\]
-
-<p>The fastest known algorithm to compute the DLP in this case is a number field sieve.<br />
-One implementation is <a href="https://cado-nfs.gitlabpages.inria.fr/">CADO-NFS</a>.</p>
-<h3 id="cado-nfs">
-  
-  
-    CADO-NFS <a href="#cado-nfs">#</a>
-  
-  
-</h3>
-    
+<h2 id="solution">Solution</h2>
+<p>The first step involves solving the <a
+href="https://en.wikipedia.org/wiki/Discrete_logarithm">discrete
+logarithm problem (DLP)</a>.</p>
+<h3 id="dlp">DLP</h3>
+<p>Let <span class="math display">$$h(\bold x)$$</span> be an element of
+the cyclic subgroup <span class="math display">⟨4⟩</span> of <span
+class="math display">ℤ<sub><em>p</em></sub><sup>*</sup></span>.<br />
+If <span class="math display">$$4^n \equiv h(\bold x) \mod p$$</span>
+then <span class="math display"><em>n</em></span> is the discrete
+logarithm of <span class="math display">$$h(\bold x)$$</span> to the
+base <span class="math display">4</span> denoted as <span
+class="math display">$$n = \log_4(h(\bold x))$$</span>.<br />
+Solving this is useful because <span
+class="math display"><em>n</em></span> is directly related to <span
+class="math display"><em>k</em><sub>0</sub> + <em>x</em><sub>1</sub><em>k</em><sub>1</sub> + ⋯<em>x</em><sub><em>M</em></sub><em>k</em><sub><em>M</em></sub></span>.</p>
+<p>Some notes: - <span
+class="math display">|ℤ<sub><em>p</em></sub><sup>*</sup>| = <em>p</em> − 1</span>.
+- From <a
+href="https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)">Lagrange’s
+theorem</a> it follows that <span class="math display">|4|</span>
+divides <span
+class="math display">|ℤ<sub><em>p</em></sub><sup>*</sup>|</span> - This
+means that <span class="math display">|4|</span> is <span
+class="math display">1</span>, <span class="math display">2</span>,
+<span class="math display">4318410571912893041</span> or <span
+class="math display">8636821143825786082</span>.<br />
+It’s easy to see that in practice only the last two are possible. - The
+DLP is easy to solve if the order of the group is <a
+href="https://en.wikipedia.org/wiki/Smooth_number">smooth</a> using the
+<a
+href="https://en.wikipedia.org/wiki/Pohlig%E2%80%93Hellman_algorithm">Pohlig-Hellman
+algorithm</a>. - This is not the case because <span
+class="math display"><em>p</em> = 8636821143825786083 = 2 ⋅ 4318410571912893041 + 1</span>
+is a safe prime. - The base 4 doesn’t matter. Computing a logarithm to
+any base <span class="math display"><em>x</em></span> is sufficient,
+because</p>
+<p><span
+class="math display">log<sub><em>b</em></sub><em>a</em> = log<sub><em>x</em></sub><em>a</em> ⋅ (log<sub><em>x</em></sub><em>b</em>)<sup>−1</sup> .</span></p>
+<p>The fastest known algorithm to compute the DLP in this case is a
+number field sieve.<br />
+One implementation is <a
+href="https://cado-nfs.gitlabpages.inria.fr/">CADO-NFS</a>.</p>
+<h3 id="cado-nfs">CADO-NFS</h3>
 <p>Setup:</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://gitlab.inria.fr/cado-nfs/cado-nfs
-<span class="nb">cd </span>cado-nfs
-make
-<span class="c"># create paramter files for 19 bit</span>
-<span class="nb">cp </span>parameters/dlp/params.p30 parameters/dlp/params.p19
-<span class="nb">cp </span>parameters/dlp/p30.hint parameters/dlp/p19.hint
-</code></pre></div></div>
-<p>Example: Compute the DLP of <code class="language-plaintext highlighter-rouge">4802397593893189429</code>:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ell is the order of ⟨4⟩</span>
-./cado-nfs.py <span class="nt">--dlp</span> <span class="se">\</span>
-    <span class="nt">--ell</span> 4318410571912893041 <span class="se">\</span>
-    <span class="nv">target</span><span class="o">=</span>4802397593893189429 <span class="se">\</span>
-    8636821143825786083
-<span class="c"># 2192507630663880847</span>
-
-./cado-nfs.py <span class="nt">--dlp</span> <span class="se">\</span>
-    <span class="nt">--ell</span> 4318410571912893041 <span class="se">\</span>
-    <span class="nv">target</span><span class="o">=</span>4 <span class="se">\</span>
-    8636821143825786083
-<span class="c"># 941720563644317575</span>
-</code></pre></div></div>
-
-<p>Thus \(\log_4 4802397593893189429 = 2192507630663880847 \cdot 941720563644317575^{-1}\)</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># python
-</span><span class="n">p</span> <span class="o">=</span> <span class="mi">8636821143825786083</span>
-<span class="n">ell</span> <span class="o">=</span> <span class="mi">4318410571912893041</span>
-<span class="n">result</span> <span class="o">=</span> <span class="mi">2192507630663880847</span> <span class="o">*</span> <span class="nf">pow</span><span class="p">(</span><span class="mi">941720563644317575</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span> <span class="c1"># 1234567890
-</span>
-<span class="c1"># double check the result
-</span><span class="nf">pow</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>   <span class="c1"># 4802397593893189429 → correct
-</span></code></pre></div></div>
-<h3 id="attack">
-  
-  
-    Attack <a href="#attack">#</a>
-  
-  
-</h3>
-    
-
-<p>Now we need the hashes of three words \(\bold a, \bold b, \bold c\) such that \(\bold a + \bold b - \bold c\) doesn’t under- or overflow any of the individual bits.<br />
-Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as follows:</p>
-
-\[h(\bold z) = 4^{\log_4(h(\bold a)) + \log_4(h(\bold b)) + (\log_4(h(\bold c)))^{-1}} \mod p\]
-
-<p>Note that we need two positive and one negative term so that the secret \(k_0\) contained in every hash occurs exactly once.</p>
-<h3 id="conclusion">
-  
-  
-    Conclusion <a href="#conclusion">#</a>
-  
-  
-</h3>
-    
-
-<p>A high level overview of the exploit is:</p>
-<ul>
-  <li>Generate around 1000 (word, hash) pairs.</li>
-  <li>Do a bruteforce search to find 3 suitable words \(\bold a, \bold b, \bold c\).</li>
-  <li>Compute the discrete logarithm of the hashes using CADO-NFS.</li>
-  <li>Forge the hash of \(\bold z = \bold a + \bold b - \bold c\) as explained.</li>
-  <li>Submit \((\bold z, h(\bold z))\).</li>
-  <li>Profit.</li>
-</ul>
-
-<p>A reference implementation can be found in the <a href="#appendix">Appendix</a>.</p>
-<h2 id="appendix">
-  
-  
-    Appendix <a href="#appendix">#</a>
-  
-  
-</h2>
-    
-
-<p><code class="language-plaintext highlighter-rouge">solve.py</code></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># this program expects an input file data.txt
-# each line should contain a 'value,hash(value)' pair
-# around 1000 pairs seem to be ideal
-# this program outputs a value,hash(value) pair to submit
-</span>
-<span class="kn">import</span> <span class="n">subprocess</span>
-<span class="kn">from</span> <span class="n">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="n">random</span> <span class="kn">import</span> <span class="n">randint</span>
-
-<span class="n">p</span> <span class="o">=</span> <span class="mi">8636821143825786083</span>
-<span class="n">q</span> <span class="o">=</span> <span class="mi">4318410571912893041</span>
-<span class="n">g</span> <span class="o">=</span> <span class="mi">4</span>
-
-<span class="n">M</span> <span class="o">=</span> <span class="mi">64</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">MAX</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span>
-
-<span class="c1"># change as needed
-</span><span class="n">CADO_PATH</span> <span class="o">=</span> <span class="sh">"</span><span class="s">/home/user/opt/cado-nfs</span><span class="sh">"</span>
-<span class="n">CADO</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="nc">Path</span><span class="p">(</span><span class="n">CADO_PATH</span><span class="p">,</span> <span class="sh">'</span><span class="s">cado-nfs.py</span><span class="sh">'</span><span class="p">))</span>
-
-<span class="c1"># given the multiplicative group of integers mod p (ℤ/pℤ)^*
-# and the subgroup H generated by g where |g| = q and h ∈ H
-# find x such that g^x ≡ h (mod p)  
-</span><span class="k">def</span> <span class="nf">dlp</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="n">log_h</span> <span class="o">=</span> <span class="nf">cado_nfs</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-    <span class="n">log_g</span> <span class="o">=</span> <span class="nf">cado_nfs</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-    <span class="n">log_g_inv</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">log_g</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-    <span class="n">log</span> <span class="o">=</span> <span class="n">log_h</span> <span class="o">*</span> <span class="n">log_g_inv</span> <span class="o">%</span> <span class="n">q</span>
-    <span class="k">return</span> <span class="n">log</span>
-
-<span class="c1"># precompute log 4
-</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">941720563644317575</span> <span class="p">}</span>
-
-<span class="k">def</span> <span class="nf">cado_nfs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="n">cached</span> <span class="o">=</span> <span class="n">cache</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="nf">if </span><span class="p">(</span><span class="n">cached</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">):</span> <span class="k">return</span> <span class="n">cached</span>
-
-    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">CADO</span><span class="p">,</span>
-        <span class="sh">'</span><span class="s">--dlp</span><span class="sh">'</span><span class="p">,</span>
-        <span class="sh">'</span><span class="s">--ell</span><span class="sh">'</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">o</span><span class="p">),</span>
-        <span class="sh">'</span><span class="s">target=</span><span class="sh">'</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="n">t</span><span class="p">),</span>
-        <span class="nf">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-    <span class="p">]</span>
-
-    <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nc">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span>
-        <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">PIPE</span><span class="p">,</span>
-        <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">PIPE</span><span class="p">,</span>
-        <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">PIPE</span><span class="p">)</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="n">proc</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">out</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">ascii</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">cache</span><span class="p">.</span><span class="nf">update</span><span class="p">({</span> <span class="n">t</span><span class="p">:</span> <span class="n">out</span> <span class="p">})</span>
-    <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-
-<span class="c1"># brute-froce search
-</span><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i2</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">i1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-            <span class="n">e1</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i1</span><span class="p">]</span>
-            <span class="n">e2</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i2</span><span class="p">]</span>
-            <span class="n">AND</span> <span class="o">=</span> <span class="n">e1</span> <span class="o">&amp;</span> <span class="n">e2</span>
-            <span class="n">NOR</span> <span class="o">=</span> <span class="n">MAX</span> <span class="o">^</span> <span class="p">(</span><span class="n">e1</span> <span class="o">|</span> <span class="n">e2</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i3</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-                <span class="nf">if </span><span class="p">(</span><span class="n">i3</span> <span class="o">==</span> <span class="n">i1</span> <span class="ow">or</span> <span class="n">i3</span> <span class="o">==</span> <span class="n">i2</span><span class="p">):</span> <span class="k">continue</span>
-                <span class="n">e3</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i3</span><span class="p">]</span>
-                <span class="n">INV</span> <span class="o">=</span> <span class="n">MAX</span> <span class="o">^</span> <span class="n">e3</span>
-                <span class="nf">if </span><span class="p">(</span><span class="n">AND</span> <span class="o">&amp;</span> <span class="n">e3</span> <span class="o">==</span> <span class="n">AND</span> <span class="ow">and</span> <span class="n">NOR</span> <span class="o">&amp;</span> <span class="n">INV</span> <span class="o">==</span> <span class="n">NOR</span><span class="p">):</span>
-                    <span class="nf">return </span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">failed</span><span class="sh">"</span><span class="p">)</span>
-    <span class="nf">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">p =</span><span class="sh">"</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">q =</span><span class="sh">"</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">g =</span><span class="sh">"</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s"># searching for a, b, c...</span><span class="sh">"</span><span class="p">)</span>
-
-    <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span> <span class="o">=</span> <span class="nf">search</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">array</span><span class="p">)))</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">array</span><span class="p">[</span><span class="n">i2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">array</span><span class="p">[</span><span class="n">i3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">a =</span><span class="sh">"</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">b =</span><span class="sh">"</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">c =</span><span class="sh">"</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i3</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">x =</span><span class="sh">"</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hash_a =</span><span class="sh">"</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hash_b =</span><span class="sh">"</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i2</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hash_c =</span><span class="sh">"</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i3</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s"># solving dlp...</span><span class="sh">"</span><span class="p">)</span>
-    
-    <span class="n">log_a</span> <span class="o">=</span> <span class="nf">dlp</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-    <span class="n">log_b</span> <span class="o">=</span> <span class="nf">dlp</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-    <span class="n">log_c</span> <span class="o">=</span> <span class="nf">dlp</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i3</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-    <span class="n">log_c_inv</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">log_c</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-    <span class="n">log_x</span> <span class="o">=</span> <span class="n">log_a</span> <span class="o">*</span> <span class="n">log_b</span> <span class="o">*</span> <span class="n">log_c_inv</span> <span class="o">%</span> <span class="n">q</span>
-    <span class="n">hash_x</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">log_x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">log_a =</span><span class="sh">"</span><span class="p">,</span> <span class="n">log_a</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">log_b =</span><span class="sh">"</span><span class="p">,</span> <span class="n">log_b</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">log_c =</span><span class="sh">"</span><span class="p">,</span> <span class="n">log_c</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">log_x =</span><span class="sh">"</span><span class="p">,</span> <span class="n">log_x</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hash_x =</span><span class="sh">"</span><span class="p">,</span> <span class="n">hash_x</span><span class="p">)</span>
-
-    <span class="nf">return </span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">hash_x</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">data.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
-    <span class="n">txt</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="n">txt</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">))),</span> <span class="n">lines</span><span class="p">))</span>
-
-<span class="n">x</span><span class="p">,</span> <span class="n">log_x</span> <span class="o">=</span> <span class="nf">solve</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="s">,</span><span class="sh">'</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="n">log_x</span><span class="p">))</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">mathmac.py</code></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
-</span>
-<span class="kn">import</span> <span class="n">os</span>
-<span class="kn">from</span> <span class="n">random</span> <span class="kn">import</span> <span class="n">randint</span>
-<span class="kn">import</span> <span class="n">json</span>
-
-<span class="n">flag</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">'</span><span class="s">FLAG</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flag{redacted}</span><span class="sh">'</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">MAC</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="mi">8636821143825786083</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">sk</span> <span class="o">=</span> <span class="p">[</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">base</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">p</span><span class="p">),</span> <span class="n">self</span><span class="p">.</span><span class="n">p</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="o">**</span><span class="n">self</span><span class="p">.</span><span class="n">n</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">None</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">bin</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">2</span><span class="p">:].</span><span class="nf">zfill</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">n</span><span class="p">)))</span>
-        <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">n</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">base</span>
-        <span class="k">for</span> <span class="n">ai</span><span class="p">,</span> <span class="n">xi</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">sk</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">xi</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">ai</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">p</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">res</span>
-
-
-<span class="k">def</span> <span class="nf">menu</span><span class="p">():</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. Generate token</span><span class="sh">"</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2. Validate token</span><span class="sh">"</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">3. Quit</span><span class="sh">"</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">&gt; </span><span class="sh">"</span><span class="p">))</span>
-
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Welcome to the magic MathMAC. Can you become a wizard and guess tokens?</span><span class="sh">"</span><span class="p">)</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="mi">64</span>
-    <span class="n">mac</span> <span class="o">=</span> <span class="nc">MAC</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">choice</span> <span class="o">=</span> <span class="nf">menu</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">data</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">tag</span> <span class="o">=</span> <span class="n">mac</span><span class="p">.</span><span class="nf">sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s">,</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="nf">input</span><span class="p">().</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="s">,</span><span class="sh">"</span><span class="p">)</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">tag</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
-            <span class="n">actual_tag</span> <span class="o">=</span> <span class="n">mac</span><span class="p">.</span><span class="nf">sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">actual_tag</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">tag</span> <span class="o">!=</span> <span class="n">actual_tag</span><span class="p">:</span>
-                <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Unlucky</span><span class="sh">"</span><span class="p">)</span>
-                <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-                <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Yup. I know.</span><span class="sh">"</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nf">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
-    <span class="nf">main</span><span class="p">()</span>
-</code></pre></div></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://gitlab.inria.fr/cado-nfs/cado-nfs</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> cado-nfs</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create paramter files for 19 bit</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> parameters/dlp/params.p30 parameters/dlp/params.p19</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> parameters/dlp/p30.hint parameters/dlp/p19.hint</span></code></pre></div>
+<p>Example: Compute the DLP of <code>4802397593893189429</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ell is the order of ⟨4⟩</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./cado-nfs.py</span> <span class="at">--dlp</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ell</span> 4318410571912893041 <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    target=4802397593893189429 <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    8636821143825786083</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2192507630663880847</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">./cado-nfs.py</span> <span class="at">--dlp</span> <span class="dt">\</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ell</span> 4318410571912893041 <span class="dt">\</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    target=4 <span class="dt">\</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    8636821143825786083</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 941720563644317575</span></span></code></pre></div>
+<p>Thus <span
+class="math display">log<sub>4</sub>4802397593893189429 = 2192507630663880847 ⋅ 941720563644317575<sup>−1</sup></span></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># python</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">8636821143825786083</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ell <span class="op">=</span> <span class="dv">4318410571912893041</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="dv">2192507630663880847</span> <span class="op">*</span> <span class="bu">pow</span>(<span class="dv">941720563644317575</span>, <span class="op">-</span><span class="dv">1</span>, ell) <span class="co"># 1234567890</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># double check the result</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">pow</span>(<span class="dv">4</span>, result, p)   <span class="co"># 4802397593893189429 → correct</span></span></code></pre></div>
+<h3 id="attack">Attack</h3>
+<p>Now we need the hashes of three words <span
+class="math display">$$\bold a, \bold b, \bold c$$</span> such that
+<span class="math display">$$\bold a + \bold b - \bold c$$</span>
+doesn’t under- or overflow any of the individual bits.<br />
+Then we can compute the hash of <span class="math display">$$\bold z =
+\bold a + \bold b - \bold c$$</span> as follows:</p>
+<p><span class="math display">$$
+h(\bold z) = 4^{\log_4(h(\bold a)) + \log_4(h(\bold b)) +
+(\log_4(h(\bold c)))^{-1}} \mod p
+$$</span></p>
+<p>Note that we need two positive and one negative term so that the
+secret <span class="math display"><em>k</em><sub>0</sub></span>
+contained in every hash occurs exactly once.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>A high level overview of the exploit is: - Generate around 1000
+(word, hash) pairs. - Do a bruteforce search to find 3 suitable words
+<span class="math display">$$\bold a, \bold b, \bold c$$</span>. -
+Compute the discrete logarithm of the hashes using CADO-NFS. - Forge the
+hash of <span class="math display">$$\bold z = \bold a + \bold b - \bold
+c$$</span> as explained. - Submit <span class="math display">$$(\bold z,
+h(\bold z))$$</span>. - Profit.</p>
+<p>A reference implementation can be found in the <a
+href="#appendix">Appendix</a>.</p>
+<h2 id="appendix">Appendix</h2>
+<p><code>solve.py</code></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this program expects an input file data.txt</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># each line should contain a &#39;value,hash(value)&#39; pair</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># around 1000 pairs seem to be ideal</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># this program outputs a value,hash(value) pair to submit</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> randint</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">8636821143825786083</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">4318410571912893041</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>MAX <span class="op">=</span> <span class="dv">2</span><span class="op">**</span>M <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># change as needed</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>CADO_PATH <span class="op">=</span> <span class="st">&quot;/home/user/opt/cado-nfs&quot;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>CADO <span class="op">=</span> <span class="bu">str</span>(Path(CADO_PATH, <span class="st">&#39;cado-nfs.py&#39;</span>))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># given the multiplicative group of integers mod p (ℤ/pℤ)^*</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># and the subgroup H generated by g where |g| = q and h ∈ H</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># find x such that g^x ≡ h (mod p)  </span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dlp(h, g, q, p):</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    log_h <span class="op">=</span> cado_nfs(h, q, p)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    log_g <span class="op">=</span> cado_nfs(g, q, p)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    log_g_inv <span class="op">=</span> <span class="bu">pow</span>(log_g, <span class="op">-</span><span class="dv">1</span>, q)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    log <span class="op">=</span> log_h <span class="op">*</span> log_g_inv <span class="op">%</span> q</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> log</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># precompute log 4</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>cache <span class="op">=</span> { <span class="dv">4</span>: <span class="dv">941720563644317575</span> }</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cado_nfs(t, o, p):</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    cached <span class="op">=</span> cache.get(t)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (cached <span class="op">!=</span> <span class="va">None</span>): <span class="cf">return</span> cached</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> [</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        CADO,</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;--dlp&#39;</span>,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;--ell&#39;</span>, <span class="bu">str</span>(o),</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;target=&#39;</span> <span class="op">+</span> <span class="bu">str</span>(t),</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        <span class="bu">str</span>(p)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    proc <span class="op">=</span> subprocess.Popen(cmd,</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        stdin<span class="op">=</span>subprocess.PIPE,</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>        stdout<span class="op">=</span>subprocess.PIPE,</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>        stderr<span class="op">=</span>subprocess.PIPE)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> proc.stdout.readline()</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> <span class="bu">int</span>(out.decode(<span class="st">&#39;ascii&#39;</span>)[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    cache.update({ t: out })</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>(out)</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="co"># brute-froce search</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> search(arr):</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(arr)</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i1 <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i2 <span class="kw">in</span> <span class="bu">range</span>(i1 <span class="op">+</span> <span class="dv">1</span>, n):</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>            e1 <span class="op">=</span> arr[i1]</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>            e2 <span class="op">=</span> arr[i2]</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>            AND <span class="op">=</span> e1 <span class="op">&amp;</span> e2</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>            NOR <span class="op">=</span> MAX <span class="op">^</span> (e1 <span class="op">|</span> e2)</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i3 <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> (i3 <span class="op">==</span> i1 <span class="kw">or</span> i3 <span class="op">==</span> i2): <span class="cf">continue</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>                e3 <span class="op">=</span> arr[i3]</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>                INV <span class="op">=</span> MAX <span class="op">^</span> e3</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> (AND <span class="op">&amp;</span> e3 <span class="op">==</span> AND <span class="kw">and</span> NOR <span class="op">&amp;</span> INV <span class="op">==</span> NOR):</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> (i1, i2, i3)</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;failed&quot;</span>)</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    exit(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve(array):</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;p =&quot;</span>, p)</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;q =&quot;</span>, q)</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;g =&quot;</span>, g)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;# searching for a, b, c...&quot;</span>)</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    i1, i2, i3 <span class="op">=</span> search(<span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x: x[<span class="dv">0</span>], array)))</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> array[i1][<span class="dv">0</span>] <span class="op">+</span> array[i2][<span class="dv">0</span>] <span class="op">-</span> array[i3][<span class="dv">0</span>]</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;a =&quot;</span>, array[i1][<span class="dv">0</span>])</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;b =&quot;</span>, array[i2][<span class="dv">0</span>])</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;c =&quot;</span>, array[i3][<span class="dv">0</span>])</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;x =&quot;</span>, x)</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;hash_a =&quot;</span>, array[i1][<span class="dv">1</span>])</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;hash_b =&quot;</span>, array[i2][<span class="dv">1</span>])</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;hash_c =&quot;</span>, array[i3][<span class="dv">1</span>])</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;# solving dlp...&quot;</span>)</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>    log_a <span class="op">=</span> dlp(array[i1][<span class="dv">1</span>], g, q, p)</span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>    log_b <span class="op">=</span> dlp(array[i2][<span class="dv">1</span>], g, q, p)</span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>    log_c <span class="op">=</span> dlp(array[i3][<span class="dv">1</span>], g, q, p)</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>    log_c_inv <span class="op">=</span> <span class="bu">pow</span>(log_c, <span class="op">-</span><span class="dv">1</span>, q)</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>    log_x <span class="op">=</span> log_a <span class="op">*</span> log_b <span class="op">*</span> log_c_inv <span class="op">%</span> q</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>    hash_x <span class="op">=</span> <span class="bu">pow</span>(<span class="dv">4</span>, log_x, p)</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;log_a =&quot;</span>, log_a)</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;log_b =&quot;</span>, log_b)</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;log_c =&quot;</span>, log_c)</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;log_x =&quot;</span>, log_x)</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;hash_x =&quot;</span>, hash_x)</span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x, hash_x)</span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;data.txt&#39;</span>, <span class="st">&#39;r&#39;</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>    txt <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> txt.split(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> line: <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, line.split(<span class="st">&#39;,&#39;</span>))), lines))</span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>x, log_x <span class="op">=</span> solve(arr)</span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>(x) <span class="op">+</span> <span class="st">&#39;,&#39;</span> <span class="op">+</span> <span class="bu">str</span>(log_x))</span></code></pre></div>
+<p><code>mathmac.py</code></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> randint</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>flag <span class="op">=</span> os.getenv(<span class="st">&#39;FLAG&#39;</span>, <span class="st">&#39;flag</span><span class="sc">{redacted}</span><span class="st">&#39;</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MAC:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.p <span class="op">=</span> <span class="dv">8636821143825786083</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n <span class="op">=</span> n</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sk <span class="op">=</span> [randint(<span class="dv">0</span>, <span class="va">self</span>.p) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.base <span class="op">=</span> <span class="bu">pow</span>(<span class="dv">4</span>, randint(<span class="dv">0</span>, <span class="va">self</span>.p), <span class="va">self</span>.p)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> sign(<span class="va">self</span>, x):</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">or</span> x <span class="op">&gt;=</span> <span class="dv">2</span><span class="op">**</span><span class="va">self</span>.n:</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">bin</span>(x)[<span class="dv">2</span>:].zfill(<span class="va">self</span>.n)))</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">len</span>(x) <span class="op">==</span> <span class="va">self</span>.n</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> <span class="va">self</span>.base</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ai, xi <span class="kw">in</span> <span class="bu">zip</span>(<span class="va">self</span>.sk, x):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> xi <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                res <span class="op">=</span> <span class="bu">pow</span>(res, ai, <span class="va">self</span>.p)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> res</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> menu():</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;1. Generate token&quot;</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;2. Validate token&quot;</span>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;3. Quit&quot;</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;&gt; &quot;</span>))</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Welcome to the magic MathMAC. Can you become a wizard and guess tokens?&quot;</span>)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    mac <span class="op">=</span> MAC(M)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> []</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        choice <span class="op">=</span> menu()</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> choice <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> randint(<span class="dv">0</span>, <span class="dv">2</span><span class="op">**</span>M<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>            data.append(x)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>            tag <span class="op">=</span> mac.sign(x)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>tag<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> choice <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>            x, tag <span class="op">=</span> <span class="bu">input</span>().strip().split(<span class="st">&quot;,&quot;</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="bu">int</span>(x)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>            tag <span class="op">=</span> <span class="bu">int</span>(tag)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>            actual_tag <span class="op">=</span> mac.sign(x)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> actual_tag <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> tag <span class="op">!=</span> actual_tag:</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">&quot;Unlucky&quot;</span>)</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>                exit(<span class="dv">1</span>)</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> x <span class="kw">in</span> data:</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">&quot;Yup. I know.&quot;</span>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(flag)</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>            exit(<span class="dv">0</span>)</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div>
 
         </article>
     </main>
 
     <footer>
         <table style="width: 100%;"><tr>
-            
             <td><a class="prev" href="/writeup/2024/05/02/anti-rev.html">
-                Previous: Anti-rev
-            </a></td>
-            
+    Previous: Anti-rev
+</a></td>
 
-            
-            <td><a class="next" href="/blog/2024/06/01/function.html">
-                Next: Function connecting points with straight lines
-            </a></td>
-            
+            <td><a class="next" href="/blog/2024/06/01/function-connecting-points-with-straight-lines.html">
+    Next: Function connecting points with straight lines
+</a></td>
+
         </tr></table>
     </footer>
 </div>
@@ -453,3 +401,4 @@ Then we can compute the hash of \(\bold z = \bold a + \bold b - \bold c\) as fol
   </body>
 
 </html>
+

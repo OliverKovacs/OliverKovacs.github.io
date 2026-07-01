@@ -1,41 +1,30 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Fast RSA | Oliver Kovacs</title>
-<meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="Fast RSA" />
-<meta name="author" content="Oliver Kovacs" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="ACSC 2025 - Final" />
-<meta property="og:description" content="ACSC 2025 - Final" />
-<link rel="canonical" href="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" />
-<meta property="og:url" content="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html" />
-<meta property="og:site_name" content="Oliver Kovacs" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-07-07T00:00:00+02:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Fast RSA" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Oliver Kovacs"},"dateModified":"2025-07-07T00:00:00+02:00","datePublished":"2025-07-07T00:00:00+02:00","description":"ACSC 2025 - Final","headline":"Fast RSA","mainEntityOfPage":{"@type":"WebPage","@id":"https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"},"url":"https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"}</script>
-<!-- End Jekyll SEO tag -->
-<link type="application/atom+xml" rel="alternate" href="https://oliverkovacs.dev/feed.xml" title="Oliver Kovacs" /><link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--{%- seo -%}
+    {%- feed_meta -%}-->
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    
-        <!-- is a post -->
-        <link rel="stylesheet" href="/assets/css/post.css">
-        <link rel="stylesheet" href="/assets/css/code.css">
+    <!-- is a post -->
+<link rel="stylesheet" href="/assets/css/post.css">
+<link rel="stylesheet" href="/assets/css/code.css">
 
-        <!-- KaTeX -->
-        <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-        <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-        <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
-    
+<!-- KaTeX -->
+<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+
 </head>
-<body>
+
+
+  <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
     
@@ -59,7 +48,8 @@
         <h1>Fast RSA</h1>
         <nav>
         <table style="width: 100%;"><tr>
-            <td><time datetime="2025-07-07T00:00:00+02:00">2025 Jul 7
+            <td><time datetime="2025-07-07T00:00:00+02:00">
+                2025 Jul 7
             </time></td>
             <td><a id="author" href="/">
                 Oliver Kovacs
@@ -71,228 +61,195 @@
     <main id="main">
         <article>
             <p><strong>ACSC 2025 - Final</strong></p>
+<p>Category: <code>crypto</code></p>
+<h2 id="description">Description</h2>
+<pre><code>Hey choom! I got my hands on some fresh new hardware, a chip that can do military-grade encryption at lightning speed.
 
-<p>Category: <code class="language-plaintext highlighter-rouge">crypto</code></p>
-<h2 id="description">
-  
-  
-    Description <a href="#description">#</a>
-  
-  
-</h2>
-    
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hey choom! I got my hands on some fresh new hardware, a chip that can do military-grade encryption at lightning speed.
-
-I'm testing out it's signature features, and since you're a god-tier netrunner, maybe you can learn how to sign stuff yourself if you watch my bot do it enough?
-</code></pre></div></div>
+I&#39;m testing out it&#39;s signature features, and since you&#39;re a god-tier netrunner, maybe you can learn how to sign stuff yourself if you watch my bot do it enough?</code></pre>
 <p>Attachments: [
-<a href="/assets/zip/fast-rsa.zip">fast-rsa.zip</a>
-]</p>
-<h2 id="problem">
-  
-  
-    Problem <a href="#problem">#</a>
-  
-  
-</h2>
-    
-
-<p>The program generates an RSA keypair and outputs the modulus \(n\)
-and the uppermost 32 bits of \(d\).</p>
-
-<p>It then repeatedly reads \(m, b \in \mathbb Z\) and calculates the signature \(s = m^d \mod n\).
-This is done in <a href="https://en.wikipedia.org/wiki/Montgomery_modular_multiplication">Montgomery</a> form.
-Then \(s\) and whether any of the two multiplications in the \(b\)th step of exponentiation
-required the conditional subtraction is revealed.</p>
-
-<p>The goal is to determine \(d\).</p>
-<h2 id="solution">
-  
-  
-    Solution <a href="#solution">#</a>
-  
-  
-</h2>
-    
-
+<a href="/assets/zip/fast-rsa.zip">fast-rsa.zip</a>]</p>
+<h2 id="problem">Problem</h2>
+<p>The program generates an RSA keypair and outputs the modulus <span
+class="math display"><em>n</em></span> and the uppermost 32 bits of
+<span class="math display"><em>d</em></span>.</p>
+<p>It then repeatedly reads <span
+class="math display"><em>m</em>, <em>b</em> ∈ ℤ</span> and calculates
+the signature <span
+class="math display"><em>s</em> = <em>m</em><sup><em>d</em></sup> mod  <em>n</em></span>.
+This is done in <a
+href="https://en.wikipedia.org/wiki/Montgomery_modular_multiplication">Montgomery</a>
+form. Then <span class="math display"><em>s</em></span> and whether any
+of the two multiplications in the <span
+class="math display"><em>b</em></span>th step of exponentiation required
+the conditional subtraction is revealed.</p>
+<p>The goal is to determine <span
+class="math display"><em>d</em></span>.</p>
+<h2 id="solution">Solution</h2>
 <blockquote>
-  <p>Disclosure: I was not able to solve this challenge at the competition.</p>
+<p>Disclosure: I was not able to solve this challenge at the
+competition.</p>
 </blockquote>
-
-<p>We can <em>almost</em> use an attack by Walter &amp; Thompson<sup>1</sup>.
-You can find my implementation <a href="https://github.com/OliverKovacs/montgomery-sidechannel/">here</a>.</p>
-
-<p>The only difference is that in each step it is not known which of the two
-subtractions were needed, i. e. the observation vector is “squashed”.
-The solution is simple: the algorithm has to be run on multiple
-squashed observation vectors simultaneously.
-In practice 2 are enough.
-The algorithm calculates \(d\) in ~1 s,
-however getting the observation vectors from the remote takes considerably more time.</p>
-<h2 id="implementation">
-  
-  
-    Implementation <a href="#implementation">#</a>
-  
-  
-</h2>
-    
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
-</span>
-<span class="kn">import</span> <span class="n">sys</span>
-<span class="kn">import</span> <span class="n">time</span>
-<span class="kn">import</span> <span class="n">pwn</span>
-
-<span class="n">sys</span><span class="p">.</span><span class="nf">setrecursionlimit</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span>
-
-<span class="c1"># https://en.wikipedia.org/wiki/Montgomery_modular_multiplication
-</span><span class="k">class</span> <span class="nc">Montgomery</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="nf">assert</span><span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">nbits</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">.</span><span class="nf">bit_length</span><span class="p">()</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">R</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">nbits</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">R_inv</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">R</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">N_prime</span> <span class="o">=</span> <span class="o">-</span><span class="nf">pow</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">R</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">to_montgomery</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="nf">return </span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">nbits</span><span class="p">)</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span>
-
-    <span class="k">def</span> <span class="nf">from_montgomery</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="nf">return </span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">R_inv</span><span class="p">)</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span>
-
-    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">T</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="p">((</span><span class="n">T</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">N_prime</span><span class="p">)</span> <span class="o">%</span> <span class="n">self</span><span class="p">.</span><span class="n">R</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">self</span><span class="p">.</span><span class="n">nbits</span>
-        <span class="nf">return </span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span> <span class="nf">else </span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">:],</span> <span class="mi">16</span><span class="p">)</span>
-
-<span class="n">CUTOFF</span> <span class="o">=</span> <span class="mi">3</span>
-
-<span class="k">def</span> <span class="nf">Z_prime_next</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">bit</span><span class="p">):</span>
-    <span class="n">Y</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-    <span class="n">z2</span> <span class="o">=</span> <span class="bp">False</span>
-    <span class="k">if</span> <span class="n">bit</span><span class="p">:</span>
-        <span class="n">Y</span><span class="p">,</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Y</span><span class="p">,</span> <span class="n">z1</span> <span class="ow">or</span> <span class="n">z2</span>
-
-<span class="k">def</span> <span class="nf">attack_bruteforce</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">S_bar</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">CUTOFF</span><span class="p">):</span>
-        <span class="n">Y</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">CUTOFF</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">Y</span> <span class="o">==</span> <span class="n">S_bar</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">i</span>
-        <span class="n">Y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="nf">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">None</span>
-
-<span class="c1"># inv: first t bits of dt are assumed to be correct
-</span><span class="k">def</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">guess</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">10</span><span class="p">:</span>
-        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">attack_impl</span><span class="sh">'</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-
-    <span class="n">nbits</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">Zs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">guess</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">|</span> <span class="p">(</span><span class="n">guess</span> <span class="o">&lt;&lt;</span> <span class="n">nbits</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="p">[</span><span class="nc">Z_prime_next</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">guess</span><span class="p">)</span> <span class="k">for</span> <span class="n">A_bar</span><span class="p">,</span> <span class="n">Y</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">As_bar</span><span class="p">,</span> <span class="n">Ys</span><span class="p">)]</span>
-        <span class="n">Ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span> <span class="k">for</span> <span class="n">Y</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">]</span>
-        <span class="n">Zs_prime</span> <span class="o">=</span> <span class="p">[</span><span class="n">Z_prime</span> <span class="o">+</span> <span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="k">for</span> <span class="n">Z_prime</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">Zs_prime</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)]</span>
-
-    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="n">nbits</span> <span class="o">-</span> <span class="n">CUTOFF</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nf">attack_bruteforce</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Ys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Ss_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="nf">any</span><span class="p">([</span><span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Z_prime</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Z_prime</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">)]):</span>
-        <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">None</span>
-
-    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">:</span>
-        <span class="n">guess</span> <span class="o">=</span> <span class="ow">not</span> <span class="ow">not</span> <span class="p">(</span><span class="n">H</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">31</span> <span class="o">-</span> <span class="n">t</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">guess</span><span class="p">)</span>
-
-    <span class="n">guess</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">any</span><span class="p">([</span><span class="n">Z</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">Z_prime</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Z_prime</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">)]))</span>
-    <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">guess</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
-        <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="ow">not</span> <span class="n">guess</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span>
-
-<span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">d_upper</span><span class="p">):</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="nc">Montgomery</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-    <span class="n">As_bar</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="nf">to_montgomery</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
-    <span class="n">Ss_bar</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="nf">to_montgomery</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">Ss</span><span class="p">]</span>
-    <span class="n">Ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="nf">to_montgomery</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
-    <span class="n">Zs_prime</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>
-    <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">attack_impl</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">As_bar</span><span class="p">,</span> <span class="n">Ss_bar</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Ys</span><span class="p">,</span> <span class="n">Zs_prime</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d_upper</span><span class="p">)</span>
-    <span class="nf">assert</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">d</span>
-
-<span class="k">def</span> <span class="nf">get_sig</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="nf">hex</span><span class="p">(</span><span class="n">A</span><span class="p">).</span><span class="nf">encode</span><span class="p">()</span> <span class="o">+</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="s">0</span><span class="sh">'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readuntil</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">challenge: </span><span class="sh">'</span><span class="p">),</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Signature: </span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">is_expensive</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
-    <span class="n">GOOD</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="sa">b</span><span class="sh">'</span><span class="s"> is a cool number</span><span class="sh">'</span><span class="p">,</span>
-        <span class="sa">b</span><span class="sh">'</span><span class="s"> is really quite something</span><span class="sh">'</span><span class="p">,</span>
-        <span class="sa">b</span><span class="sh">'</span><span class="s"> likes to save me money</span><span class="sh">'</span>
-    <span class="p">]</span>
-    <span class="k">return</span> <span class="ow">not</span> <span class="nf">any</span><span class="p">([</span><span class="n">e</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">GOOD</span><span class="p">])</span>
-
-<span class="k">def</span> <span class="nf">get_vec</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">bits</span><span class="p">):</span>
-    <span class="n">BATCH</span> <span class="o">=</span> <span class="mi">32</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">bits</span><span class="p">,</span> <span class="n">BATCH</span><span class="p">):</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="nf">hex</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="se">\n</span><span class="sh">'</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">BATCH</span><span class="p">)]</span>
-        <span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">lines</span><span class="p">).</span><span class="nf">encode</span><span class="p">())</span>
-
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">BATCH</span><span class="p">):</span>
-            <span class="n">Z</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">is_expensive</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readuntil</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">challenge: </span><span class="sh">'</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">Z</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="n">p</span> <span class="o">=</span> <span class="n">pwn</span><span class="p">.</span><span class="nf">remote</span><span class="p">(</span><span class="sh">'</span><span class="s">127.0.0.1</span><span class="sh">'</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nf">readuntil</span><span class="p">(</span><span class="sh">'</span><span class="s">challenge: </span><span class="sh">'</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="s">n=</span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
-<span class="n">d_upper</span> <span class="o">=</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="s">d: </span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>         <span class="c1"># crib
-</span><span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>                                     <span class="c1"># messages
-</span><span class="n">Ss</span> <span class="o">=</span> <span class="p">[</span><span class="nf">get_sig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>                   <span class="c1"># signatures
-</span><span class="n">Zs</span> <span class="o">=</span> <span class="p">[</span><span class="nf">get_vec</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">.</span><span class="nf">bit_length</span><span class="p">())</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">As</span><span class="p">]</span>   <span class="c1"># observation vectors
-</span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
-<span class="n">d</span> <span class="o">=</span> <span class="nf">attack</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">d_upper</span><span class="p">)</span>
-<span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
-
-<span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="sa">b</span><span class="sh">''</span><span class="p">)</span>
-<span class="n">msg</span> <span class="o">=</span> <span class="nf">parse_res</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readline</span><span class="p">(),</span> <span class="sa">b</span><span class="sh">'</span><span class="s">message: </span><span class="sh">'</span><span class="p">,</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">p</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="nf">hex</span><span class="p">(</span><span class="n">sig</span><span class="p">).</span><span class="nf">encode</span><span class="p">())</span>
-
-<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">{d_upper = }</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">As</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">Ss</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">n</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">d</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">msg</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">sig</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">CUTOFF</span> <span class="o">=</span> <span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s"># calculated in </span><span class="sh">'</span><span class="p">,</span> <span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">,</span> <span class="sh">'</span><span class="s">s</span><span class="sh">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">readline</span><span class="p">())</span>
-</code></pre></div></div>
-<h2 id="references">
-  
-  
-    References <a href="#references">#</a>
-  
-  
-</h2>
-    
-
-<ol>
-  <li><em>C. D. Walter and S. Thompson, “<a href="https://link.springer.com/chapter/10.1007/3-540-45353-9_15">Distinguishing exponent digits by observing modular subtractions</a>,” in Topics in Cryptology — CT-RSA 2001, ser. Lecture Notes in Computer Science, vol. 2020. Springer Verlag, 2001, pp. 192–207. subsection 3.3</em></li>
+<p>We can <em>almost</em> use an attack by Walter &amp;
+Thompson<sup>1</sup>. You can find my implementation <a
+href="https://github.com/OliverKovacs/montgomery-sidechannel/">here</a>.</p>
+<p>The only difference is that in each step it is not known which of the
+two subtractions were needed, i. e. the observation vector is
+“squashed”. The solution is simple: the algorithm has to be run on
+multiple squashed observation vectors simultaneously. In practice 2 are
+enough. The algorithm calculates <span
+class="math display"><em>d</em></span> in ~1 s, however getting the
+observation vectors from the remote takes considerably more time.</p>
+<h2 id="implementation">Implementation</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pwn</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>sys.setrecursionlimit(<span class="dv">2500</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># https://en.wikipedia.org/wiki/Montgomery_modular_multiplication</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Montgomery:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span>(n <span class="op">&amp;</span> <span class="dv">1</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.N <span class="op">=</span> n</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nbits <span class="op">=</span> <span class="va">self</span>.N.bit_length()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.R <span class="op">=</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="va">self</span>.nbits</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.R_inv <span class="op">=</span> <span class="bu">pow</span>(<span class="va">self</span>.R, <span class="op">-</span><span class="dv">1</span>, <span class="va">self</span>.N)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.N_prime <span class="op">=</span> <span class="op">-</span><span class="bu">pow</span>(<span class="va">self</span>.N, <span class="op">-</span><span class="dv">1</span>, <span class="va">self</span>.R)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_montgomery(<span class="va">self</span>, x):</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (x <span class="op">&lt;&lt;</span> <span class="va">self</span>.nbits) <span class="op">%</span> <span class="va">self</span>.N</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> from_montgomery(<span class="va">self</span>, x):</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (x <span class="op">*</span> <span class="va">self</span>.R_inv) <span class="op">%</span> <span class="va">self</span>.N</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> multiply(<span class="va">self</span>, x, y):</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        T <span class="op">=</span> x <span class="op">*</span> y</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> ((T <span class="op">%</span> <span class="va">self</span>.R) <span class="op">*</span> <span class="va">self</span>.N_prime) <span class="op">%</span> <span class="va">self</span>.R</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        t <span class="op">=</span> (T <span class="op">+</span> m <span class="op">*</span> <span class="va">self</span>.N) <span class="op">&gt;&gt;</span> <span class="va">self</span>.nbits</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (t, <span class="va">False</span>) <span class="cf">if</span> t <span class="op">&lt;</span> <span class="va">self</span>.N <span class="cf">else</span> (t <span class="op">-</span> <span class="va">self</span>.N, <span class="va">True</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_res(res, a, b):</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>(res.split(a)[<span class="dv">1</span>].split(b)[<span class="dv">0</span>][<span class="dv">2</span>:], <span class="dv">16</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>CUTOFF <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> Z_prime_next(M, A_bar, Y, bit):</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    Y, z1 <span class="op">=</span> M.multiply(Y, Y)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    z2 <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> bit:</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        Y, z2 <span class="op">=</span> M.multiply(Y, A_bar)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Y, z1 <span class="kw">or</span> z2</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attack_bruteforce(M, A_bar, Y, S_bar, dt):</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(CUTOFF):</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        Y, z1 <span class="op">=</span> M.multiply(Y, Y)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span> <span class="op">&lt;&lt;</span> CUTOFF):</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> Y <span class="op">==</span> S_bar:</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">True</span>, dt <span class="op">+</span> i</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        Y, _ <span class="op">=</span> M.multiply(Y, A_bar)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span>, <span class="va">None</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"># inv: first t bits of dt are assumed to be correct</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attack_impl(M, As_bar, Ss_bar, Zs, Ys, Zs_prime, t, dt, H, guess <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> t <span class="op">%</span> <span class="dv">10</span>:</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&#39;attack_impl&#39;</span>, t, dt)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    nbits <span class="op">=</span> <span class="bu">len</span>(Zs[<span class="dv">0</span>])</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> guess <span class="op">!=</span> <span class="va">None</span>:</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        t <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>        dt <span class="op">=</span> dt <span class="op">|</span> (guess <span class="op">&lt;&lt;</span> nbits <span class="op">-</span> t)</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>        tmp <span class="op">=</span> [Z_prime_next(M, A_bar, Y, guess) <span class="cf">for</span> A_bar, Y <span class="kw">in</span> <span class="bu">zip</span>(As_bar, Ys)]</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        Ys <span class="op">=</span> [Y <span class="cf">for</span> Y, _ <span class="kw">in</span> tmp]</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        Zs_prime <span class="op">=</span> [Z_prime <span class="op">+</span> [z] <span class="cf">for</span> Z_prime, (_, z) <span class="kw">in</span> <span class="bu">zip</span>(Zs_prime, tmp)]</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> t <span class="op">==</span> nbits <span class="op">-</span> CUTOFF:</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> attack_bruteforce(M, As_bar[<span class="dv">0</span>], Ys[<span class="dv">0</span>], Ss_bar[<span class="dv">0</span>], dt)</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">any</span>([Z[<span class="dv">0</span>:t] <span class="op">!=</span> Z_prime[<span class="dv">0</span>:t] <span class="cf">for</span> Z, Z_prime <span class="kw">in</span> <span class="bu">zip</span>(Zs, Zs_prime)]):</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span>, <span class="va">None</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> t <span class="op">&lt;</span> <span class="dv">32</span>:</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        guess <span class="op">=</span> <span class="kw">not</span> <span class="kw">not</span> (H <span class="op">&amp;</span> (<span class="dv">1</span> <span class="op">&lt;&lt;</span> (<span class="dv">31</span> <span class="op">-</span> t)))</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> attack_impl(M, As_bar, Ss_bar, Zs, Ys, Zs_prime, t, dt, H, guess)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    guess <span class="op">=</span> <span class="bu">int</span>(<span class="bu">any</span>([Z[t<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> Z_prime[t<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> Z, Z_prime <span class="kw">in</span> <span class="bu">zip</span>(Zs, Zs_prime)]))</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    s, d <span class="op">=</span> attack_impl(M, As_bar, Ss_bar, Zs, Ys, Zs_prime, t, dt, H, guess)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> s:</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        s, d <span class="op">=</span> attack_impl(M, As_bar, Ss_bar, Zs, Ys, Zs_prime, t, dt, H, <span class="kw">not</span> guess)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s, d</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attack(N, As, Ss, Zs, d_upper):</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> Montgomery(N)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>    As_bar <span class="op">=</span> [M.to_montgomery(A) <span class="cf">for</span> A <span class="kw">in</span> As]</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>    Ss_bar <span class="op">=</span> [M.to_montgomery(S) <span class="cf">for</span> S <span class="kw">in</span> Ss]</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    Ys <span class="op">=</span> [M.to_montgomery(<span class="dv">1</span>) <span class="cf">for</span> _ <span class="kw">in</span> As]</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    Zs_prime <span class="op">=</span> [[] <span class="cf">for</span> _ <span class="kw">in</span> As]</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    s, d <span class="op">=</span> attack_impl(M, As_bar, Ss_bar, Zs, Ys, Zs_prime, <span class="dv">0</span>, <span class="dv">0</span>, d_upper)</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span>(s)</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_sig(A):</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    p.sendline(<span class="bu">hex</span>(A).encode() <span class="op">+</span> <span class="st">b&#39;</span><span class="ch">\n</span><span class="st">0&#39;</span>)</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parse_res(p.readuntil(<span class="st">b&#39;challenge: &#39;</span>), <span class="st">b&#39;Signature: &#39;</span>, <span class="st">b&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_expensive(res):</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    GOOD <span class="op">=</span> [</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>        <span class="st">b&#39; is a cool number&#39;</span>,</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>        <span class="st">b&#39; is really quite something&#39;</span>,</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>        <span class="st">b&#39; likes to save me money&#39;</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">not</span> <span class="bu">any</span>([e <span class="kw">in</span> res <span class="cf">for</span> e <span class="kw">in</span> GOOD])</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_vec(A, bits):</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>    BATCH <span class="op">=</span> <span class="dv">32</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    Z <span class="op">=</span> []</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, bits, BATCH):</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>        lines <span class="op">=</span> [<span class="bu">hex</span>(A) <span class="op">+</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span> <span class="op">+</span> <span class="bu">str</span>(i <span class="op">+</span> j) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(BATCH)]</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>        p.sendline(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>.join(lines).encode())</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(BATCH):</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>            Z.append(is_expensive(p.readuntil(<span class="st">b&#39;challenge: &#39;</span>)))</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Z[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> pwn.remote(<span class="st">&#39;127.0.0.1&#39;</span>, <span class="dv">5000</span>)</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> p.readuntil(<span class="st">&#39;challenge: &#39;</span>)</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> parse_res(res, <span class="st">b&#39;n=&#39;</span>, <span class="st">b&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>d_upper <span class="op">=</span> parse_res(res, <span class="st">b&#39;d: &#39;</span>, <span class="st">b&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)         <span class="co"># crib</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>As <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>]                                     <span class="co"># messages</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>Ss <span class="op">=</span> [get_sig(A) <span class="cf">for</span> A <span class="kw">in</span> As]                   <span class="co"># signatures</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>Zs <span class="op">=</span> [get_vec(A, n.bit_length()) <span class="cf">for</span> A <span class="kw">in</span> As]   <span class="co"># observation vectors</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.time()</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> attack(n, As, Ss, Zs, d_upper)</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> time.time()</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>p.sendline(<span class="st">b&#39;&#39;</span>)</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> parse_res(p.readline(), <span class="st">b&#39;message: &#39;</span>, <span class="st">b&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>sig <span class="op">=</span> <span class="bu">pow</span>(msg, d, n)</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>p.sendline(<span class="bu">hex</span>(sig).encode())</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;{d_upper = }&#39;</span>)</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>As <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>Ss <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>n <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>d <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>msg <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>sig <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>CUTOFF <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;# calculated in &#39;</span>, t2 <span class="op">-</span> t1, <span class="st">&#39;s&#39;</span>)</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p.readline())</span></code></pre></div>
+<h2 id="references">References</h2>
+<ol type="1">
+<li><em>C. D. Walter and S. Thompson, “<a
+href="https://link.springer.com/chapter/10.1007/3-540-45353-9_15">Distinguishing
+exponent digits by observing modular subtractions</a>,” in Topics in
+Cryptology — CT-RSA 2001, ser. Lecture Notes in Computer Science,
+vol. 2020. Springer Verlag, 2001, pp. 192–207. subsection 3.3</em></li>
 </ol>
 
         </article>
@@ -300,13 +257,14 @@ however getting the observation vectors from the remote takes considerably more 
 
     <footer>
         <table style="width: 100%;"><tr>
-            
             <td><a class="prev" href="/blog/2025/05/02/installing-vivado-on-nixos.html">
-                Previous: Installing Vivado on NixOS
-            </a></td>
-            
+    Previous: Installing Vivado on NixOS
+</a></td>
 
-            
+            <td><a class="next" href="/blog/2026/07/01/fixing-oebb-wifi-conflict-with-docker-on-nixos.html">
+    Next: Fixing ÖBB WiFi conflict with Docker on NixOS
+</a></td>
+
         </tr></table>
     </footer>
 </div>
@@ -315,3 +273,4 @@ however getting the observation vectors from the remote takes considerably more 
   </body>
 
 </html>
+
