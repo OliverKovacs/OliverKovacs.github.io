@@ -187,6 +187,7 @@ a.ui-card:hover {
 
 .ui-card img {
     width: 57px;
+    min-width: 57px;
     margin-right: 16px;
     border-radius: 2px;
 }

@@ -97,6 +97,8 @@ code {
 }
 
 
+code span { color: var(--dark-color-fg); }
+
 code span.al { color: #a61717; background-color: #e3d2d2; font-weight: bold; } /* Alert -> Error */
 code span.an { color: #6A9955; font-weight: bold; font-style: italic; } /* Annotation -> Comment */
 code span.at { color: #008080; } /* Attribute -> Name.Attribute */
