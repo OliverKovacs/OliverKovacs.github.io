@@ -67,29 +67,26 @@
 <p>Attachments: <code>mathmac.py</code> (see <a
 href="#appendix">Appendix</a>)</p>
 <h2 id="probem">Probem</h2>
-<p>Let <span
-class="math display"><em>p</em> = 8636821143825786083</span> and <span
-class="math display"><em>M</em> = 64</span>.<br />
-Let <span class="math display">$$\bold k = k_0, \ldots,k_M$$</span>
-where <span
-class="math display"><em>k</em><sub><em>i</em></sub> ∈ ℤ<sub> &lt; <em>p</em></sub></span>
-be a private key chosen at random.<br />
-Let <span class="math display">$$\bold x  \in \{0, 1\}^M$$</span> with
-<span class="math display">$$\bold x = x_1, \ldots, x_M$$</span> be an
-<span class="math display"><em>M</em></span>-bit binary word.<br />
-Let <span
-class="math display"><em>h</em>: {0, 1}<sup><em>M</em></sup> → ℤ<sub><em>p</em></sub></span>
-be a hash function defined as</p>
-<p><span class="math display">$$
+<p>Let <span class="math inline">\(p = 8636821143825786083\)</span> and
+<span class="math inline">\(M = 64\)</span>.<br />
+Let <span class="math inline">\(\bold k = k_0, \ldots,k_M\)</span> where
+<span class="math inline">\(k_i \in \mathbb Z_{\lt p}\)</span> be a
+private key chosen at random.<br />
+Let <span class="math inline">\(\bold x  \in \{0, 1\}^M\)</span> with
+<span class="math inline">\(\bold x = x_1, \ldots, x_M\)</span> be an
+<span class="math inline">\(M\)</span>-bit binary word.<br />
+Let <span class="math inline">\(h \colon \{0, 1\}^M \to \mathbb
+Z_p\)</span> be a hash function defined as</p>
+<p><span class="math inline">\[
 h(\bold x) = 4^{k_0 + x_1 k_1+ \cdots x_M k_M} \mod p \ .
-$$</span></p>
+\]</span></p>
 <p>The challenge is:</p>
 <ul>
 <li>The attacker can request an unlimited amount of word/hash pairs
-<span class="math display">$$(\bold x, h(\bold x))$$</span> chosen at
+<span class="math inline">\((\bold x, h(\bold x))\)</span> chosen at
 random.</li>
 <li>Then the attacker has to submit a word/hash pair <span
-class="math display">$$(\bold x ^\prime, h(\bold x ^\prime))$$</span>
+class="math inline">\((\bold x ^\prime, h(\bold x ^\prime))\)</span>
 that has not yet been revealed.
 <ul>
 <li>If the submission is correct the attacker obtains the flag.</li>
@@ -101,40 +98,51 @@ that has not yet been revealed.
 href="https://en.wikipedia.org/wiki/Discrete_logarithm">discrete
 logarithm problem (DLP)</a>.</p>
 <h3 id="dlp">DLP</h3>
-<p>Let <span class="math display">$$h(\bold x)$$</span> be an element of
-the cyclic subgroup <span class="math display">⟨4⟩</span> of <span
-class="math display">ℤ<sub><em>p</em></sub><sup>*</sup></span>.<br />
-If <span class="math display">$$4^n \equiv h(\bold x) \mod p$$</span>
-then <span class="math display"><em>n</em></span> is the discrete
-logarithm of <span class="math display">$$h(\bold x)$$</span> to the
-base <span class="math display">4</span> denoted as <span
-class="math display">$$n = \log_4(h(\bold x))$$</span>.<br />
-Solving this is useful because <span
-class="math display"><em>n</em></span> is directly related to <span
-class="math display"><em>k</em><sub>0</sub> + <em>x</em><sub>1</sub><em>k</em><sub>1</sub> + ⋯<em>x</em><sub><em>M</em></sub><em>k</em><sub><em>M</em></sub></span>.</p>
-<p>Some notes: - <span
-class="math display">|ℤ<sub><em>p</em></sub><sup>*</sup>| = <em>p</em> − 1</span>.
-- From <a
+<p>Let <span class="math inline">\(h(\bold x)\)</span> be an element of
+the cyclic subgroup <span class="math inline">\(\langle 4
+\rangle\)</span> of <span class="math inline">\(\mathbb
+Z_p^*\)</span>.<br />
+If <span class="math inline">4^n \equiv h(\bold x) \mod p</span> then
+<span class="math inline">\(n\)</span> is the discrete logarithm of
+<span class="math inline">\(h(\bold x)\)</span> to the base <span
+class="math inline">\(4\)</span> denoted as <span
+class="math inline">\(n = \log_4(h(\bold x)).\)</span><br />
+Solving this is useful because <span class="math inline">n</span> is
+directly related to <span class="math inline">k_0 + x_1 k_1 + \cdots x_M
+k_M</span>.</p>
+<p>Some notes:</p>
+<ul>
+<li><span class="math inline">\(\lvert \mathbb Z_p^*\rvert = p -
+1\)</span>.</li>
+<li>From <a
 href="https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)">Lagrange’s
-theorem</a> it follows that <span class="math display">|4|</span>
-divides <span
-class="math display">|ℤ<sub><em>p</em></sub><sup>*</sup>|</span> - This
-means that <span class="math display">|4|</span> is <span
-class="math display">1</span>, <span class="math display">2</span>,
-<span class="math display">4318410571912893041</span> or <span
-class="math display">8636821143825786082</span>.<br />
-It’s easy to see that in practice only the last two are possible. - The
-DLP is easy to solve if the order of the group is <a
+theorem</a> it follows that <span
+class="math inline">\(\lvert4\rvert\)</span> divides <span
+class="math inline">\(\lvert \mathbb Z_p^*\rvert\)</span>
+<ul>
+<li>This means that <span class="math inline">\(|4|\)</span> is <span
+class="math inline">\(1\)</span>, <span
+class="math inline">\(2\)</span>, <span
+class="math inline">\(4318410571912893041\)</span> or <span
+class="math inline">\(8636821143825786082\)</span>.<br />
+It’s easy to see that in practice only the last two are possible.</li>
+</ul></li>
+<li>The DLP is easy to solve if the order of the group is <a
 href="https://en.wikipedia.org/wiki/Smooth_number">smooth</a> using the
 <a
 href="https://en.wikipedia.org/wiki/Pohlig%E2%80%93Hellman_algorithm">Pohlig-Hellman
-algorithm</a>. - This is not the case because <span
-class="math display"><em>p</em> = 8636821143825786083 = 2 ⋅ 4318410571912893041 + 1</span>
-is a safe prime. - The base 4 doesn’t matter. Computing a logarithm to
-any base <span class="math display"><em>x</em></span> is sufficient,
-because</p>
-<p><span
-class="math display">log<sub><em>b</em></sub><em>a</em> = log<sub><em>x</em></sub><em>a</em> ⋅ (log<sub><em>x</em></sub><em>b</em>)<sup>−1</sup> .</span></p>
+algorithm</a>.
+<ul>
+<li>This is not the case because <span class="math inline">\(p =
+8636821143825786083 = 2 \cdot 4318410571912893041 + 1\)</span> is a safe
+prime.</li>
+</ul></li>
+<li>The base 4 doesn’t matter. Computing a logarithm to any base <span
+class="math inline">\(x\)</span> is sufficient, because</li>
+</ul>
+<p><span class="math inline">\[
+\log_ba = \log_x a \cdot (\log_xb)^{-1} \ .
+\]</span></p>
 <p>The fastest known algorithm to compute the DLP in this case is a
 number field sieve.<br />
 One implementation is <a
@@ -160,8 +168,8 @@ href="https://cado-nfs.gitlabpages.inria.fr/">CADO-NFS</a>.</p>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    target=4 <span class="dt">\</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    8636821143825786083</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 941720563644317575</span></span></code></pre></div>
-<p>Thus <span
-class="math display">log<sub>4</sub>4802397593893189429 = 2192507630663880847 ⋅ 941720563644317575<sup>−1</sup></span></p>
+<p>Thus <span class="math inline">\(\log_4 4802397593893189429 =
+2192507630663880847 \cdot 941720563644317575^{-1}\]</span></p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># python</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">8636821143825786083</span></span>
@@ -172,26 +180,31 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a hr
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">pow</span>(<span class="dv">4</span>, result, p)   <span class="co"># 4802397593893189429 → correct</span></span></code></pre></div>
 <h3 id="attack">Attack</h3>
 <p>Now we need the hashes of three words <span
-class="math display">$$\bold a, \bold b, \bold c$$</span> such that
-<span class="math display">$$\bold a + \bold b - \bold c$$</span>
-doesn’t under- or overflow any of the individual bits.<br />
-Then we can compute the hash of <span class="math display">$$\bold z =
-\bold a + \bold b - \bold c$$</span> as follows:</p>
-<p><span class="math display">$$
+class="math inline">\(\bold a, \bold b, \bold c\)</span> such that <span
+class="math inline">\(\bold a + \bold b - \bold c\)</span> doesn’t
+under- or overflow any of the individual bits.<br />
+Then we can compute the hash of <span class="math inline">\(\bold z =
+\bold a + \bold b - \bold c\)</span> as follows:</p>
+<p><span class="math inline">\[
 h(\bold z) = 4^{\log_4(h(\bold a)) + \log_4(h(\bold b)) +
 (\log_4(h(\bold c)))^{-1}} \mod p
-$$</span></p>
+\]</span></p>
 <p>Note that we need two positive and one negative term so that the
-secret <span class="math display"><em>k</em><sub>0</sub></span>
-contained in every hash occurs exactly once.</p>
+secret <span class="math inline">\(k_0\)</span> contained in every hash
+occurs exactly once.</p>
 <h3 id="conclusion">Conclusion</h3>
-<p>A high level overview of the exploit is: - Generate around 1000
-(word, hash) pairs. - Do a bruteforce search to find 3 suitable words
-<span class="math display">$$\bold a, \bold b, \bold c$$</span>. -
-Compute the discrete logarithm of the hashes using CADO-NFS. - Forge the
-hash of <span class="math display">$$\bold z = \bold a + \bold b - \bold
-c$$</span> as explained. - Submit <span class="math display">$$(\bold z,
-h(\bold z))$$</span>. - Profit.</p>
+<p>A high level overview of the exploit is:</p>
+<ul>
+<li>Generate around 1000 (word, hash) pairs.</li>
+<li>Do a bruteforce search to find 3 suitable words <span
+class="math inline">\(\bold a, \bold b, \bold c.\)</span></li>
+<li>Compute the discrete logarithm of the hashes using CADO-NFS.</li>
+<li>Forge the hash of <span class="math inline">\(\bold z = \bold a +
+\bold b - \bold c\)</span> as explained.</li>
+<li>Submit <span class="math inline">\((\bold z, h(\bold
+z)).\)</span></li>
+<li>Profit.</li>
+</ul>
 <p>A reference implementation can be found in the <a
 href="#appendix">Appendix</a>.</p>
 <h2 id="appendix">Appendix</h2>
@@ -328,7 +341,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a hr
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n <span class="op">=</span> n</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sk <span class="op">=</span> [randint(<span class="dv">0</span>, <span class="va">self</span>.p) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.base <span class="op">=</span> <span class="bu">pow</span>(<span class="dv">4</span>, randint(<span class="dv">0</span>, <span class="va">self</span>.p), <span class="va">self</span>.p)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> sign(<span class="va">self</span>, x):</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">or</span> x <span class="op">&gt;=</span> <span class="dv">2</span><span class="op">**</span><span class="va">self</span>.n:</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span></span>

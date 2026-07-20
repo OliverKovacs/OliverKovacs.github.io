@@ -67,149 +67,146 @@
 <p>Attachments: <code>stealing-seeds.py</code> (see <a
 href="#appendix">Appendix</a>)</p>
 <h2 id="probem">Probem</h2>
-<p>Let <span class="math display"><em>s</em> ∈ ℙ</span> and <span
-class="math display"><em>k</em> ∈ ℤ</span> with <span
-class="math display">0 ≤ <em>s</em>, <em>k</em> &lt; 2<sup>256</sup></span>
-be two secret numbers chosen at random.</p>
-<p>Let <span
-class="math display"><em>f</em><sub>1</sub>, <em>f</em><sub>2</sub>: {0, 1}<sup>256</sup> → {0, 1}<sup>256</sup></span>
-be</p>
-<p><span class="math display">$$
+<p>Let <span class="math inline">\(s \in \mathbb{P}\)</span> and <span
+class="math inline">\(k \in \mathbb{Z}\)</span> with <span
+class="math inline">\(0 \le s, k \lt 2^{256}\)</span> be two secret
+numbers chosen at random.</p>
+<p>Let <span class="math inline">\(f_1, f_2 \colon \{0, 1\}^{256} \to
+\{0, 1\}^{256}\)</span> be</p>
+<p><span class="math inline">\[
 f_1(u) = \text{sha256}(((s \oplus u) + s) \oplus k) \\
 f_2(u) = \text{sha256}(((s + u) \oplus s) \oplus k)
-$$</span></p>
-<p>where <span class="math display">⊕</span> denotes bit-wise XOR.</p>
+\]</span></p>
+<p>where <span class="math inline">\(\oplus\)</span> denotes bit-wise
+XOR.</p>
 <p>Given that you can compute <span
-class="math display"><em>f</em><sub>1</sub>(<em>u</em>)</span> and <span
-class="math display"><em>f</em><sub>2</sub>(<em>u</em>)</span> for any
-<span class="math display"><em>u</em> ∈ {0, 1}<sup>256</sup></span>,
-find <span class="math display"><em>s</em></span>.</p>
+class="math inline">\(f_1(u)\)</span> and <span
+class="math inline">\(f_2(u)\)</span> for any <span
+class="math inline">\(u \in \{0, 1\}^{256}\)</span>, find <span
+class="math inline">\(s\)</span>.</p>
 <h2 id="solution">Solution</h2>
 <p>This may not be the most elegant solution, however I will explain how
 to systematically find it without any advanced knowledge of cryptography
 and semi-formally argue why it is correct.</p>
-<p>We first observe that <span
-class="math display">sha256: {0, 1}<sup><em>n</em></sup> → {0, 1}<sup>256</sup></span>
-is a <em>hash function</em>. It maps every sequence of bits to a
-sequence of 256 bits. Its outputs are distributed uniformly random, but
-the same input will always yield the same output. Furthermore we cannot
-find the pre-image of an output. That is, given <span
-class="math display">sha256(<em>x</em>)</span> there is no way of
-finding <span class="math display"><em>x</em></span> other than trying
-every possible value. This is obviously only feasible if the search
-space is severly limited.</p>
-<p>Let us define <span
-class="math display"><em>g</em><sub>1</sub>, <em>g</em><sub>2</sub></span>
-as</p>
-<p><span class="math display">$$
+<p>We first observe that <span class="math inline">\(\text{sha256}
+\colon \{0, 1\}^n \to \{0, 1\}^{256}\)</span> is a <em>hash
+function</em>. It maps every sequence of bits to a sequence of 256 bits.
+Its outputs are distributed uniformly random, but the same input will
+always yield the same output. Furthermore we cannot find the pre-image
+of an output. That is, given <span
+class="math inline">\(\text{sha256}(x)\)</span> there is no way of
+finding <span class="math inline">\(x\)</span> other than trying every
+possible value. This is obviously only feasible if the search space is
+severly limited.</p>
+<p>Let us define <span class="math inline">\(g_1, g_2\)</span> as</p>
+<p><span class="math inline">\[
 \begin{align*}
 &amp;g_1(u) = (s \oplus u) + s \\
 &amp;g_2(u) = (s + u) \oplus s \ .
 \end{align*}
-$$</span></p>
-<p>Now we observe that the <span
-class="math display"><em>f</em><sub><em>i</em></sub></span> has the
-following structure:</p>
-<p><span
-class="math display"><em>f</em><sub><em>i</em></sub>(<em>u</em>) = sha256(<em>g</em><sub><em>i</em></sub>(<em>u</em>) ⊕ <em>k</em>) .</span></p>
+\]</span></p>
+<p>Now we observe that the <span class="math inline">\(f_i\)</span> has
+the following structure:</p>
+<p><span class="math inline">\[
+f_i(u) = \text{sha256}(g_i(u) \oplus k) \  .
+\]</span></p>
 <p>XOR can be interpreted as conditionally flipping a bit. More
-precisely, given two bits <span
-class="math display"><em>b</em>, <em>k</em> ∈ {0, 1}</span></p>
-<p><span class="math display">$$
+precisely, given two bits <span class="math inline">\(b, k \in \{0,
+1\}\]</span></p>
+<p><span class="math inline">\[
 b \oplus k = \begin{cases}
    b &amp;\text{if } k = 0 \\
    \neg\ b &amp;\text{if } k = 1
 \end{cases}.
-$$</span></p>
+\]</span></p>
 <p>This is problematic because it means that even knowing <span
-class="math display"><em>g</em><sub><em>i</em></sub>(<em>u</em>)</span>
-the term <span
-class="math display"><em>g</em><sub><em>i</em></sub>(<em>u</em>) ⊕ <em>k</em></span>
-could still be <em>any</em> number. This implies that doing a
-brute-force search to find pre-images of <span
-class="math display">sha256</span> would require checking <span
-class="math display">2<sup>256</sup></span> (the amount of possible
-values of <span class="math display"><em>k</em></span>) elements which
-is practically impossible.</p>
+class="math inline">\(g_i(u)\)</span> the term <span
+class="math inline">\(g_i(u) \oplus k\)</span> could still be
+<em>any</em> number. This implies that doing a brute-force search to
+find pre-images of <span class="math inline">\(\text{sha256}\)</span>
+would require checking <span class="math inline">\(2^{256}\)</span> (the
+amount of possible values of <span class="math inline">\(k\)</span>)
+elements which is practically impossible.</p>
 <p>To closer illustrate this consider that</p>
-<p><span
-class="math display"><em>f</em><sub>2</sub>(0) = sha256(((<em>s</em> + 0) ⊕ <em>s</em>) ⊕ <em>k</em>) = sha256((<em>s</em> ⊕ <em>s</em>) ⊕ <em>k</em>) = sha256(0 ⊕ <em>k</em>) = sha256(<em>k</em>)</span></p>
+<p><span class="math inline">\[
+f_2(0) = \text{sha256}(((s + 0) \oplus s) \oplus k) = \text{sha256}((s
+\oplus s) \oplus k) = \text{sha256}(0 \oplus k) = \text{sha256}(k)
+\]</span></p>
 <p>could have any possible value depending on <span
-class="math display"><em>k</em></span>. This rules out a pre-image
-attack and thus extracting information from a single image is
-impossible.</p>
-<p>But we observe that <span class="math display">sha256</span> behaves
-<em>as if</em> it were injective. A function <span
-class="math display"><em>f</em></span> with the domain <span
-class="math display"><em>X</em></span> is called injective if</p>
-<p><span
-class="math display">∀<em>a</em>, <em>b</em> ∈ <em>X</em>: <em>f</em>(<em>a</em>) = <em>f</em>(<em>b</em>) ⟹ <em>a</em> = <em>b</em> .</span></p>
+class="math inline">\(k\)</span>. This rules out a pre-image attack and
+thus extracting information from a single image is impossible.</p>
+<p>But we observe that <span
+class="math inline">\(\text{sha256}\)</span> behaves <em>as if</em> it
+were injective. A function <span class="math inline">\(f\)</span> with
+the domain <span class="math inline">\(X\)</span> is called injective
+if</p>
+<p><span class="math inline">\[
+\forall a, b \in X \colon f(a) = f(b) \implies a = b \ .
+\]</span></p>
 <p>Technically this is not true for <span
-class="math display">sha256</span> as there are infinitely many hash
-collisions (this is evident by the fact that the output is limited to a
-finite number of bits) but in practice it is extremely unlikely to
-observe a hash collision.</p>
+class="math inline">\(\text{sha256}\)</span> as there are infinitely
+many hash collisions (this is evident by the fact that the output is
+limited to a finite number of bits) but in practice it is extremely
+unlikely to observe a hash collision.</p>
 <p>If we now define the function</p>
-<p><span
-class="math display"><em>x</em><sub><em>k</em></sub>(<em>u</em>) = <em>u</em> ⊕ <em>k</em></span></p>
-<p>for some constant <span class="math display"><em>k</em></span> we can
-see that</p>
-<p><span
-class="math display"><em>x</em><sub><em>k</em></sub>(<em>x</em><sub><em>k</em></sub>(<em>u</em>)) = (<em>u</em> ⊕ <em>k</em>) ⊕ <em>k</em> = <em>u</em> ⊕ (<em>k</em> ⊕ <em>k</em>) = <em>u</em> ⊕ 0 = <em>u</em></span></p>
-<p>therefore <span
-class="math display"><em>x</em><sub><em>k</em></sub> = <em>x</em><sub><em>k</em></sub><sup>−1</sup></span>
-which implies that <span
-class="math display"><em>x</em><sub><em>k</em></sub></span> is injective
+<p><span class="math inline">\[
+x_k(u) = u \oplus k
+\]</span></p>
+<p>for some constant <span class="math inline">\(k\)</span> we can see
+that</p>
+<p><span class="math inline">\[
+x_k(x_k(u)) = (u \oplus k) \oplus k = u \oplus (k \oplus k) = u \oplus 0
+= u
+\]</span></p>
+<p>therefore <span class="math inline">\(x_k = x_k^{-1}\)</span> which
+implies that <span class="math inline">\(x_k\)</span> is injective
 aswell.</p>
-<p>It is easy to show that if two function <span
-class="math display"><em>f</em>: <em>B</em> → <em>C</em>, <em>g</em>: <em>A</em> → <em>B</em></span>
-are injective then <span
-class="math display"><em>f</em> ∘ <em>g</em>: <em>A</em> → <em>C</em></span>
-must also be injective.</p>
+<p>It is easy to show that if two function <span class="math inline">\(f
+\colon B \to C, g \colon A \to B\)</span> are injective then <span
+class="math inline">\(f \circ g \colon A \to C\)</span> must also be
+injective.</p>
 <p>We can now write</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 f_i(u) = \text{sha256}(x_k(g_i(u)) \\
-$$</span></p>
+\]</span></p>
 <p>and use the definition of injectivity to show that</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \begin{align*}
 \forall u, v \colon &amp;f_1(u) = f_2(v) \\
 \iff &amp;\text{sha256}(x_k(g_1(u))) = \text{sha256}(x_k(g_2(v))) \\
 \implies &amp;g_1(u) = g_2(v) \ .
 \end{align*}
-$$</span></p>
+\]</span></p>
 <p>It is also worth to note that we can use the same arguments to show
 that</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \forall u, v \colon f_i(u) = f_i(v) \implies u = v \ .\\
-$$</span></p>
+\]</span></p>
 <p>This gives us the crucial hint that we have to create an exploit by
 comparing the values of two different functions while trying out
 specific inputs. To craft this exploit we fix <span
-class="math display"><em>s</em></span> to some number and consider <span
-class="math display"><em>g</em><sub><em>i</em></sub>(0), <em>g</em><sub><em>i</em></sub>(1), …</span></p>
+class="math inline">\(s\)</span> to some number and consider <span
+class="math inline">\(g_i(0), g_i(1), \ldots\]</span></p>
 <pre><code>s = 1
 u       0   1   2   3   4   5   6   7
 
 g1      2   1   4   3   6   5   8   7
 g2      0   3   2   5   4   7   6   9</code></pre>
-<p>Let <span
-class="math display"><em>p</em><sub><em>s</em></sub>(<em>u</em>)</span>
-be the number such that <span
-class="math display"><em>g</em><sub>2</sub>(<em>u</em>) = <em>g</em><sub>1</sub>(<em>p</em><sub><em>s</em></sub>(<em>u</em>))</span>
-or <span class="math display">−1</span> if no such number exists with
-<span class="math display"><em>s</em></span> fixed to some value. This
-is well defined as from the above result it follows that <span
-class="math display">∀<em>u</em>, <em>v</em>: <em>u</em> ≠ <em>v</em> ⟹ <em>g</em><sub><em>i</em></sub>(<em>u</em>) ≠ <em>g</em><sub><em>i</em></sub>(<em>v</em>)</span>.</p>
-<p>We now look at a table of <span
-class="math display"><em>p</em><sub><em>s</em></sub>(<em>u</em>)</span>
-with the axes <span class="math display"><em>u</em></span> and odd <span
-class="math display"><em>s</em></span>. A <code>.</code> denotes <span
-class="math display">−1</span>.</p>
+<p>Let <span class="math inline">\(p_s(u)\)</span> be the number such
+that <span class="math inline">\(g_2(u) = g_1(p_s(u))\)</span> or <span
+class="math inline">\(-1\)</span> if no such number exists with <span
+class="math inline">\(s\)</span> fixed to some value. This is well
+defined as from the above result it follows that <span
+class="math inline">\(\forall u, v \colon u \neq v \implies g_i(u) \neq
+g_i(v)\)</span>.</p>
+<p>We now look at a table of <span class="math inline">\(p_s(u)\)</span>
+with the axes <span class="math inline">\(u\)</span> and odd <span
+class="math inline">\(s\)</span>. A <code>.</code> denotes <span
+class="math inline">\(-1\)</span>.</p>
 <blockquote>
-<p>Only odd <span class="math display"><em>s</em></span> are considered
-as <span class="math display"><em>s</em></span> is prime and very
-unlikely to be <span class="math display">2</span>.</p>
+<p>Only odd <span class="math inline">\(s\)</span> are considered as
+<span class="math inline">\(s\)</span> is prime and very unlikely to be
+<span class="math inline">\(2\)</span>.</p>
 </blockquote>
 <pre><code>u     0   1   2   3   4   5   6   7
 
@@ -218,13 +215,13 @@ p3    .   7   0   1   2   .   4   5
 p5    .   .   .   .   2   .   .   1
 p7    .   .   0   1   2   3   4   5</code></pre>
 <p>We notice that</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \begin{align*}
 &amp;p_3(7) = p_7(7) = 5 \neq p_{1,5}(7) \\
 \implies &amp;g_2(7) = g_1(5) \iff f_2(7) = f_1(5) \iff s \in \{3, 7\}
 \iff s \equiv 3 \quad (\text{mod } 4) \ .
 \end{align*}
-$$</span></p>
+\]</span></p>
 <p>This means that by a single comparison we can halve the search space!
 A quick look at a larger table suggests that the method can be
 generalised.</p>
@@ -238,7 +235,7 @@ p9    .   .   .   .   .   .   .   .   6   .   .   .   .   .   .   1
 p11   .   .   .   .   .   .   4   5   6   .   .   .   .   3  12  13
 p13   .   .   .   .   2   .   .   1   6   3   0   5  10   7   4   9
 p15   .   .   0   1   2   3   4   5   6   7   8   9  10  11  12  13</code></pre>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 s \equiv \begin{cases}
     3 \equiv \begin{cases}
         7 &amp;\text{if } f_2(13) = f_1(11) \\
@@ -249,11 +246,11 @@ s \equiv \begin{cases}
         1 &amp;\text{if } f_2(15) \neq f_1(9)
     \end{cases} (\text{mod } 8) &amp;\text{if } f_2(15) \neq f_1(13)
 \end{cases} (\text{mod } 4)
-$$</span></p>
+\]</span></p>
 <p>To put this more concretely let us look at a slice of the above
 table:</p>
 <pre><code>u     ...   12  13        14  15
-                         
+
 p1    ...   10  15        12   .
 p3    ...   10   .        12  13 (1)
 p5    ...   10   .         .   9 (3)
@@ -265,35 +262,32 @@ p15   ...   10  11 (2)    12  13 (1)</code></pre>
 <p>The first comparison concerns the entries marked with
 <code>(1)</code>.</p>
 <ol type="1">
-<li>If it returns true we get this subtable of possible values and use
-the comparison marked with <code>(2)</code>:</li>
-</ol>
+<li><p>If it returns true we get this subtable of possible values and
+use the comparison marked with <code>(2)</code>:</p>
 <pre><code>u     ...   12  13        14  15
-                          
+
 p3    ...   10   .        12  13 (1)
 p7    ...   10  11 (2)    12  13 (1)
 p11   ...    .   3        12  13 (1)
-p15   ...   10  11 (2)    12  13 (1)</code></pre>
-<ol start="2" type="1">
-<li>If it returns false we get the opposite subtable and use the
-comparison marked with <code>(3)</code>:</li>
-</ol>
+p15   ...   10  11 (2)    12  13 (1)</code></pre></li>
+<li><p>If it returns false we get the opposite subtable and use the
+comparison marked with <code>(3)</code>:</p>
 <pre><code>u     ...   12  13        14  15
-                          
+
 p1    ...   10  15        12   .
 p5    ...   10   .         .   9 (3)
 p9    ...    .   .         .   1
-p13   ...   10   7         4   9 (3)</code></pre>
+p13   ...   10   7         4   9 (3)</code></pre></li>
+</ol>
 <p>Thus with every comparison one bit is recovered, meaning that <span
-class="math display"><em>s</em></span> can be computed with 255
-comparisons. What remains is to reverse engineer the equation for the
-indices to compare at each step. One possible solution can be found in
-the <a href="#appendix">Appendix</a>. Then some automated way of
-submitting requests needs to be created to obtain the seed from the
-remote server.</p>
-<p>Visualisation of the <span
-class="math display"><em>p</em><sub><em>s</em></sub>(<em>u</em>)</span>
-table obtained by coloring <span class="math display">−1</span>
+class="math inline">\(s\)</span> can be computed with 255 comparisons.
+What remains is to reverse engineer the equation for the indices to
+compare at each step. One possible solution can be found in the <a
+href="#appendix">Appendix</a>. Then some automated way of submitting
+requests needs to be created to obtain the seed from the remote
+server.</p>
+<p>Visualisation of the <span class="math inline">\(p_s(u)\)</span>
+table obtained by coloring <span class="math inline">\(-1\)</span>
 white.</p>
 <h2 id="appendix">Appendix</h2>
 <figure>
@@ -314,10 +308,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a hr
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (index <span class="op">&lt;</span> k):</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> index</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        delta_y <span class="op">|=</span> mask</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># x y</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(last <span class="op">-</span> delta_y, last <span class="op">-</span> delta_x)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute f1(x) == f2(y)</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># write result to stdin</span></span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        equal <span class="op">=</span> <span class="bu">bool</span>(<span class="bu">int</span>(<span class="bu">input</span>()))</span>
@@ -390,7 +384,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a hr
 <span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>        random_number <span class="op">=</span> bytes_to_long(sha256(long_to_bytes(final_seed)).digest())</span>
 <span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Random number:&quot;</span>, random_number)</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>    guess <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;Hey, did you steal my seed? &quot;</span>))</span>
 <span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> guess <span class="op">==</span> seed:</span>

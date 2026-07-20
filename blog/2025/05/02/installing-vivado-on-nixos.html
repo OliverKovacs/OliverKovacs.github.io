@@ -74,14 +74,11 @@ not work.</p>
 from the <a
 href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html">Xilinx
 website</a>.</p></li>
-<li><p>Extract it using</p></li>
-</ol>
+<li><p>Extract it using</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Downloads <span class="kw">&amp;&amp;</span> <span class="fu">tar</span> xzvf Xilinx_Vivado_2019.2_1106_2127.tar.gz</span></code></pre></div>
-<ol start="3" type="1">
-<li>In the extracted directory create a <code>shell.nix</code> file with
-the following content:</li>
-</ol>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Downloads <span class="kw">&amp;&amp;</span> <span class="fu">tar</span> xzvf Xilinx_Vivado_2019.2_1106_2127.tar.gz</span></code></pre></div></li>
+<li><p>In the extracted directory create a <code>shell.nix</code> file
+with the following content:</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shell.nix</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{</span> <span class="op">}</span> <span class="op">}</span>:</span>
@@ -106,43 +103,35 @@ class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#c
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">      CMAKE_INCLUDE_PATH=/usr/include \</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">      bash</span></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">}).</span>env</span></code></pre></div>
-<ol start="4" type="1">
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">}).</span>env</span></code></pre></div></li>
 <li><p>Run <code>nix-shell</code>.</p></li>
 <li><p>Run <code>./xsetup -b ConfigGen</code>. Select
 <code>Vivado HL WebPACK</code>.</p></li>
-<li><p>Edit the install config:</p></li>
-</ol>
+<li><p>Edit the install config:</p>
 <pre><code>nvim ~/.Xilinx/install_config.txt</code></pre>
 <p>It seems advisable to change <code>Destination</code> to a path that
 we have read/write permissions for. <br> I used
-<code>&lt;home directory&gt;/opt/Xilinx</code>.</p>
-<ol start="7" type="1">
-<li>Install Vivado with</li>
-</ol>
+<code>&lt;home directory&gt;/opt/Xilinx</code>.</p></li>
+<li><p>Install Vivado with</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./xsetup</span> <span class="dt">\</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>-a XilinxEULA,3rdPartyEULA,WebTalkTerms <span class="dt">\</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>-b Install <span class="dt">\</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>-c <span class="va">$HOME</span>/.Xilinx/install_config.txt</span></code></pre></div>
-<ol start="8" type="1">
-<li>See <a
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>-c <span class="va">$HOME</span>/.Xilinx/install_config.txt</span></code></pre></div></li>
+<li><p>See <a
 href="/blog/2025/05/02/installing-vivado-on-nixos.html#notes-on-libtinfoso5">Notes
-on <tt>libtinfo.so.5</tt></a>. Run</li>
-</ol>
+on <tt>libtinfo.so.5</tt></a>. Run</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /usr/lib/libtinfo.so.5 ~/opt/Xilinx/Vivado/2019.2/lib/lnx64.o/libtinfo.so.5</span></code></pre></div>
-<ol start="9" type="1">
-<li>You can now launch Vivado with</li>
-</ol>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /usr/lib/libtinfo.so.5 ~/opt/Xilinx/Vivado/2019.2/lib/lnx64.o/libtinfo.so.5</span></code></pre></div></li>
+<li><p>You can now launch Vivado with</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/opt/Xilinx/Vivado/2019.2/bin/vivado</span></span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/opt/Xilinx/Vivado/2019.2/bin/vivado</span></span></code></pre></div></li>
+</ol>
 <h2 id="desktop-entry">Desktop Entry</h2>
 <ol type="1">
-<li>Create a <code>shell.nix</code> in
+<li><p>Create a <code>shell.nix</code> in
 <code>~/opt/Xilinx/Vivado/2019.2/bin/</code> with the following
-content</li>
-</ol>
+content</p>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode nix"><code class="sourceCode nix"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shell.nix</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{</span> <span class="op">}</span> <span class="op">}</span>:</span>
@@ -167,14 +156,14 @@ class="sourceCode nix"><code class="sourceCode nix"><span id="cb7-1"><a href="#c
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">      CMAKE_INCLUDE_PATH=/usr/include \</span></span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">      $HOME/opt/Xilinx/Vivado/2019.2/bin/vivado</span></span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="op">}).</span>env</span></code></pre></div>
-<ol start="2" type="1">
-<li>Open the desktop entry for Vivado:</li>
-</ol>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="op">}).</span>env</span></code></pre></div></li>
+<li><p>Open the desktop entry for Vivado:</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvim</span> .local/share/applications/Vivado\ 2019.2_<span class="pp">*</span>.desktop</span></code></pre></div>
 <p>Change the line starting with <code>Exec</code> to</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">Exec</span><span class="op">=</span>nix-shell <span class="op">&lt;</span>home <span class="ex">directory</span><span class="op">&gt;</span>/opt/Xilinx/Vivado/2019.2/bin/shell.nix</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">Exec</span><span class="op">=</span>nix-shell <span class="op">&lt;</span>home <span class="ex">directory</span><span class="op">&gt;</span>/opt/Xilinx/Vivado/2019.2/bin/shell.nix</span></code></pre></div></li>
+</ol>
 <h2 id="notes-on-libtinfo.so.5">Notes on <tt>libtinfo.so.5</tt></h2>
 <p>If step 8. is omitted then running Vivado throws the following
 error:</p>

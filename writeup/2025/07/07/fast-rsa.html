@@ -70,20 +70,16 @@ I&#39;m testing out it&#39;s signature features, and since you&#39;re a god-tier
 <a href="/assets/zip/fast-rsa.zip">fast-rsa.zip</a>]</p>
 <h2 id="problem">Problem</h2>
 <p>The program generates an RSA keypair and outputs the modulus <span
-class="math display"><em>n</em></span> and the uppermost 32 bits of
-<span class="math display"><em>d</em></span>.</p>
-<p>It then repeatedly reads <span
-class="math display"><em>m</em>, <em>b</em> ∈ ℤ</span> and calculates
-the signature <span
-class="math display"><em>s</em> = <em>m</em><sup><em>d</em></sup> mod  <em>n</em></span>.
-This is done in <a
+class="math inline">\(n\)</span> and the uppermost 32 bits of <span
+class="math inline">\(d\)</span>.</p>
+<p>It then repeatedly reads <span class="math inline">\(m, b \in \mathbb
+Z\)</span> and calculates the signature <span class="math inline">\(s =
+m^d \mod n\)</span>. This is done in <a
 href="https://en.wikipedia.org/wiki/Montgomery_modular_multiplication">Montgomery</a>
-form. Then <span class="math display"><em>s</em></span> and whether any
-of the two multiplications in the <span
-class="math display"><em>b</em></span>th step of exponentiation required
-the conditional subtraction is revealed.</p>
-<p>The goal is to determine <span
-class="math display"><em>d</em></span>.</p>
+form. Then <span class="math inline">\(s\)</span> and whether any of the
+two multiplications in the <span class="math inline">\(b\)</span>th step
+of exponentiation required the conditional subtraction is revealed.</p>
+<p>The goal is to determine <span class="math inline">\(d\)</span>.</p>
 <h2 id="solution">Solution</h2>
 <blockquote>
 <p>Disclosure: I was not able to solve this challenge at the
@@ -96,9 +92,9 @@ href="https://github.com/OliverKovacs/montgomery-sidechannel/">here</a>.</p>
 two subtractions were needed, i. e. the observation vector is
 “squashed”. The solution is simple: the algorithm has to be run on
 multiple squashed observation vectors simultaneously. In practice 2 are
-enough. The algorithm calculates <span
-class="math display"><em>d</em></span> in ~1 s, however getting the
-observation vectors from the remote takes considerably more time.</p>
+enough. The algorithm calculates <span class="math inline">\(d\)</span>
+in ~1 s, however getting the observation vectors from the remote takes
+considerably more time.</p>
 <h2 id="implementation">Implementation</h2>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>

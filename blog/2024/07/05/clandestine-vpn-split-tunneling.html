@@ -65,11 +65,14 @@
 on a separate (virtual) machine. This allows us to “pre-filter” the
 network traffic, effectively split tunneling using a full-tunnel VPN
 connection.</p>
-<p>Some possible use cases include: - You are required to use a full
-tunnel VPN connection but you don’t want to send all of your traffic
-through the VPN for privacy or performance reasons. - You want to
-connect a machine to multiple VPNs simultaneously. - You want to connect
-multiple machines to a VPN simultaneously.</p>
+<p>Some possible use cases include:</p>
+<ul>
+<li>You are required to use a full tunnel VPN connection but you don’t
+want to send all of your traffic through the VPN for privacy or
+performance reasons.</li>
+<li>You want to connect a machine to multiple VPNs simultaneously.</li>
+<li>You want to connect multiple machines to a VPN simultaneously.</li>
+</ul>
 <h2 id="setup">Setup</h2>
 <p>The simplest setup is to use a virtual machine (VM) to connect to the
 VPN. However two different physical computers could also be used.</p>
@@ -88,11 +91,23 @@ paranoid you can enable full disk encryption.</li>
 <h3 id="network-interfaces">Network interfaces</h3>
 <p>Inspect the network interfaces of the machines using
 <code>ip addr</code> or <code>ifconfig</code>. There are 3 interfaces of
-interest: - On the host: - interface to the LAN: - <code>wlp1s0</code>
-or similar if connected to wifi - <code>enp1s0</code>, <code>eth0</code>
-or similar if connected to ethernet - interface like <code>virbr0</code>
-to the VM - On the VM: - interface like <code>enp1s0</code> to the
-host</p>
+interest:</p>
+<ul>
+<li>On the host:
+<ul>
+<li>interface to the LAN:
+<ul>
+<li><code>wlp1s0</code> or similar if connected to wifi</li>
+<li><code>enp1s0</code>, <code>eth0</code> or similar if connected to
+ethernet</li>
+</ul></li>
+<li>interface like <code>virbr0</code> to the VM</li>
+</ul></li>
+<li>On the VM:
+<ul>
+<li>interface like <code>enp1s0</code> to the host</li>
+</ul></li>
+</ul>
 <p>Furthermore if you start the VPN in the VM a new interface like
 <code>tun0</code> should be created.</p>
 <p>This is a diagramm of the setup:</p>
@@ -114,10 +129,13 @@ will have to adapt the following commands accordingly.</p>
 <h3 id="routing">Routing</h3>
 <p>Linux uses a routing table to determine where to send packets. The
 routing table can be consulted using the <code>route</code> command.</p>
-<p>Therefore: 1. The routing table of the host has to be modified so
-that it sends packets meant for the VPN to the VM. 1. The VM has to be
-adjusted so that it forwards these packets received from the host to the
-VPN.</p>
+<p>Therefore:</p>
+<ol type="1">
+<li>The routing table of the host has to be modified so that it sends
+packets meant for the VPN to the VM.</li>
+<li>The VM has to be adjusted so that it forwards these packets received
+from the host to the VPN.</li>
+</ol>
 <h2 id="vm">VM</h2>
 <p>Enable IP forwarding:</p>
 <div class="sourceCode" id="cb2"><pre
@@ -136,29 +154,29 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="
 <p>There are two ways to set up the host:</p>
 <h3 id="static">Static</h3>
 <p>This is simpler if you only need to access a few resources. If there
-is a website called <code>site.example</code> that you need to access:
-1. Look up the IP address of <code>site.example</code> using
+is a website called <code>site.example</code> that you need to
+access:</p>
+<ol type="1">
+<li><p>Look up the IP address of <code>site.example</code> using
 <code>dig</code> or <code>nslookup</code>. Let’s assume it is
-<code>10.10.10.10</code>. 1. Add an entry to your
-<code>/etc/hosts</code> file:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/hosts</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">10.10.10.10</span>     site.example</span></code></pre></div>
-<ol type="1">
-<li>Find the IP address of the <code>enp1s0</code> network interface of
-the VM. It must be on the same subnet as the <code>virbr0</code>
+<code>10.10.10.10</code>.</p></li>
+<li><p>Add an entry to your <code>/etc/hosts</code> file:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/hosts</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">10.10.10.10</span>     site.example</span></code></pre></div></li>
+<li><p>Find the IP address of the <code>enp1s0</code> network interface
+of the VM. It must be on the same subnet as the <code>virbr0</code>
 interface of the host. Let’s assume it is
-<code>192.168.100.100</code>.</li>
-<li>Add an entry to the routing table of the host specifying that
+<code>192.168.100.100</code>.</p></li>
+<li><p>Add an entry to the routing table of the host specifying that
 packets bound for the IP of the website should use the VM as the
-gateway.</li>
-</ol>
+gateway.</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">route</span> add 10.10.10.10/32 gw 192.168.100.100 metric 200 dev virbr0</span></code></pre></div>
-<ol type="1">
-<li>You should be able to access the website.</li>
-</ol>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">route</span> add 10.10.10.10/32 gw 192.168.100.100 metric 200 dev virbr0</span></code></pre></div></li>
+<li><p>You should be able to access the website.</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> site.example</span></code></pre></div>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> site.example</span></code></pre></div></li>
+</ol>
 <h3 id="dns">DNS</h3>
 <p>This is more complicated but might be necessary if a static setup
 would be too tedious.</p>
@@ -254,14 +272,21 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href=
 <h2 id="persistence">Persistence</h2>
 <p>All of the commands are non-persistent. If you want them to survive a
 reboot you have to create a startup script running them on boot.</p>
-<p>Ideally you want - a startup script on the host setting up the
-routing table and starting the VM, and - a startup script on the VM
-starting the VPN and adjusting the firewall.</p>
+<p>Ideally you want</p>
+<ul>
+<li>a startup script on the host setting up the routing table and
+starting the VM, and</li>
+<li>a startup script on the VM starting the VPN and adjusting the
+firewall.</li>
+</ul>
 <p>The specifics will highly depend on your setup and use case.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Notice how you can use these techniques to - split tunnel before a
-full tunnel VPN, - share a VPN connection with multiple computers or -
-use multiple VPNs simultaneously</p>
+<p>Notice how you can use these techniques to</p>
+<ul>
+<li>split tunnel before a full tunnel VPN,</li>
+<li>share a VPN connection with multiple computers or</li>
+<li>use multiple VPNs simultaneously</li>
+</ul>
 <p>without the arbiters of the VPN being able to do much about it.</p>
 
         </article>

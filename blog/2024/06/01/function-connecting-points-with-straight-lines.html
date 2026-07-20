@@ -69,14 +69,12 @@ a linear system of equations might give awful precision unless you
 represent your numbers as rationals.</p>
 </blockquote>
 <h2 id="problem">Problem</h2>
-<p>Given a list of <span class="math display"><em>n</em></span> Points
-<span class="math display">$$\bold P = (P_1, P_2, …, P_n)$$</span> where
-<span
-class="math display"><em>P</em><sub><em>i</em></sub> = (<em>P</em><sub><em>i</em>, <em>x</em></sub>, <em>P</em><sub><em>i</em>, <em>y</em></sub>)</span>
-ordered along the <span class="math display"><em>x</em></span>-axis,
-what function <span class="math display"><em>f</em>(<em>x</em>)</span>,
-when graphed, connects the points in the domain <span
-class="math display">[<em>P</em><sub>1, <em>x</em></sub>; <em>P</em><sub><em>n</em>, <em>x</em></sub>]</span>
+<p>Given a list of <span class="math inline">\(n\)</span> Points <span
+class="math inline">\(\bold P = (P_1, P_2, …, P_n)\)</span> where <span
+class="math inline">\(P_i = (P_{i,x}, P_{i,y})\)</span> ordered along
+the <span class="math inline">\(x\)</span>-axis, what function <span
+class="math inline">\(f(x)\)</span>, when graphed, connects the points
+in the domain <span class="math inline">\([P_{1,x}; P_{n,x}]\)</span>
 with straight lines?</p>
 <figure>
 <img src="/assets/img/posts/graph.svg" alt="Graph"/>
@@ -86,11 +84,11 @@ Example: (f(x)) connects the points ((1, 1)), ((2, 3)) and ((4, 2)) in
 </figcaption>
 </figure>
 <h2 id="solution">Solution</h2>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert
-$$</span></p>
+\]</span></p>
 <p>where</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \begin{bmatrix}
     a_1    \\
     \vdots \\
@@ -111,50 +109,50 @@ P_{n,x} \rvert \\
     \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} -
 P_{n,x} \rvert \\
 \end{bmatrix}^{-1} \ .
-$$</span></p>
+\]</span></p>
 <blockquote>
 <p>Note: I came up with this on my own so there are probably better ways
 to do this.</p>
 </blockquote>
 <h2 id="explanation">Explanation</h2>
-<p>Consider the function <span
-class="math display"><em>g</em>(<em>x</em>) = <em>a</em>|<em>x</em> − <em>b</em>|</span>:
-it is like a linear function, <span
-class="math display"><em>a</em></span> determines the steepness, but
-it’s mirrored at <span class="math display"><em>b</em></span> along the
-<span class="math display"><em>y</em></span> axis.</p>
+<p>Consider the function <span class="math inline">\(g(x) = a \lvert x -
+b \rvert\)</span>: it is like a linear function, <span
+class="math inline">\(a\)</span> determines the steepness, but it’s
+mirrored at <span class="math inline">\(b\)</span> along the <span
+class="math inline">\(y\)</span> axis.</p>
 <p>If you sum multiple of these functions with different <span
-class="math display"><em>a</em></span> and <span
-class="math display"><em>b</em></span> values together, you get a
-zigzagged line, something that could work as the function we are
-searching for.</p>
+class="math inline">\(a\)</span> and <span
+class="math inline">\(b\)</span> values together, you get a zigzagged
+line, something that could work as the function we are searching
+for.</p>
 <p>Let’s assume we can use the <span
-class="math display"><em>x</em></span>-values of the given points as
-values for <span class="math display"><em>b</em></span>. Then we
-get:</p>
-<p><span class="math display">$$
+class="math inline">\(x\)</span>-values of the given points as values
+for <span class="math inline">\(b\)</span>. Then we get:</p>
+<p><span class="math inline">\[
 f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert
-$$</span></p>
+\]</span></p>
 <p>which is the same as</p>
-<p><span
-class="math display"><em>f</em>(<em>x</em>) = <em>a</em><sub>1</sub>|<em>x</em> − <em>P</em><sub>1, <em>x</em></sub>| + ⋯ + <em>a</em><sub><em>n</em></sub>|<em>x</em> − <em>P</em><sub><em>n</em>, <em>x</em></sub>| .</span></p>
-<p>Now we need to find the values for <span
-class="math display"><em>a</em> = (<em>a</em><sub>1</sub>, <em>a</em><sub>2</sub>, …, <em>a</em><sub><em>n</em></sub>)</span>.</p>
-<p>We know the values of <span
-class="math display"><em>f</em>(<em>x</em>)</span> at the given
-points:</p>
-<p><span
-class="math display">∀<em>p</em> ∈ <em>P</em>: <em>f</em>(<em>p</em><sub><em>x</em></sub>) = <em>p</em><sub><em>y</em></sub></span></p>
+<p><span class="math inline">\[
+f(x) = a_1 \lvert x - P_{1,x} \rvert + \cdots + a_n \lvert x - P_{n,x}
+\rvert \ .
+\]</span></p>
+<p>Now we need to find the values for <span class="math inline">\(a =
+(a_1, a_2, \ldots, a_n)\)</span>.</p>
+<p>We know the values of <span class="math inline">\(f(x)\)</span> at
+the given points:</p>
+<p><span class="math inline">\[
+\forall p \in P \colon f(p_x) = p_y
+\]</span></p>
 <p>which in simpler terms just means</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \begin{cases}
     f(P_{1,x}) = P_{1,y}     \\
     \quad \quad \quad \vdots \\
     f(P_{n,x}) = P_{n,y}     \\
 \end{cases} \ .
-$$</span></p>
+\]</span></p>
 <p>From this we can construct a linear system of equations:</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \begin{cases}
     a_1 \lvert P_{1,x} - P_{1,x} \rvert + \cdots + a_n \lvert P_{1,x} -
 P_{n,x} \rvert = P_{1,y}                              \\
@@ -163,12 +161,12 @@ P_{n,x} \rvert = P_{1,y}                              \\
     a_1 \lvert P_{n,x} - P_{1,x} \rvert + \cdots + a_n \lvert P_{n,x} -
 P_{n,x} \rvert = P_{n,y}                              \\
 \end{cases} \ .
-$$</span></p>
-<p>All values for <span class="math display"><em>P</em></span> are
-known, so at this point, we could simply use an equation solver to get
-<span class="math display"><em>a</em></span>. However, it can also be
-rewritten as a matrix multiplication:</p>
-<p><span class="math display">$$
+\]</span></p>
+<p>All values for <span class="math inline">\(P\)</span> are known, so
+at this point, we could simply use an equation solver to get <span
+class="math inline">\(a\)</span>. However, it can also be rewritten as a
+matrix multiplication:</p>
+<p><span class="math inline">\[
 \begin{bmatrix}
     \lvert P_{1,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{1,x} -
 P_{n,x} \rvert \\
@@ -189,9 +187,9 @@ P_{n,x} \rvert \\
     \vdots  \\
     P_{n,y} \\
 \end{bmatrix} \ .
-$$</span></p>
-<p>Solve for <span class="math display"><em>a</em></span>:</p>
-<p><span class="math display">$$
+\]</span></p>
+<p>Solve for <span class="math inline">\(a\)</span>:</p>
+<p><span class="math inline">\[
 \begin{bmatrix}
     a_1    \\
     \vdots \\
@@ -212,16 +210,16 @@ P_{n,x} \rvert \\
     \lvert P_{n,x} - P_{1,x} \rvert &amp; \cdots &amp; \lvert P_{n,x} -
 P_{n,x} \rvert \\
 \end{bmatrix}^{-1} \ .
-$$</span></p>
+\]</span></p>
 <p>And that’s it.</p>
 <h2 id="example">Example</h2>
-<p>Let’s find <span class="math display"><em>f</em>(<em>x</em>)</span>
-for the points <span class="math display">(1, 1)</span>, <span
-class="math display">(2, 3)</span> and <span
-class="math display">(4, 2)</span>. First, we need to find the values
-for <span class="math display"><em>a</em></span>.</p>
+<p>Let’s find <span class="math inline">\(f(x)\)</span> for the points
+<span class="math inline">\((1, 1)\)</span>, <span
+class="math inline">\((2, 3)\)</span> and <span
+class="math inline">\((4, 2)\)</span>. First, we need to find the values
+for <span class="math inline">\(a\)</span>.</p>
 <p>Using the above formula, we get:</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \begin{bmatrix}
     a_1 \\
     a_2 \\
@@ -242,9 +240,9 @@ for <span class="math display"><em>a</em></span>.</p>
     \lvert 4 - 1 \rvert &amp; \lvert 4 - 2 \rvert &amp; \lvert 4 - 4
 \rvert \\
 \end{bmatrix}^{-1} \ .
-$$</span></p>
+\]</span></p>
 <p>Simplify:</p>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 \begin{bmatrix}
     a_1 \\
     a_2 \\
@@ -262,7 +260,7 @@ $$</span></p>
     1 &amp; 0 &amp; 2 \\
     3 &amp; 2 &amp; 0 \\
 \end{bmatrix}^{-1} \ .
-$$</span></p>
+\]</span></p>
 <p>Solve using SageMath:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> matrix(QQ, [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>])</span>
@@ -270,15 +268,15 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> V <span class="op">*</span> <span class="bu">pow</span>(M, <span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>a <span class="co"># [ 3/2 -5/4  3/4]</span></span></code></pre></div>
-<p><span class="math display">$$
+<p><span class="math inline">\[
 a = \left(\frac 3 2, - \frac 5 4, \frac 3 4\right)
-$$</span></p>
+\]</span></p>
 <p>Now we can use the very first formula to get <span
-class="math display"><em>f</em>(<em>x</em>)</span>:</p>
-<p><span class="math display">$$
+class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math inline">\[
 f(x) = \frac 3 2 \lvert x - 1 \rvert - \frac 5 4 \lvert x - 2 \rvert +
 \frac 3 4 \lvert x - 4 \rvert \ .
-$$</span></p>
+\]</span></p>
 <figure>
 <img src="/assets/img/posts/graph.svg" alt="Graph" height="450"/>
 <figcaption>
