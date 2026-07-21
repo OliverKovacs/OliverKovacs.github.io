@@ -5,14 +5,21 @@ code {
     word-wrap: break-word;
     white-space: pre-wrap;
     word-break: break-word;
+    overflow: auto;
+}
+
+pre.tab code {
+    white-space: pre;
 }
 
 p>code,
 li>code {
     color: var(--color-fg);
     background-color: var(--color-bg2);
-    padding-right: 2px;
-    padding-left: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 3px;
+    padding-left: 3px;
     border-radius: 2px;
 }
 
@@ -21,8 +28,9 @@ pre {
     border-width: 1px;
     border-style: solid; */
     padding: 10px;
-    background: #1e1e1e;
     border-radius: 5px;
+    color: var(--color-fg);
+    background-color: var(--color-bg2);
 }
 
 
@@ -96,9 +104,6 @@ code {
   .il    { color: #B5CEA8 } /* Literal.Number.Integer.Long                 */
 }
 
-
-code span { color: var(--dark-color-fg); }
-
 code span.al { color: #a61717; background-color: #e3d2d2; font-weight: bold; } /* Alert -> Error */
 code span.an { color: #6A9955; font-weight: bold; font-style: italic; } /* Annotation -> Comment */
 code span.at { color: #008080; } /* Attribute -> Name.Attribute */
@@ -106,7 +111,8 @@ code span.bn { color: #B5CEA8; } /* BaseN -> Number */
 code span.bu { color: #569CD6; } /* BuiltIn -> Name.Builtin */
 code span.cf { color: #C586C0; font-weight: bold; } /* ControlFlow -> Keyword */
 code span.ch { color: #CE9178; } /* Char -> String */
-code span.cn { color: #DCDCAA; } /* Constant -> Name.Exception */
+/* code span.cn { color: #DCDCAA; } */ /* Constant -> Name.Exception */
+code span.cn { color: var(--color-fg); } /* Constant -> Name.Exception */
 code span.co { color: #6A9955; font-style: italic; } /* Comment */
 code span.cv { color: #6A9955; font-weight: bold; font-style: italic; } /* CommentVar -> Comment.Special */
 code span.do { color: #6A9955; font-style: italic; } /* Documentation -> Comment */
@@ -119,7 +125,7 @@ code span.fu { color: #DCDCAA; } /* Function -> Name.Function */
 code span.im { color: #C586C0; font-weight: bold; } /* Import -> Keyword */
 code span.in { color: #6A9955; font-weight: bold; font-style: italic; } /* Information -> Comment.Special */
 code span.kw { color: #C586C0; font-weight: bold; } /* Keyword */
-code span.op { color: #D4D4D4; } /* Operator */
+code span.op { color: var(--color-fg); } /* Operator */
 code span.ot { color: #C586C0; } /* Other -> Keyword */
 code span.pp { color: #6A9955; font-weight: bold; } /* Preprocessor -> Comment.Preproc */
 code span.sc { color: #CE9178; } /* SpecialChar -> String */

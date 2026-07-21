@@ -4,11 +4,13 @@
     --light-color-bg: #ffffff;
     --light-color-bg2: #e0e0e0;
     --light-color-fg: #000000;
-    --light-color-fg2: #999999;
+    /* --light-color-fg2: #999999; */
+    --light-color-fg2: #777777;
     --light-color-hl: #555555;
 
     --dark-color-bg: #000000;
-    --dark-color-bg2: #333333;
+    /* --dark-color-bg2: #333333; */
+    --dark-color-bg2: #1e1e1e;
     --dark-color-fg: #d4d4d4;
     --dark-color-fg2: #999999;
     --dark-color-hl: #ffffff;
