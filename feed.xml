@@ -5,7 +5,7 @@
 <id>https://oliverkovacs.dev/feed.xml</id>
 <link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://oliverkovacs.dev/" rel="alternate" type="text/html" hreflang="en"/>
-<updated>2026-07-21T00:00:00+02:00</updated>
+<updated>2026-08-31T00:00:00+02:00</updated>
 <generator uri="https://github.com/OliverKovacs/website/blob/main/_lib/feed.nix" version="0.1.0">Website generator script by Oliver Kovacs</generator>
 <entry>
     <title type="html"><![CDATA[Stealing Seeds]]></title>
@@ -116,6 +116,17 @@
     <category term="tab" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/tab/2026/07/21/la-femme-nouvelle-orleans-bass.html"></content>
+</entry>
+<entry>
+    <title type="html"><![CDATA[Punkhash]]></title>
+    <link href="https://oliverkovacs.dev/writeup/2026/08/31/punkhash.html" rel="alternate" type="text/html" title="Punkhash"/>
+    <id>https://oliverkovacs.dev/writeup/2026/08/31/punkhash</id>
+    <published>2026-08-31T00:00:00+02:00</published>
+    <updated>2026-08-31T00:00:00+02:00</updated>
+    <author><name>Oliver Kovacs</name></author>
+    <category term="writeup" />
+    <summary></summary>
+    <content type="text/html" src="https://oliverkovacs.dev/writeup/2026/08/31/punkhash.html"></content>
 </entry>
 
 </feed>
