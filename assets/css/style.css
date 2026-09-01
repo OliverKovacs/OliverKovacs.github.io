@@ -158,6 +158,23 @@ nav.contacts ul {
     padding-inline-start: 0px;
 }
 
+#music {
+    margin-top: 42px;
+}
+
+main {
+    margin-top: 42px;
+}
+
+main.post {
+    margin-top: 0px;
+}
+
+div#photos {
+    margin-top: 48px;
+    margin-bottom: 200px;
+}
+
 .photo {
     margin: 0px;
     margin-bottom: 100px;
@@ -332,19 +349,19 @@ footer.prevnext {
     padding-top: 100px;
 }
 
-.post > figure img {
+article figure img {
     border-radius: 5px;
     width: 100%;
     background-color: #000000;
 }
 
-.post > figure {
+article figure {
     display: block;
     margin: auto;
     width: 75%;
 }
 
-.post > li {
+article li {
     padding-top: 4px;
 }
 
