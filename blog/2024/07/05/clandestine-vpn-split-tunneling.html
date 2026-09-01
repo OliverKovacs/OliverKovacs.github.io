@@ -5,29 +5,27 @@
     <title>Clandestine VPN split tunneling</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,22 +43,26 @@
 </div>
 
 
-        <h1>Clandestine VPN split tunneling</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2024-07-05T00:00:00+02:00">
-                2024 Jul 5
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            Clandestine VPN split tunneling
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2024-07-05T00:00:00+02:00">
+            2024 Jul 5
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
         <article>
-            <h2 id="overview">Overview</h2>
+            <h2 id="overview">Overview <a href="#overview">#</a></h2>
 <p>This post details how to use a virtual private network (VPN) running
 on a separate (virtual) machine. This allows us to “pre-filter” the
 network traffic, effectively split tunneling using a full-tunnel VPN
@@ -73,12 +75,12 @@ performance reasons.</li>
 <li>You want to connect a machine to multiple VPNs simultaneously.</li>
 <li>You want to connect multiple machines to a VPN simultaneously.</li>
 </ul>
-<h2 id="setup">Setup</h2>
+<h2 id="setup">Setup <a href="#setup">#</a></h2>
 <p>The simplest setup is to use a virtual machine (VM) to connect to the
 VPN. However two different physical computers could also be used.</p>
 <p>This post will assume you are running a KVM VM on a Linux host but it
 should be trivial to adapt it to other situations.</p>
-<h3 id="create-the-vm">Create the VM</h3>
+<h3 id="create-the-vm">Create the VM <a href="#create-the-vm">#</a></h3>
 <ol type="1">
 <li>Choose a Linux distribution. You can use a distro optimized for
 networking like <a href="https://openwrt.org/">OpenWRT</a> or a general
@@ -88,7 +90,8 @@ href="https://archlinux.org/">Arch</a>.</li>
 paranoid you can enable full disk encryption.</li>
 <li>Install the VPN client you want to use inside the VM.</li>
 </ol>
-<h3 id="network-interfaces">Network interfaces</h3>
+<h3 id="network-interfaces">Network interfaces <a
+href="#network-interfaces">#</a></h3>
 <p>Inspect the network interfaces of the machines using
 <code>ip addr</code> or <code>ifconfig</code>. There are 3 interfaces of
 interest:</p>
@@ -126,7 +129,7 @@ LAN &lt;-----&gt; | wlp1s0 |    |                              |    |
        +------------------------------------------------------+</code></pre>
 <p>The interfaces might be named a bit differently on your machines, you
 will have to adapt the following commands accordingly.</p>
-<h3 id="routing">Routing</h3>
+<h3 id="routing">Routing <a href="#routing">#</a></h3>
 <p>Linux uses a routing table to determine where to send packets. The
 routing table can be consulted using the <code>route</code> command.</p>
 <p>Therefore:</p>
@@ -136,7 +139,7 @@ packets meant for the VPN to the VM.</li>
 <li>The VM has to be adjusted so that it forwards these packets received
 from the host to the VPN.</li>
 </ol>
-<h2 id="vm">VM</h2>
+<h2 id="vm">VM <a href="#vm">#</a></h2>
 <p>Enable IP forwarding:</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&#39;1&#39;</span> <span class="op">&gt;&gt;</span> /proc/sys/net/ipv4/ip_forward</span></code></pre></div>
@@ -150,9 +153,9 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">iptables</span> <span class="at">-A</span> FORWARD <span class="at">-i</span> tun0 <span class="at">-m</span> conntrack <span class="at">--ctstate</span> ESTABLISHED,RELATED <span class="at">-j</span> ACCEPT</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">iptables</span> <span class="at">-A</span> INPUT <span class="at">-i</span> tun0 <span class="at">-j</span> ACCEPT</span></code></pre></div>
-<h2 id="host">Host</h2>
+<h2 id="host">Host <a href="#host">#</a></h2>
 <p>There are two ways to set up the host:</p>
-<h3 id="static">Static</h3>
+<h3 id="static">Static <a href="#static">#</a></h3>
 <p>This is simpler if you only need to access a few resources. If there
 is a website called <code>site.example</code> that you need to
 access:</p>
@@ -177,7 +180,7 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> site.example</span></code></pre></div></li>
 </ol>
-<h3 id="dns">DNS</h3>
+<h3 id="dns">DNS <a href="#dns">#</a></h3>
 <p>This is more complicated but might be necessary if a static setup
 would be too tedious.</p>
 <ol type="1">
@@ -202,7 +205,7 @@ routing table as explained in the <a
 href="./clandestine-vpn-split-tunneling.html#static">static</a>
 section.</li>
 </ol>
-<h4 id="example">Example</h4>
+<h4 id="example">Example <a href="#example">#</a></h4>
 <p>DNS using <code>systemd-resolved</code> with
 <code>systemd-networkd</code></p>
 <p>Run on the VM:</p>
@@ -269,7 +272,7 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href=
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">DNS</span> Domain: site1.example site2.example ~example</span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span></code></pre></div>
-<h2 id="persistence">Persistence</h2>
+<h2 id="persistence">Persistence <a href="#persistence">#</a></h2>
 <p>All of the commands are non-persistent. If you want them to survive a
 reboot you have to create a startup script running them on boot.</p>
 <p>Ideally you want</p>
@@ -280,7 +283,7 @@ starting the VM, and</li>
 firewall.</li>
 </ul>
 <p>The specifics will highly depend on your setup and use case.</p>
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">Conclusion <a href="#conclusion">#</a></h2>
 <p>Notice how you can use these techniques to</p>
 <ul>
 <li>split tunnel before a full tunnel VPN,</li>
@@ -292,18 +295,19 @@ firewall.</li>
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/publication/2024/06/25/gpu-accelerated-real-time-rendering-of-n-dimensional-objects.html">
-    Previous: GPU-accelerated real-time rendering of n-dimensional objects
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/publication/2024/06/25/gpu-accelerated-real-time-rendering-of-n-dimensional-objects.html">
+    Prev: GPU-accelerated real-time rendering of n-dimensional objects
 </a></td>
 
-            <td><a class="next" href="/blog/2025/05/02/installing-vivado-on-nixos.html">
+    <td><a class="next" href="/blog/2025/05/02/installing-vivado-on-nixos.html">
     Next: Installing Vivado on NixOS
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 

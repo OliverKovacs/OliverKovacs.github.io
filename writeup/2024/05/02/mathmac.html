@@ -5,29 +5,27 @@
     <title>MathMAC</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,28 +43,32 @@
 </div>
 
 
-        <h1>MathMAC</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2024-05-02T00:00:00+02:00">
-                2024 May 2
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            MathMAC
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2024-05-02T00:00:00+02:00">
+            2024 May 2
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
         <article>
             <p><strong>openECSC 2024 - Round 2</strong></p>
 <p>Category: <code>crypto</code></p>
-<h2 id="description">Description</h2>
+<h2 id="description">Description <a href="#description">#</a></h2>
 <pre><code>Why using boring symmetric crypto for MACs when we can use fancy math?</code></pre>
 <p>Attachments: <code>mathmac.py</code> (see <a
 href="#appendix">Appendix</a>)</p>
-<h2 id="probem">Probem</h2>
+<h2 id="probem">Probem <a href="#probem">#</a></h2>
 <p>Let <span class="math inline">\(p = 8636821143825786083\)</span> and
 <span class="math inline">\(M = 64\)</span>.<br />
 Let <span class="math inline">\(\bold k = k_0, \ldots,k_M\)</span> where
@@ -93,11 +95,11 @@ that has not yet been revealed.
 <li>Only a single submission can be made.</li>
 </ul></li>
 </ul>
-<h2 id="solution">Solution</h2>
+<h2 id="solution">Solution <a href="#solution">#</a></h2>
 <p>The first step involves solving the <a
 href="https://en.wikipedia.org/wiki/Discrete_logarithm">discrete
 logarithm problem (DLP)</a>.</p>
-<h3 id="dlp">DLP</h3>
+<h3 id="dlp">DLP <a href="#dlp">#</a></h3>
 <p>Let <span class="math inline">\(h(\bold x)\)</span> be an element of
 the cyclic subgroup <span class="math inline">\(\langle 4
 \rangle\)</span> of <span class="math inline">\(\mathbb
@@ -147,7 +149,7 @@ class="math inline">\(x\)</span> is sufficient, because</li>
 number field sieve.<br />
 One implementation is <a
 href="https://cado-nfs.gitlabpages.inria.fr/">CADO-NFS</a>.</p>
-<h3 id="cado-nfs">CADO-NFS</h3>
+<h3 id="cado-nfs">CADO-NFS <a href="#cado-nfs">#</a></h3>
 <p>Setup:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://gitlab.inria.fr/cado-nfs/cado-nfs</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> cado-nfs</span>
@@ -178,7 +180,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a hr
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># double check the result</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">pow</span>(<span class="dv">4</span>, result, p)   <span class="co"># 4802397593893189429 → correct</span></span></code></pre></div>
-<h3 id="attack">Attack</h3>
+<h3 id="attack">Attack <a href="#attack">#</a></h3>
 <p>Now we need the hashes of three words <span
 class="math inline">\(\bold a, \bold b, \bold c\)</span> such that <span
 class="math inline">\(\bold a + \bold b - \bold c\)</span> doesn’t
@@ -192,7 +194,7 @@ h(\bold z) = 4^{\log_4(h(\bold a)) + \log_4(h(\bold b)) +
 <p>Note that we need two positive and one negative term so that the
 secret <span class="math inline">\(k_0\)</span> contained in every hash
 occurs exactly once.</p>
-<h3 id="conclusion">Conclusion</h3>
+<h3 id="conclusion">Conclusion <a href="#conclusion">#</a></h3>
 <p>A high level overview of the exploit is:</p>
 <ul>
 <li>Generate around 1000 (word, hash) pairs.</li>
@@ -207,7 +209,7 @@ z)).\)</span></li>
 </ul>
 <p>A reference implementation can be found in the <a
 href="#appendix">Appendix</a>.</p>
-<h2 id="appendix">Appendix</h2>
+<h2 id="appendix">Appendix <a href="#appendix">#</a></h2>
 <p><code>solve.py</code></p>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this program expects an input file data.txt</span></span>
@@ -396,18 +398,19 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a hr
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/writeup/2024/05/02/anti-rev.html">
-    Previous: Anti-rev
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/writeup/2024/05/02/anti-rev.html">
+    Prev: Anti-rev
 </a></td>
 
-            <td><a class="next" href="/blog/2024/06/01/function-connecting-points-with-straight-lines.html">
+    <td><a class="next" href="/blog/2024/06/01/function-connecting-points-with-straight-lines.html">
     Next: Function connecting points with straight lines
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 

@@ -5,29 +5,27 @@
     <title>Stealing Seeds</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,28 +43,32 @@
 </div>
 
 
-        <h1>Stealing Seeds</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2024-04-06T00:00:00+02:00">
-                2024 Apr 6
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            Stealing Seeds
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2024-04-06T00:00:00+02:00">
+            2024 Apr 6
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
         <article>
             <p><strong>openECSC 2024 - Round 1</strong></p>
 <p>Category: <code>crypto</code></p>
-<h2 id="description">Description</h2>
+<h2 id="description">Description <a href="#description">#</a></h2>
 <pre><code>I found an interesting way to generate numbers with someone. Wanna try?</code></pre>
 <p>Attachments: <code>stealing-seeds.py</code> (see <a
 href="#appendix">Appendix</a>)</p>
-<h2 id="probem">Probem</h2>
+<h2 id="probem">Probem <a href="#probem">#</a></h2>
 <p>Let <span class="math inline">\(s \in \mathbb{P}\)</span> and <span
 class="math inline">\(k \in \mathbb{Z}\)</span> with <span
 class="math inline">\(0 \le s, k \lt 2^{256}\)</span> be two secret
@@ -84,7 +86,7 @@ class="math inline">\(f_1(u)\)</span> and <span
 class="math inline">\(f_2(u)\)</span> for any <span
 class="math inline">\(u \in \{0, 1\}^{256}\)</span>, find <span
 class="math inline">\(s\)</span>.</p>
-<h2 id="solution">Solution</h2>
+<h2 id="solution">Solution <a href="#solution">#</a></h2>
 <p>This may not be the most elegant solution, however I will explain how
 to systematically find it without any advanced knowledge of cryptography
 and semi-formally argue why it is correct.</p>
@@ -289,7 +291,7 @@ server.</p>
 <p>Visualisation of the <span class="math inline">\(p_s(u)\)</span>
 table obtained by coloring <span class="math inline">\(-1\)</span>
 white.</p>
-<h2 id="appendix">Appendix</h2>
+<h2 id="appendix">Appendix <a href="#appendix">#</a></h2>
 <figure>
 <img src="/assets/img/posts/vis.png" alt="Graph"/>
 <figcaption>
@@ -407,15 +409,16 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a hr
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            
-            <td><a class="next" href="/writeup/2024/05/02/anti-rev.html">
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    
+    <td><a class="next" href="/writeup/2024/05/02/anti-rev.html">
     Next: Anti-rev
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 

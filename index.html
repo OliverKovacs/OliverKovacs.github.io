@@ -5,16 +5,22 @@
     <title>Oliver Kovacs</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is home -->
-<link rel="stylesheet" href="/assets/css/home.css">
-<script defer src="/assets/js/main.js" type="module"></script>
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
+
+    <script defer src="/assets/js/main.js" type="module"></script>
 
 </head>
 
@@ -24,7 +30,7 @@
 
     <canvas id="canvas" class="background"></canvas>
 
-    <div class="content">
+<div class="content">
     <header>
         <h1>
     <a href="/">
@@ -32,87 +38,66 @@
         Oliver Kovacs
     </a>
 </h1>
-<nav class="contacts">
-    <ul>
-    <li>
+
+        <nav class="contacts">
+<ul>
+<li>
     <a href="https://github.com/OliverKovacs">
         <img src="/assets/img/icons/dark/github.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="mailto:oliver@oliverkovacs.dev">
         <img src="/assets/img/icons/dark/protonmail.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="https://matrix.to/#/@dnydxn:matrix.org">
         <img src="/assets/img/icons/dark/matrix.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="https://bsky.app/profile/oliverkovacs.dev">
         <img src="/assets/img/icons/dark/bluesky.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="https://www.youtube.com/@dnydxn">
         <img src="/assets/img/icons/dark/youtube.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="https://www.linkedin.com/in/oliver-k-a57129201">
         <img src="/assets/img/icons/dark/linkedin.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="https://oliverkovacs.medium.com/">
         <img src="/assets/img/icons/dark/medium.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="https://open.spotify.com/user/oliverkovacs">
         <img src="/assets/img/icons/dark/spotify.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="/html/discord.html">
         <img src="/assets/img/icons/dark/discord.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 <li>
     <a href="./feed.xml">
         <img src="/assets/img/icons/dark/rss.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
     </a>
 </li>
 
-    </ul>
+</ul>
 </nav>
 
-        <!--<p>Navigate using <span class="key"> Tab </span></p>-->
-        <!--<p>Rotate using <span class="key">1</span> <span class="key">2</span> <span class="key">3</span></p>-->
     </header>
 
-    <main id="main" class="home">
+    <main class="home">
         <h2 id="about">
     About <a href="#about">#</a>
 </h2>
@@ -126,7 +111,7 @@ You can find my
 <h2 id="blog">
     Blog <a href="#blog">#</a>
 </h2>
-<ul>
+<ul class="dark">
 <li><a href="blog/2024/06/01/function-connecting-points-with-straight-lines.html" class="ui-card">
     <img src="./assets/img/technologies/sagemath.svg" alt="" loading="lazy" />
     <div class="container">
@@ -161,7 +146,7 @@ You can find my
 <h2 id="writeups">
     Writeups <a href="#writeups">#</a>
 </h2>
-<ul>
+<ul class="dark">
 <li><a href="writeup/2024/04/06/stealing-seeds.html" class="ui-card">
     <img src="./assets/img/languages/python.svg" alt="" loading="lazy" />
     <div class="container">
@@ -203,7 +188,7 @@ You can find my
 <h2 id="projects">
     Projects <a href="#projects">#</a>
 </h2>
-<ul>
+<ul class="dark">
 <li><a href="https://github.com/OliverKovacs/vulkan-xd" class="ui-card">
     <img src="./assets/img/technologies/vulkan.svg" alt="" loading="lazy" />
     <div class="container">
@@ -237,7 +222,7 @@ You can find my
 <h2 id="publications">
     Publications <a href="#publications">#</a>
 </h2>
-<ul>
+<ul class="dark">
 <li><a href="publication/2024/06/25/gpu-accelerated-real-time-rendering-of-n-dimensional-objects.html" class="ui-card">
     <img src="./assets/img/technologies/vulkan.svg" alt="" loading="lazy" />
     <div class="container">
@@ -251,7 +236,7 @@ You can find my
 <h2 id="tabs">
     Tabs <a href="#tabs">#</a>
 </h2>
-<ul>
+<ul class="dark">
 <li><a href="tab/2026/07/21/la-femme-nouvelle-orleans-bass.html" class="ui-card">
     <img src="./assets/img/music/la_femme-levitation_sessions.jpg" alt="" loading="lazy" />
     <div class="container">
@@ -278,36 +263,31 @@ You can find my
     <a href="./music.html">Music</a> <a href="#music">#</a>
 </h2>
 
-        <!--{% include anchor_headings.html html=content anchorBody="#" %}-->
     </main>
 
-    <footer>
-    <h2 id="info">
-        Info
-        <a href="#info">#</a>
-    </h2>
+    <footer class="home dark">
+        <h2 id="info">
+    Info
+    <a href="#info">#</a>
+</h2>
 
-    <p>
-    Made with<a href="https://nixos.org/" class="ui-icon"><img src="./assets/img/technologies/nix.svg">Nix</a><a href="https://www.typescriptlang.org/" class="ui-icon"><img src="./assets/img/languages/ts.svg">TypeScript</a><a href="https://www.khronos.org/webgl/" class="ui-icon"><img src="./assets/img/technologies/webgl.svg">WebGL</a>
-    </p>
+<p>
+Made with<a href="https://nixos.org/" class="ui-icon"><img src="./assets/img/technologies/nix.svg">Nix</a><a href="https://www.typescriptlang.org/" class="ui-icon"><img src="./assets/img/languages/ts.svg">TypeScript</a><a href="https://www.khronos.org/webgl/" class="ui-icon"><img src="./assets/img/technologies/webgl.svg">WebGL</a>
+</p>
 
-    <p>
-    Made by<a href="https://github.com/OliverKovacs" class="ui-icon"><img src="./assets/img/projects/pfp.png">me</a>
-    </p>
+<p>
+Made by<a href="https://github.com/OliverKovacs" class="ui-icon"><img src="./assets/img/projects/pfp.png">me</a>
+</p>
 
-    <p>
-    Hosted on<a href="https://pages.github.com/" class="ui-icon"><img src="./assets/img/contact/github.svg">GitHub</a>
-    </p>
+<p>
+Hosted on<a href="https://pages.github.com/" class="ui-icon"><img src="./assets/img/contact/github.svg">GitHub</a>
+</p>
 
-    <br>
-    <br>
-    <br>
+        <webring-banner style="--background-color: transparent; --outer-border-color: var(--color-fg2); --inner-border-color: var(--color-fg2); --href-color: var(--color-primary); --href-color-active: var(--color-primary); --text-color: var(--color-fg)">
+    <p>Member of the <a href="https://polyring.ch">Polyring</a> webring</p>
+</webring-banner><script async src="https://polyring.ch/embed.js" charset="utf-8"></script>
 
-    <webring-banner style="--background-color: transparent; --outer-border-color: var(--color-fg2); --inner-border-color: var(--color-fg2); --href-color: var(--color-primary); --href-color-active: var(--color-primary); --text-color: var(--color-fg)">
-        <p>Member of the <a href="https://polyring.ch">Polyring</a> webring</p>
-    </webring-banner><script async src="https://polyring.ch/embed.js" charset="utf-8"></script>
-</footer>
-
+    </footer>
 </div>
 
 

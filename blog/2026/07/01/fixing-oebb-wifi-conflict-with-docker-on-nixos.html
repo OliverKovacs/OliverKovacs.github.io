@@ -5,29 +5,27 @@
     <title>Fixing ÖBB WiFi conflict with Docker on NixOS</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,22 +43,26 @@
 </div>
 
 
-        <h1>Fixing ÖBB WiFi conflict with Docker on NixOS</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2026-07-01T00:00:00+02:00">
-                2026 Jul 1
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            Fixing ÖBB WiFi conflict with Docker on NixOS
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2026-07-01T00:00:00+02:00">
+            2026 Jul 1
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
         <article>
-            <h2 id="problem">Problem</h2>
+            <h2 id="problem">Problem <a href="#problem">#</a></h2>
 <p>As explained in <a
 href="https://unterwaditzer.net/2024/oebb-docker.html">this</a> great
 blogpost by Markus Unterwaditzer Docker sometimes adds routes to the
@@ -68,7 +70,7 @@ routing table that make it impossible to connect to the WiFi on ÖBB
 trains. As a quick fix they may manually be removed with</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ip route del 172.19.0.0/16 </span></code></pre></div>
 <p>However they will be recreated eventually.</p>
-<h2 id="solution">Solution</h2>
+<h2 id="solution">Solution <a href="#solution">#</a></h2>
 <p>Delete the <code>br-*</code> devices and associated routes. Put the
 following in your <code>configuration.nix</code>:</p>
 <div class="sourceCode" id="cb2"><pre
@@ -84,18 +86,19 @@ needs.</p>
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/writeup/2025/07/07/fast-rsa.html">
-    Previous: Fast RSA
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/writeup/2025/07/07/fast-rsa.html">
+    Prev: Fast RSA
 </a></td>
 
-            <td><a class="next" href="/tab/2026/07/21/la-femme-nouvelle-orleans-bass.html">
+    <td><a class="next" href="/tab/2026/07/21/la-femme-nouvelle-orleans-bass.html">
     Next: La Femme - Nouvelle-Orléans [Bass]
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 

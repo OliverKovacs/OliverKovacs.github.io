@@ -5,29 +5,27 @@
     <title>Punkhash</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,24 +43,28 @@
 </div>
 
 
-        <h1>Punkhash</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2026-08-31T00:00:00+02:00">
-                2026 Aug 31
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            Punkhash
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2026-08-31T00:00:00+02:00">
+            2026 Aug 31
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
         <article>
             <p><strong>ACSC 2026 Qualifier</strong></p>
 <p>Category: <code>crypto</code></p>
-<h2 id="problem">Problem</h2>
+<h2 id="problem">Problem <a href="#problem">#</a></h2>
 <p>Let <span class="math inline">\(p \in \mathbb P\)</span> be prime,
 <span class="math inline">\(n \in \mathbb N\)</span>, and <span
 class="math inline">\(b \in \mathbb N\)</span> with <span
@@ -76,8 +78,8 @@ random. Define <span class="math inline">\(c \in \{0, \ldots, p -
 \]</span> Given <span class="math inline">\(p, b, v_1, \ldots, v_n,
 c\)</span> determine <span class="math inline">\(x_1, \ldots,
 x_n\)</span>.</p>
-<h2 id="solution">Solution</h2>
-<h3 id="simple">Simple</h3>
+<h2 id="solution">Solution <a href="#solution">#</a></h2>
+<h3 id="simple">Simple <a href="#simple">#</a></h3>
 <p>We rewrite equation (1) as</p>
 <p><span class="math inline">\[
 v_1 x_1 + \cdots + v_n x_n + k p - c = 0 \tag{2}
@@ -129,7 +131,7 @@ lattice basis reduction algorithm</a> to <span
 class="math inline">\(M\)</span> and hope to find it as a row of the
 result. A suitable <span class="math inline">\(w\)</span> has to be
 guessed.</p>
-<h3 id="centered">Centered</h3>
+<h3 id="centered">Centered <a href="#centered">#</a></h3>
 <p>Should this not produce a result we can try to construct an even
 shorter vector.</p>
 <p>Define <span class="math inline">\(\delta = \lfloor b/2
@@ -202,7 +204,8 @@ class="math inline">\(M&#39;\)</span> and hope to find <span
 class="math inline">\(y M&#39;\)</span> as a row in the result. We can
 then trivially reconstruct <span class="math inline">\(x_1, \ldots,
 x_n\)</span>.</p>
-<h2 id="implementation">Implementation</h2>
+<h2 id="implementation">Implementation <a
+href="#implementation">#</a></h2>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode sage"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env sage</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -244,7 +247,7 @@ class="sourceCode sage"><code class="sourceCode python"><span id="cb1-1"><a href
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># construct M_prime</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> ((n <span class="op">//</span> <span class="dv">2</span>) <span class="op">+</span> <span class="dv">5</span>) <span class="op">*</span> b</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    delta <span class="op">=</span> b <span class="op">//</span> <span class="dv">2</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    c_prime <span class="op">=</span> (c <span class="op">-</span> delta <span class="op">*</span> <span class="bu">sum</span>(v))</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    c_prime <span class="op">=</span> c <span class="op">-</span> delta <span class="op">*</span> <span class="bu">sum</span>(v)</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    M_prime <span class="op">=</span> Matrix(ZZ, n <span class="op">+</span> <span class="dv">2</span>, n <span class="op">+</span> <span class="dv">2</span>)</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        M_prime[i,i]   <span class="op">=</span> <span class="dv">1</span></span>
@@ -308,15 +311,16 @@ class="sourceCode sage"><code class="sourceCode python"><span id="cb1-1"><a href
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/tab/2026/07/21/la-femme-nouvelle-orleans-bass.html">
-    Previous: La Femme - Nouvelle-Orléans [Bass]
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/tab/2026/07/21/la-femme-nouvelle-orleans-bass.html">
+    Prev: La Femme - Nouvelle-Orléans [Bass]
 </a></td>
 
-            
-        </tr></table>
-    </footer>
+    
+</tr></table>
+</footer>
+
 </div>
 
 

@@ -5,29 +5,27 @@
     <title>Anti-rev</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,27 +43,31 @@
 </div>
 
 
-        <h1>Anti-rev</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2024-05-02T01:00:00+02:00">
-                2024 May 2
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            Anti-rev
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2024-05-02T01:00:00+02:00">
+            2024 May 2
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
         <article>
             <p><strong>openECSC 2024 - Round 2</strong></p>
 <p>Category: <code>rev</code></p>
-<h2 id="description">Description</h2>
+<h2 id="description">Description <a href="#description">#</a></h2>
 <pre><code>Good luck finding the secret word for my super secure program!</code></pre>
 <p>Attachments: <code>anti-rev</code></p>
-<h2 id="solution">Solution</h2>
+<h2 id="solution">Solution <a href="#solution">#</a></h2>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> angr</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -73,7 +75,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a hr
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>simgr <span class="op">=</span> project.factory.simulation_manager(project.factory.full_init_state())</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>simgr.explore(find<span class="op">=</span><span class="bn">0x401def</span>, avoid<span class="op">=</span><span class="bn">0x401df8</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(simgr.found[<span class="dv">0</span>].posix.dumps(<span class="dv">0</span>))</span></code></pre></div>
-<h2 id="bonus">Bonus</h2>
+<h2 id="bonus">Bonus <a href="#bonus">#</a></h2>
 <p>Use <code>angr</code> to disassemble and find address to search
 for.</p>
 <div class="sourceCode" id="cb3"><pre
@@ -88,18 +90,19 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a hr
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/writeup/2024/04/06/stealing-seeds.html">
-    Previous: Stealing Seeds
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/writeup/2024/04/06/stealing-seeds.html">
+    Prev: Stealing Seeds
 </a></td>
 
-            <td><a class="next" href="/writeup/2024/05/02/mathmac.html">
+    <td><a class="next" href="/writeup/2024/05/02/mathmac.html">
     Next: MathMAC
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 

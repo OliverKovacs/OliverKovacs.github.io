@@ -5,29 +5,27 @@
     <title>Function connecting points with straight lines</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,17 +43,21 @@
 </div>
 
 
-        <h1>Function connecting points with straight lines</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2024-06-01T00:00:00+02:00">
-                2024 Jun 1
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            Function connecting points with straight lines
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2024-06-01T00:00:00+02:00">
+            2024 Jun 1
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
@@ -68,7 +70,7 @@ since taken a numerics lecture and come to know that this is called
 a linear system of equations might give awful precision unless you
 represent your numbers as rationals.</p>
 </blockquote>
-<h2 id="problem">Problem</h2>
+<h2 id="problem">Problem <a href="#problem">#</a></h2>
 <p>Given a list of <span class="math inline">\(n\)</span> Points <span
 class="math inline">\(\bold P = (P_1, P_2, …, P_n)\)</span> where <span
 class="math inline">\(P_i = (P_{i,x}, P_{i,y})\)</span> ordered along
@@ -83,7 +85,7 @@ Example: (f(x)) connects the points ((1, 1)), ((2, 3)) and ((4, 2)) in
 ([1; 4]).
 </figcaption>
 </figure>
-<h2 id="solution">Solution</h2>
+<h2 id="solution">Solution <a href="#solution">#</a></h2>
 <p><span class="math inline">\[
 f(x) = \sum_{i = 0}^n a_i \lvert x - P_{i,x} \rvert
 \]</span></p>
@@ -114,7 +116,7 @@ P_{n,x} \rvert \\
 <p>Note: I came up with this on my own so there are probably better ways
 to do this.</p>
 </blockquote>
-<h2 id="explanation">Explanation</h2>
+<h2 id="explanation">Explanation <a href="#explanation">#</a></h2>
 <p>Consider the function <span class="math inline">\(g(x) = a \lvert x -
 b \rvert\)</span>: it is like a linear function, <span
 class="math inline">\(a\)</span> determines the steepness, but it’s
@@ -212,7 +214,7 @@ P_{n,x} \rvert \\
 \end{bmatrix}^{-1} \ .
 \]</span></p>
 <p>And that’s it.</p>
-<h2 id="example">Example</h2>
+<h2 id="example">Example <a href="#example">#</a></h2>
 <p>Let’s find <span class="math inline">\(f(x)\)</span> for the points
 <span class="math inline">\((1, 1)\)</span>, <span
 class="math inline">\((2, 3)\)</span> and <span
@@ -287,18 +289,19 @@ This is the graph of (f(x)).
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/writeup/2024/05/02/mathmac.html">
-    Previous: MathMAC
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/writeup/2024/05/02/mathmac.html">
+    Prev: MathMAC
 </a></td>
 
-            <td><a class="next" href="/publication/2024/06/25/gpu-accelerated-real-time-rendering-of-n-dimensional-objects.html">
+    <td><a class="next" href="/publication/2024/06/25/gpu-accelerated-real-time-rendering-of-n-dimensional-objects.html">
     Next: GPU-accelerated real-time rendering of n-dimensional objects
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 

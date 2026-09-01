@@ -5,29 +5,27 @@
     <title>GPU-accelerated real-time rendering of n-dimensional objects</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,17 +43,21 @@
 </div>
 
 
-        <h1>GPU-accelerated real-time rendering of n-dimensional objects</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2024-06-25T00:00:00+02:00">
-                2024 Jun 25
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            GPU-accelerated real-time rendering of n-dimensional objects
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2024-06-25T00:00:00+02:00">
+            2024 Jun 25
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
@@ -65,7 +67,7 @@
 <a href="/assets/pdf/Oliver_Kovacs-VWA-Errata.pdf" target="_blank"><tt>errata</tt></a>
 ]</p>
 <p>My pre-scientific thesis (VWA), submitted in 2023.</p>
-<h2 id="abstract">Abstract</h2>
+<h2 id="abstract">Abstract <a href="#abstract">#</a></h2>
 <p>N-dimensional rendering is a fascinating but computationally
 expensive process. This makes it ill-suited for real-time applications.
 GPUs have been conventionally used to accelerate rendering workloads,
@@ -84,18 +86,19 @@ and to accurately assess the exact performance to be expected.</p>
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/blog/2024/06/01/function-connecting-points-with-straight-lines.html">
-    Previous: Function connecting points with straight lines
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/blog/2024/06/01/function-connecting-points-with-straight-lines.html">
+    Prev: Function connecting points with straight lines
 </a></td>
 
-            <td><a class="next" href="/blog/2024/07/05/clandestine-vpn-split-tunneling.html">
+    <td><a class="next" href="/blog/2024/07/05/clandestine-vpn-split-tunneling.html">
     Next: Clandestine VPN split tunneling
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 

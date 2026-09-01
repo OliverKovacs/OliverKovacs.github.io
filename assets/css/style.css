@@ -5,6 +5,10 @@ body {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
 
+body {
+    background-color: var(--color-bg);
+}
+
 /* headings */
 h1, h2, h3, h4 {
     color: var(--color-primary);
@@ -175,12 +179,31 @@ figcaption {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
 
-a.ui-card:hover {
+
+.dark a.ui-card:hover {
     color: var(--dark-color-hl);
 }
 
-.ui-card {
+a.ui-card:hover {
+    color: var(--color-hl);
+}
+
+.dark a.ui-card {
     color: var(--dark-color-fg);
+    text-decoration: none;
+}
+
+a.ui-card {
+    color: var(--color-fg);
+    text-decoration: none;
+}
+
+.ui-card {
+    color: var(--color-fg);
+}
+
+.ui-card {
+    color: var(--color-fg);
     display: flex;
     justify-content: left;
 }
@@ -193,7 +216,148 @@ a.ui-card:hover {
     border-radius: 2px;
 }
 
-#music .ui-card img {
+.card-list .ui-card img {
     width: 69px;
     height: 69px;
+}
+
+.card-list {
+    padding: 0px;
+    list-style-type: none;
+}
+
+.card-list li {
+    line-height: 1.4em;
+    padding: 0px;
+    margin-bottom: 16px;
+}
+
+.dateauthor > table {
+    width: 100%;
+}
+
+#author, .next {
+    float: right;
+}
+
+footer.home {
+    background-color: var(--dark-color-bg);
+    color: var(--dark-color-fg);
+    font-family: Roboto Mono, monospace;
+    padding-bottom: 160px;
+}
+
+main.home {
+    /* background-color: var(--dark-color-bg); */
+    color: var(--dark-color-fg);
+    font-family: Roboto Mono, monospace;
+}
+
+main.home li {
+    display: block;
+    padding-right: 10px;
+}
+
+canvas.background {
+    background-color: var(--dark-color-bg);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* ??? */
+
+p img {
+    margin-left: 10px;
+}
+
+.key {
+    background-color: var(--dark-color-bg2);
+    border-radius: 2px;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0px 6px;
+    text-align: center;
+}
+
+a.ui-icon {
+    color: var(--color-fg);
+    text-decoration: none;
+}
+
+a.ui-icon:hover {
+    color: var(--color-hl);
+}
+
+
+.dark a.ui-icon {
+    color: var(--dark-color-fg);
+    text-decoration: none;
+}
+
+.dark a.ui-icon:hover {
+    color: var(--dark-color-hl);
+}
+
+.ui-icon img {
+    width: 19px;
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+/* post */
+
+h1.underline {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #444;
+    margin-bottom: 7px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+}
+
+nav.dateauthor {
+    margin-bottom: 16px;
+    color: var(--color-fg2);
+    font-size: 85%;
+}
+
+nav.dateauthor a {
+    color: var(--color-fg2);
+}
+
+footer.prevnext a {
+    color: var(--color-fg2);
+}
+
+footer.prevnext {
+    padding-top: 100px;
+}
+
+.post > figure img {
+    border-radius: 5px;
+    width: 100%;
+    background-color: #000000;
+}
+
+.post > figure {
+    display: block;
+    margin: auto;
+    width: 75%;
+}
+
+.post > li {
+    padding-top: 4px;
+}
+
+blockquote p {
+    margin-top: 36px;
+    margin-bottom: 36px;
+    color: var(--color-fg2);
+    font-style: italic;
+}
+
+webring-banner {
+    margin-top: 73px;
+    margin-left: auto;
+    margin-right: auto;
+    width: min(446px, 100%);
 }

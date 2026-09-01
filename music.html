@@ -5,120 +5,129 @@
     <title>Music</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <link rel="stylesheet" href="/assets/css/home.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
+
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
 
-    
-
     <div class="content">
     <header>
+        <div id="color-row">
+    <div>
+        <img class="light-mode-hide" src="/assets/img/icons/dark/light_mode.svg" alt="Light mode" />
+        <img class="dark-mode-hide" src="/assets/img/icons/light/light_mode.svg" alt="Light mode" />
+        <label class="switch">
+            <input type="checkbox" id="color-mode">
+            <span class="slider"></span>
+        </label>
+        <img class="light-mode-hide" src="/assets/img/icons/dark/dark_mode.svg" alt="Dark mode" />
+        <img class="dark-mode-hide" src="/assets/img/icons/light/dark_mode.svg" alt="Dark mode" />
+    </div>
+</div>
+
         <h1>
     <a href="/">
         <img alt="logo" id="pfp" src="/assets/img/projects/pfp.png">
         Music
     </a>
 </h1>
-<nav class="contacts">
-    <ul>
-    <li>
+
+        <nav class="contacts">
+<ul>
+<li>
     <a href="https://github.com/OliverKovacs">
-        <img src="/assets/img/icons/dark/github.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/github.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/github.svg">
     </a>
 </li>
 <li>
     <a href="mailto:oliver@oliverkovacs.dev">
-        <img src="/assets/img/icons/dark/protonmail.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/protonmail.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/protonmail.svg">
     </a>
 </li>
 <li>
     <a href="https://matrix.to/#/@dnydxn:matrix.org">
-        <img src="/assets/img/icons/dark/matrix.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/matrix.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/matrix.svg">
     </a>
 </li>
 <li>
     <a href="https://bsky.app/profile/oliverkovacs.dev">
-        <img src="/assets/img/icons/dark/bluesky.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/bluesky.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/bluesky.svg">
     </a>
 </li>
 <li>
     <a href="https://www.youtube.com/@dnydxn">
-        <img src="/assets/img/icons/dark/youtube.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/youtube.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/youtube.svg">
     </a>
 </li>
 <li>
     <a href="https://www.linkedin.com/in/oliver-k-a57129201">
-        <img src="/assets/img/icons/dark/linkedin.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/linkedin.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/linkedin.svg">
     </a>
 </li>
 <li>
     <a href="https://oliverkovacs.medium.com/">
-        <img src="/assets/img/icons/dark/medium.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/medium.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/medium.svg">
     </a>
 </li>
 <li>
     <a href="https://open.spotify.com/user/oliverkovacs">
-        <img src="/assets/img/icons/dark/spotify.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/spotify.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/spotify.svg">
     </a>
 </li>
 <li>
     <a href="/html/discord.html">
-        <img src="/assets/img/icons/dark/discord.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/discord.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/discord.svg">
     </a>
 </li>
 <li>
     <a href="./feed.xml">
-        <img src="/assets/img/icons/dark/rss.svg">
-        <!--<img class="light-mode-hide" src="./assets/img/icons/dark/{{ element.src }}">
-        <img class="dark-mode-hide" src="./assets/img/icons/light/{{ element.src }}">-->
+        <img class="light-mode-hide" src="./assets/img/icons/dark/rss.svg">
+        <img class="dark-mode-hide" src="./assets/img/icons/light/rss.svg">
     </a>
 </li>
 
-    </ul>
+</ul>
 </nav>
 
     </header>
 
-    <main id="main" class="home">
+    <main>
         <br>
 
 List of some music I like.
 
 <br>
 <br>
-<br>
+
 <!-- TODO fix -->
 
-<ul id="music">
+<ul id="music" class="card-list">
 <li><div class="ui-card">
     <img src="./assets/img/music/radiohead-in_rainbows.jpg" alt="" loading="lazy" />
     <div class="container">

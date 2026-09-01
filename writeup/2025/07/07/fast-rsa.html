@@ -5,29 +5,27 @@
     <title>Fast RSA</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/vars.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- is a post -->
-<link rel="stylesheet" href="/assets/css/post.css">
-<link rel="stylesheet" href="/assets/css/code.css">
+    <!-- KaTeX -->
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
+    <script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
+    <script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
 
-<!-- KaTeX -->
-<link rel="stylesheet" href="/assets/lib/katex/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww">
-<script defer src="/assets/lib/katex/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"></script>
-<script defer src="/assets/lib/katex/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" onload="renderMathInElement(document.body);"></script>
+    <!-- TODO maybe not necessary -->
+    <link rel="stylesheet" href="/assets/css/code.css">
 
+    
 </head>
 
 
   <body>
     <a id="skip" href="#main"><h2>Skip to main content</h2></a>
-
-    
 
     <div class="content">
     <header>
@@ -45,30 +43,34 @@
 </div>
 
 
-        <h1>Fast RSA</h1>
-        <nav>
-        <table style="width: 100%;"><tr>
-            <td><time datetime="2025-07-07T00:00:00+02:00">
-                2025 Jul 7
-            </time></td>
-            <td><a id="author" href="/">
-                Oliver Kovacs
-            </a></td>
-            </tr></table>
-        </nav>
+        <h1 class="underline"><a href="/">
+            Fast RSA
+        </a></h1>
+
+        <nav class="dateauthor">
+    <table><tr>
+        <td><time datetime="2025-07-07T00:00:00+02:00">
+            2025 Jul 7
+        </time></td>
+        <td><a id="author" href="/">
+            Oliver Kovacs
+        </a></td>
+    </tr></table>
+</nav>
+
     </header>
 
     <main id="main">
         <article>
             <p><strong>ACSC 2025 - Final</strong></p>
 <p>Category: <code>crypto</code></p>
-<h2 id="description">Description</h2>
+<h2 id="description">Description <a href="#description">#</a></h2>
 <pre><code>Hey choom! I got my hands on some fresh new hardware, a chip that can do military-grade encryption at lightning speed.
 
 I&#39;m testing out it&#39;s signature features, and since you&#39;re a god-tier netrunner, maybe you can learn how to sign stuff yourself if you watch my bot do it enough?</code></pre>
 <p>Attachments: [ <a href="/assets/zip/fast-rsa.zip">fast-rsa.zip</a>
 ]</p>
-<h2 id="problem">Problem</h2>
+<h2 id="problem">Problem <a href="#problem">#</a></h2>
 <p>The program generates an RSA keypair and outputs the modulus <span
 class="math inline">\(n\)</span> and the uppermost 32 bits of <span
 class="math inline">\(d\)</span>.</p>
@@ -80,7 +82,7 @@ form. Then <span class="math inline">\(s\)</span> and whether any of the
 two multiplications in the <span class="math inline">\(b\)</span>th step
 of exponentiation required the conditional subtraction is revealed.</p>
 <p>The goal is to determine <span class="math inline">\(d\)</span>.</p>
-<h2 id="solution">Solution</h2>
+<h2 id="solution">Solution <a href="#solution">#</a></h2>
 <blockquote>
 <p>Disclosure: I was not able to solve this challenge at the
 competition.</p>
@@ -95,7 +97,8 @@ multiple squashed observation vectors simultaneously. In practice 2 are
 enough. The algorithm calculates <span class="math inline">\(d\)</span>
 in ~1 s, however getting the observation vectors from the remote takes
 considerably more time.</p>
-<h2 id="implementation">Implementation</h2>
+<h2 id="implementation">Implementation <a
+href="#implementation">#</a></h2>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -239,7 +242,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a hr
 <span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>CUTOFF <span class="op">=</span> <span class="sc">}</span><span class="ss">&#39;</span>)</span>
 <span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;# calculated in &#39;</span>, t2 <span class="op">-</span> t1, <span class="st">&#39;s&#39;</span>)</span>
 <span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p.readline())</span></code></pre></div>
-<h2 id="references">References</h2>
+<h2 id="references">References <a href="#references">#</a></h2>
 <ol type="1">
 <li><em>C. D. Walter and S. Thompson, “<a
 href="https://link.springer.com/chapter/10.1007/3-540-45353-9_15">Distinguishing
@@ -251,18 +254,19 @@ vol. 2020. Springer Verlag, 2001, pp. 192–207. subsection 3.3</em></li>
         </article>
     </main>
 
-    <footer>
-        <table style="width: 100%;"><tr>
-            <td><a class="prev" href="/blog/2025/05/02/installing-vivado-on-nixos.html">
-    Previous: Installing Vivado on NixOS
+    <footer class="prevnext">
+<table style="width: 100%;"><tr>
+    <td><a class="prev" href="/blog/2025/05/02/installing-vivado-on-nixos.html">
+    Prev: Installing Vivado on NixOS
 </a></td>
 
-            <td><a class="next" href="/blog/2026/07/01/fixing-oebb-wifi-conflict-with-docker-on-nixos.html">
+    <td><a class="next" href="/blog/2026/07/01/fixing-oebb-wifi-conflict-with-docker-on-nixos.html">
     Next: Fixing ÖBB WiFi conflict with Docker on NixOS
 </a></td>
 
-        </tr></table>
-    </footer>
+</tr></table>
+</footer>
+
 </div>
 
 
