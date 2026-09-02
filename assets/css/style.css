@@ -14,6 +14,10 @@ h1, h2, h3, h4 {
     color: var(--color-primary);
 }
 
+h3.plain, h4.plain {
+    color: var(--color-fg);
+}
+
 h1 {
     font-family: Roboto Mono, monospace;
     font-size: 2em;
@@ -30,10 +34,22 @@ h3 {
     margin-bottom: 16px;
 }
 
+h1 a {
+    text-decoration: none;
+}
+
+h1 a:hover {
+    color: var(--color-primary);
+}
+
 h2>a, h3>a, h4>a {
     color: var(--color-primary);
     /* text-decoration: none; */
     text-decoration: underline;
+}
+
+h2 a:hover, h3 a:hover, h4 a:hover {
+    color: var(--color-primary2);
 }
 
 /* # */
@@ -45,8 +61,8 @@ a {
     color: var(--color-primary);
 }
 
-h2>a:hover, h3>a:hover, h4>a:hover {
-    text-decoration: underline;
+a:hover {
+    color: var(--color-primary2);
 }
 
 p {
@@ -99,10 +115,6 @@ p {
     height: 24px;
     margin: 6px 12px 6px 0px;
     float: left;
-}
-
-h1 a {
-    text-decoration: none;
 }
 
 td {
@@ -258,7 +270,6 @@ a.ui-card {
 }
 
 footer.home {
-    background-color: var(--dark-color-bg);
     color: var(--dark-color-fg);
     font-family: Roboto Mono, monospace;
     padding-bottom: 160px;
@@ -341,8 +352,16 @@ nav.dateauthor a {
     color: var(--color-fg2);
 }
 
+nav.dateauthor a:hover {
+    color: var(--color-fg);
+}
+
 footer.prevnext a {
     color: var(--color-fg2);
+}
+
+footer.prevnext a:hover {
+    color: var(--color-fg);
 }
 
 footer.prevnext {
@@ -377,4 +396,26 @@ webring-banner {
     margin-left: auto;
     margin-right: auto;
     width: min(446px, 100%);
+}
+
+/* dashed list */
+
+ul.dash {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.dash > li {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 1.5rem;
+}
+
+ul.dash > li:before {
+    content: "–";
+    display: block;
+    float: left;
+    margin-left: -1.5rem;
+    width: 1.1rem;
 }

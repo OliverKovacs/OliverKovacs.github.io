@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" >
-<title type="html"><![CDATA[Oliver Kovacs]]></title>
+<title type="html"><![CDATA[Olivér Kovács]]></title>
 <!-- subtitle -->
 <id>https://oliverkovacs.dev/feed.xml</id>
 <link href="https://oliverkovacs.dev/feed.xml" rel="self" type="application/atom+xml" />
@@ -13,7 +13,7 @@
     <id>https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds</id>
     <published>2024-04-06T00:00:00+02:00</published>
     <updated>2024-04-06T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="writeup" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/writeup/2024/04/06/stealing-seeds.html"></content>
@@ -24,7 +24,7 @@
     <id>https://oliverkovacs.dev/writeup/2024/05/02/anti-rev</id>
     <published>2024-05-02T01:00:00+02:00</published>
     <updated>2024-05-02T01:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="writeup" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/writeup/2024/05/02/anti-rev.html"></content>
@@ -35,7 +35,7 @@
     <id>https://oliverkovacs.dev/writeup/2024/05/02/mathmac</id>
     <published>2024-05-02T00:00:00+02:00</published>
     <updated>2024-05-02T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="writeup" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/writeup/2024/05/02/mathmac.html"></content>
@@ -46,7 +46,7 @@
     <id>https://oliverkovacs.dev/blog/2024/06/01/function-connecting-points-with-straight-lines</id>
     <published>2024-06-01T00:00:00+02:00</published>
     <updated>2024-06-01T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="blog" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/blog/2024/06/01/function-connecting-points-with-straight-lines.html"></content>
@@ -57,7 +57,7 @@
     <id>https://oliverkovacs.dev/publication/2024/06/25/gpu-accelerated-real-time-rendering-of-n-dimensional-objects</id>
     <published>2024-06-25T00:00:00+02:00</published>
     <updated>2024-06-25T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="publication" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/publication/2024/06/25/gpu-accelerated-real-time-rendering-of-n-dimensional-objects.html"></content>
@@ -68,7 +68,7 @@
     <id>https://oliverkovacs.dev/blog/2024/07/05/clandestine-vpn-split-tunneling</id>
     <published>2024-07-05T00:00:00+02:00</published>
     <updated>2024-07-05T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="blog" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/blog/2024/07/05/clandestine-vpn-split-tunneling.html"></content>
@@ -79,7 +79,7 @@
     <id>https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos</id>
     <published>2025-05-02T00:00:00+02:00</published>
     <updated>2025-05-02T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="blog" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/blog/2025/05/02/installing-vivado-on-nixos.html"></content>
@@ -90,7 +90,7 @@
     <id>https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa</id>
     <published>2025-07-07T00:00:00+02:00</published>
     <updated>2025-07-07T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="writeup" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/writeup/2025/07/07/fast-rsa.html"></content>
@@ -101,7 +101,7 @@
     <id>https://oliverkovacs.dev/blog/2026/07/01/fixing-oebb-wifi-conflict-with-docker-on-nixos</id>
     <published>2026-07-01T00:00:00+02:00</published>
     <updated>2026-07-01T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="blog" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/blog/2026/07/01/fixing-oebb-wifi-conflict-with-docker-on-nixos.html"></content>
@@ -112,7 +112,7 @@
     <id>https://oliverkovacs.dev/tab/2026/07/21/la-femme-nouvelle-orleans-bass</id>
     <published>2026-07-21T00:00:00+02:00</published>
     <updated>2026-07-21T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="tab" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/tab/2026/07/21/la-femme-nouvelle-orleans-bass.html"></content>
@@ -123,7 +123,7 @@
     <id>https://oliverkovacs.dev/writeup/2026/08/31/punkhash</id>
     <published>2026-08-31T00:00:00+02:00</published>
     <updated>2026-08-31T00:00:00+02:00</updated>
-    <author><name>Oliver Kovacs</name></author>
+    <author><name>Olivér Kovács</name></author>
     <category term="writeup" />
     <summary></summary>
     <content type="text/html" src="https://oliverkovacs.dev/writeup/2026/08/31/punkhash.html"></content>
