@@ -236,7 +236,7 @@ class="sourceCode ini"><code class="sourceCode ini"><span id="cb9-1"><a href="#c
 <code>/etc/systemd/resolved.conf</code>:</p>
 <div class="sourceCode" id="cb10"><pre
 class="sourceCode ini"><code class="sourceCode ini"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Resolve]</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">DNS</span><span class="ot">=</span><span class="st">8.8.8.8</span></span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">DNS</span><span class="ot">=</span><span class="st">9.9.9.9</span></span></code></pre></div>
 <p>See also <code>man systemd-resolved.service</code>.</p>
 <p>Reload:</p>
 <div class="sourceCode" id="cb11"><pre
@@ -245,7 +245,7 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href=
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart systemd-resolved</span></code></pre></div>
 <p>This has the effect that <code>host1.site1.example</code> will be
 resolved using <code>10.10.10.53</code> but <code>on.the.internet</code>
-using <code>8.8.8.8</code>.</p>
+using <code>9.9.9.9</code>.</p>
 <p>Add routing information for the VPN name server and other resources
 you need to access:</p>
 <div class="sourceCode" id="cb12"><pre
@@ -259,8 +259,8 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href=
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Global</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>         <span class="ex">Protocols:</span> <span class="at">-LLMNR</span> <span class="at">-mDNS</span> <span class="at">-DNSOverTLS</span> DNSSEC=no/unsupported</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">resolv.conf</span> mode: foreign</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Current</span> DNS Server: 8.8.8.8</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="ex">DNS</span> Servers: 8.8.8.8</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Current</span> DNS Server: 9.9.9.9</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="ex">DNS</span> Servers: 9.9.9.9</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Link</span> 2 <span class="er">(</span><span class="ex">wlp1s0</span><span class="kw">)</span></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Current</span> Scopes: DNS</span>
